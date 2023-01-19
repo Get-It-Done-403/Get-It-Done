@@ -20,16 +20,25 @@ Project Agenda Meeting:
 
 * Tye Coleman
   * Progress and Issues:
+    - Figured out role and software tools to build the website
   * Plans and Goals:
+    - Learn how to make APIs in Java and Spark
+    - Learn more about Firebase
 * Mitchell Ly
     * Progress and Issues:
     * Plans and Goals:
 * Sofia Barry
     * Progress and Issues:
+      -  Contributed to Requirements & Policies document
     * Plans and Goals:
+      -  Collaborate in database architecture design
+      -  Familiarize myself with Firebase 
 * Aidan Petta
     * Progress and Issues: Finished timeline of development.
     * Plans and Goals: Start planning database and how we will store data, goal is to have the database setup.
 * Lance
     * Progress and Issues:
+      -  Contributed to draft and revision of Requirements & Policies document
     * Plans and Goals:
+      -  Create rough draft of UI
+      -  Plan out architecture for frontend
