@@ -26,10 +26,10 @@ Project Agenda Meeting:
     * Plans and Goals:
 * Sofia Barry
     * Progress and Issues:
-          *  Contributed to Requirements & Policies document
+          -  Contributed to Requirements & Policies document
     * Plans and Goals:
-          *  Collaborate in database architecture design
-          *  Familiarize myself with Firebase 
+          -  Collaborate in database architecture design
+          -  Familiarize myself with Firebase 
 * Aidan Petta
     * Progress and Issues:
     * Plans and Goals:
