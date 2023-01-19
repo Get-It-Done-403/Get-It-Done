@@ -20,10 +20,10 @@ Project Agenda Meeting:
 
 * Tye Coleman
   * Progress and Issues:
-    Figured out role and software tools to build the website
+    - Figured out role and software tools to build the website
   * Plans and Goals:
-    Learn how to make APIs in Java and Spark
-    Learn more about Firebase
+    - Learn how to make APIs in Java and Spark
+    - Learn more about Firebase
 * Mitchell Ly
     * Progress and Issues:
     * Plans and Goals:
