@@ -28,7 +28,7 @@ Project Agenda Meeting:
     * Progress and Issues:
     * Plans and Goals:
 * Aidan Petta
-    * Progress and Issues: Finished timeline of development, no issues
+    * Progress and Issues: Finished timeline of development.
     * Plans and Goals: Start planning database and how we will store data, goal is to have the database setup.
 * Lance
     * Progress and Issues:
