@@ -2,7 +2,7 @@
 
 ## Team Report
 
-###Previous Goals:
+### Previous Goals:
 
 ### Progress and Issues:
 
