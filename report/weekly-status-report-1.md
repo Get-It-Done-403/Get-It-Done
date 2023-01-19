@@ -25,8 +25,8 @@ Project Agenda Meeting:
     - Learn how to make APIs in Java and Spark
     - Learn more about Firebase
 * Mitchell Ly
-    * Progress and Issues:
-    * Plans and Goals:
+    * Progress and Issues:This week I helped contribute to the team policies and requirements including adding my own use case. By finishing this assignment, I was able to learn the strengths and roles of our team as well as have a rough idea of how to implement our project and our first deadlines. We were able to do this smoothly using huddle meetings and faced no issues.
+    * Plans and Goals: For the next week my goals are helping with designing the UI however I can and implementing the front end once the designs are ready. These two tasks currently have a due date of next Friday 1/27.
 * Sofia Barry
     * Progress and Issues:
       -  Contributed to Requirements & Policies document
