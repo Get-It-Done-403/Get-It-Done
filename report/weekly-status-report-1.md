@@ -38,4 +38,7 @@ Project Agenda Meeting:
     * Plans and Goals:
 * Lance
     * Progress and Issues:
+      -  Contributed to draft and revision of Requirements & Policies document
     * Plans and Goals:
+      -  Create rough draft of UI
+      -  Plan out architecture for frontend
