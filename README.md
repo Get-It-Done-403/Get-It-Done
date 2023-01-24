@@ -26,7 +26,7 @@
              +- utils<br>
              
 ### Goals and Ideas
-* Idea 
+* Ideas 
   - A productivity web application that allows users to plan, track assignment progress, and view their calendar. 
   - By inputting an assignment’s name, due date, and approximate time commitment, Get it Done, allocates hours into a user’s schedule to work on an assignment based on previously user-declared availability. 
 
