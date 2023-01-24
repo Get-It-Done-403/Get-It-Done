@@ -16,6 +16,7 @@
 * Connect database to our current code base 
 * Have a working front end by next week 
 * Add more to current draft of UI Design
+* Start working on integrating API's as well
 
 ## Individual Contributions
 
