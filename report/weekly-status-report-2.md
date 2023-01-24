@@ -3,20 +3,18 @@
 ## Team Report
 
 ### Progress and Issues:
-* Making the structure of our GitHub Repository and pushing our code base into it
-* Completed initial draft of the UI Design on Figma 
-* Completed revisions for Team Policies document 
+* 
 
-### Project Agenda Meeting:
-* How we're going to start actually coding and the structure we want to do it in
+Project Agenda Meeting:
+* 
 
 
 ### Plans and Goals:
 
-* Connect database to our current code base 
-* Have a working front end by next week 
-* Add more to current draft of UI Design
-* Start working on integrating API's as well
+* Plan for future assignments due dates
+* Kick-start project timeline
+* Frontend: Create a rough draft for UI design by the end of week
+* Backend: Design database architecture
 
 ## Individual Contributions
 
@@ -51,4 +49,8 @@
       -  Create rough draft of UI
       -  Plan out architecture for frontend
     * Progress and Issues:
+      -  Worked on rough draft of UI
+      -  Revised project requirements
     * Plans and Goals:
+      - Finish rough draft of UI
+      - Assist in architecture of front end
