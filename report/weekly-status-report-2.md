@@ -7,16 +7,15 @@
 * Completed initial draft of the UI Design on Figma 
 * Completed revisions for Team Policies document 
 
-Project Agenda Meeting:
+### Project Agenda Meeting:
 * How we're going to start actually coding and the structure we want to do it in
 
 
 ### Plans and Goals:
 
-* Plan for future assignments due dates
-* Kick-start project timeline
-* Frontend: Create a rough draft for UI design by the end of week
-* Backend: Design database architecture
+* Connect database to our current code base 
+* Have a working front end by next week 
+* Add more to current draft of UI Design
 
 ## Individual Contributions
 
