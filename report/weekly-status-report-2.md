@@ -3,10 +3,12 @@
 ## Team Report
 
 ### Progress and Issues:
-* 
+* Making the structure of our GitHub Repository and pushing our code base into it
+* Completed initial draft of the UI Design on Figma 
+* Completed revisions for Team Policies document 
 
 Project Agenda Meeting:
-* 
+* How we're going to start actually coding and the structure we want to do it in
 
 
 ### Plans and Goals:
