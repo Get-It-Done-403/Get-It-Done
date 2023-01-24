@@ -25,3 +25,9 @@
              |   +- CalendarRepository.java
              +- utils
              
+### Goals and Ideas
+* Goals
+  - To create an easy-to-use productivity planner
+  - Create an app to manage time better
+  - Reduce the stresses that come with planning school work and events
+  - Create an algorithm that creates a study schedule for students
