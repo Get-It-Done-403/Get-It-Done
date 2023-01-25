@@ -3,17 +3,19 @@
 ## Team Report
 
 ### Goals From Last Week:
+* Plan for future assignments due dates
+* Kick-start project timeline
+* Frontend: Create a rough draft for UI design by the end of week
+* Backend: Design database architecture
 
 ### Progress and Issues:
+
 * Project Agenda Meeting:
 
 
 ### Plans and Goals:
 
-* Plan for future assignments due dates
-* Kick-start project timeline
-* Frontend: Create a rough draft for UI design by the end of week
-* Backend: Design database architecture
+
 
 ## Individual Contributions
 
