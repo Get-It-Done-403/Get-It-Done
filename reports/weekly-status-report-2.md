@@ -3,10 +3,7 @@
 ## Team Report
 
 ### Progress and Issues:
-* 
-
-Project Agenda Meeting:
-* 
+* Project Agenda Meeting:
 
 
 ### Plans and Goals:
@@ -23,7 +20,6 @@ Project Agenda Meeting:
      - Learn how to make APIs in Java and Spark
      - Learn more about Firebase
   * Progress and Issues:
-    - 
   * Plans and Goals:
         
 * Mitchell Ly
@@ -37,7 +33,12 @@ Project Agenda Meeting:
       -  Collaborate in database architecture design
       -  Familiarize myself with Firebase 
     * Progress and Issues:
+      - Designed rough project structure layout
+      - Worked on [architecture design](https://docs.google.com/document/d/1uV9L6eqc23ACV5CavqJpV2Ehi9OB4-VOD54nmRmP57U/edit?usp=sharing)
+      - Set up starter Spring Boot project
     * Plans and Goals:
+      - Help with data base implementation
+      - Learn more about creating a REST API with Spring Boot and React
 * Aidan Petta
     * Goals from last week:
        - Start planning database and how we will store data
