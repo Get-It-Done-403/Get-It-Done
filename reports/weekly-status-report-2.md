@@ -9,11 +9,18 @@
 * Backend: Design database architecture
 
 ### Progress and Issues:
+* Worked on rough UI design
+* Created architecture design diagram for backend
+* Familiarized ourselves with technologies we plan to use (e.g. Spring Boot, ReactJS, firebase, etc)
 
-* Project Agenda Meeting:
+* Project Meeting Agenda:
+
 
 
 ### Plans and Goals:
+* Design feature classes for Java backend
+* Connect Firebase to backend
+* Have a basic "Hello World" API working
 
 
 
