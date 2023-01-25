@@ -5,7 +5,7 @@
 ### Progress and Issues:
 * Completed the Requirements & Policies document
 
-Project Agenda Meeting:
+Project Meeting Agenda:
 * Address plans and goals for the week
 
 
