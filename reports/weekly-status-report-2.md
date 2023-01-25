@@ -2,6 +2,8 @@
 
 ## Team Report
 
+### Goals From Last Week:
+
 ### Progress and Issues:
 * Project Agenda Meeting:
 
