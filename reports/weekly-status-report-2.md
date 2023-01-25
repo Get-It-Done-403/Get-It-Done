@@ -13,7 +13,7 @@
 * Created architecture design diagram for backend
 * Familiarized ourselves with technologies we plan to use (e.g. Spring Boot, ReactJS, firebase, etc)
 
-* Project Meeting Agenda:
+ #### Project Meeting Agenda:
 
 
 
