@@ -25,7 +25,7 @@ Project Agenda Meeting:
   * Progress and Issues:
     - 
   * Plans and Goals:
-
+        
 * Mitchell Ly
     * Goals from last week:
       - Help Design the UI 
@@ -42,8 +42,15 @@ Project Agenda Meeting:
     * Goals from last week:
        - Start planning database and how we will store data
        - Have the database setup.
+       - Learn more about firebase and spring boot
     * Progress and Issues: 
+        - Learned how to use Spring Boot
+        - Revised project requirments
+        - Learned Firebase
     * Plans and Goals: 
+        - Implement Spring Boot and start firebase database
+        - Work on the architecture of the backend
+        - build structure of repo
 * Lance
     * Goals from last week:
       -  Create rough draft of UI
