@@ -41,7 +41,11 @@
       - Help Design the UI 
       - Start implementing the frontend 
     * Progress and Issues: 
+      - Have started implementing the front end
+      - Revised project requirements 
     * Plans and Goals: 
+      - Finish implementing the front end when the design is finally finished 
+      - Help connect the frontend to the backend once that is done
 * Sofia Barry
     * Goals from last week:
       -  Collaborate in database architecture design
