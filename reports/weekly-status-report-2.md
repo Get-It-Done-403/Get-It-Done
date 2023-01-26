@@ -31,8 +31,11 @@
      - Learn how to make APIs in Java and Spark
      - Learn more about Firebase
   * Progress and Issues:
+     - Researched about the Spring Boot Framework
+     - Familiarized myself with API integration with Java
   * Plans and Goals:
-        
+     - Design the architecture of the backend API
+     - Help with setting up the database   
 * Mitchell Ly
     * Goals from last week:
       - Help Design the UI 
