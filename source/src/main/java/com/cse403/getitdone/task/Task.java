@@ -6,21 +6,17 @@ public class Task {
     private int hoursToComplete;
     private boolean isCompleted;
 
-    public Task(final String title, final Date dueDate, final int hoursToComplete) {
+    public Task(final String title,
+                final int year, final month, final date, final hrs, final min,
+                final int hoursToComplete) {
         this.title = title;
-        this.dueDate = dueDate;
+        this.dueDate = new Date(year, month, date, hrs, min);
         this.hoursToComplete = hoursToComplete;
         this.isCompleted = false;
     }
 
-    public Task(final String title, final Date dueDate) {
-        this.title = title;
-        this.dueDate = dueDate;
-        this.hoursToComplete = null;
-        this.isCompleted = false;
-    }
-
-    public Task(final String title, final int year, final int month, final int date, final int hrs, final int min) {
+    public Task(final String title,
+                final int year, final month, final date, final hrs, final min) {
         this.title = title;
         this.dueDate = new Date(year, month, date, hrs, min);
         this.hoursToComplete = null;
