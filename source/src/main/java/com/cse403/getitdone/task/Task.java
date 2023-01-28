@@ -13,6 +13,13 @@ public class Task {
         this.isCompleted = false;
     }
 
+    public Task(final String title, final Date dueDate) {
+        this.title = title;
+        this.dueDate = dueDate;
+        this.hoursToComplete = null;
+        this.isCompleted = false;
+    }
+
     public Task(final String title, final int year, final int month, final int date, final int hrs, final int min) {
         this.title = title;
         this.dueDate = new Date(year, month, date, hrs, min);
@@ -54,8 +61,8 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Integer.valueOf(this.title) + this.dueDate.hashCode() *
-                Integer.valueOf(this.hoursToComplete);
+        return Integer.valueOf(this.title) +
+                ((this.hoursToComplete == null) ? 0: Integer.valueOf(this.hoursToComplete)) * this.dueDate.hashCode();
     }
 
     @Override
@@ -66,8 +73,8 @@ public class Task {
             Task e = (Task) o;
             return this.title.equals(e.title)
                     && this.dueDate.equals(e.dueDate)
-                    && this.hoursToComplete(e.hoursToComplete)
-                    && this.isCompleted(e.isCompleted);
+                    && this.hoursToComplete.equals(e.hoursToComplete)
+                    && this.isCompleted.equals(e.isCompleted);
         }
     }
 
