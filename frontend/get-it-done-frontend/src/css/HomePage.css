@@ -1,0 +1,106 @@
+@font-face {
+    font-family: "Light";
+    src: local("PlayfairDisplay-VariableFont_wght"), url("../fonts/PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Text";
+    src: local("Asar-Regular"), url("../fonts/Asar-Regular.ttf") format("truetype");
+}
+
+.pageBackground {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    color: white;
+    font-family: "Light";
+    /*font-size: calc(10px + 2vmin);*/
+    /*color: white;*/
+}
+
+.pageContainer {
+    display: flex;
+    flex: .95;
+}
+.navBar {
+    display: flex;
+    padding: 5px;
+    flex: .05;
+    background-color: #647DAC;
+    flex-direction: column;
+    font-size: 24px;
+    font-family: Text;
+    /*justify-content: center;*/
+    align-items: center;
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.test {
+    display: flex;
+    flex-direction: column;
+    /*text-align: center;*/
+    justify-content: center;
+    background-color: #9156F0;
+    width: 150px;
+    height: 70px;
+}
+.navComponent {
+    margin-bottom: 20px;
+}
+
+.upcomingTasks {
+    display: flex;
+    background-color: rgba(239, 239, 239, 49);
+    flex: .15;
+    color: black;
+    align-items: center;
+    /*justify-content: center;*/
+    flex-direction: column;
+    font-family: Text;
+    font-size: 20px;
+    color: #181818;
+}
+
+.header {
+    background-color: rgba(225, 225, 225, 16);
+    display: flex;
+    flex: .05;
+}
+
+.logoHeader {
+    padding: 5px;
+    display: flex;
+    flex: .05;
+    /*flex-shrink: 0;*/
+    min-width: 150px;
+    max-width: 150px;
+    background-color: rgb(99, 120, 159);
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.restHeader {
+    display: flex;
+    flex: .95;
+    background-color: #9156F0;
+}
+
+.tasksPage {
+    display: flex;
+    flex-direction: column;
+    flex: .8;
+    font-family: Text;
+    color: black;
+    padding: 30px;
+}
+
+.tasksContainer {
+    display: flex;
+    flex: .6;
+    /*padding: ;*/
+    margin-top: 50px;
+    /*background-color: green;*/
+}
