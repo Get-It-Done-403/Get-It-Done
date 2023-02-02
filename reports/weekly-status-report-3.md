@@ -41,8 +41,15 @@
     * Plans and Goals:
 * Aidan Petta
     * Goals from last week:
-    * Progress and Issues: 
+      - Implement Spring Boot and start firebase database
+      - Work on the architecture of the backend
+      - build structure of repo
+    * Progress and Issues:
+      - Implemented front and backed of firebase
+      - Need to wait for frontend login page to fully implement
     * Plans and Goals: 
+      - Setup firebase to read and write data from frontend and backend
+      - Talk about importing google calendar 
 * Lance
     * Goals from last week:
     * Progress and Issues:
