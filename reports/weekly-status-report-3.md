@@ -8,13 +8,20 @@
 * Have a basic "Hello World" API working
 
 ### Progress and Issues:
+* Completed software architecture design document 
+* Connected Firebase to front and backend
+* Frontend implementation with React (home page and calendar page)
+* Completed the UI design
 
 #### Project Meeting Agenda:
-
-
+* Discuss PM involvement in the next few weeks 
+* Discuss high level ideas for the Calendar algorithm 
+* Discuss team time management and activities.
 
 ### Plans and Goals:
-
+* Have a base draft of the algorithm we will need for Calendar
+* Complete TaskService
+* Begin working on Calendar feature
 
 
 ## Individual Contributions
