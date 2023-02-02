@@ -1,21 +1,13 @@
-import "../css/HomePage.css";
+import "../css/mainCSS.css";
+import {Link} from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 
 function HomePage() {
     return (
         <div className={"pageBackground"}>
-            <div className={"header"}>
-                <div className={"logoHeader"}> Get It Done </div>
-                <div className={"ml-auto mr-12 self-center text-[#181818] text-[28px]"}>  Profile </div>
-            </div>
             <div className={"pageContainer"}>
-                <div className={"navBar"}>
-                    <div className={"flex mb-[10px] flex-col justify-center text-center display-flex w-[150px] bg-opacity-50 h-[70px] bg-[#31FFFF]"}> Home </div>
-                    <a href={"OldPage.js"}>
-                        <div className={"navComponent"}> Calendar </div>
-                    </a>
-                    <div className={"navComponent"}> Settings </div>
-                </div>
+                <NavBar currentPage={"home"}/>
 
                 <div className={"tasksPage"}>
                     <h1 className={"text-[36px] ml-[12px] border-b-2 border-[#353535]"}> Today's Tasks </h1>
