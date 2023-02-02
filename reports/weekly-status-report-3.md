@@ -40,8 +40,16 @@
      - Connect Task and Calendar class to the database
 * Mitchell Ly
     * Goals from last week:
+      - Finish implementing the front end when the design is finally finished
+      - Help connect the frontend to the backend once that is done
     * Progress and Issues: 
+      * Now have 2 pages implemented (home page and calendar page)
+      * Added React-router and tailwindcss to help with front-end 
+      * Added functional buttons and ways to navigate between pages 
     * Plans and Goals: 
+      * Integrate these two pages with the backend (help with login and maybe start pulling and pushing code to the database)
+      * Continue implementing more pages (settings and more)
+      * Continue to revise and improve designs and functionality of pages
 * Sofia Barry
     * Goals from last week:
       - Help with data base implementation
