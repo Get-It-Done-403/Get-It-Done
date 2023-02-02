@@ -17,7 +17,7 @@
 * Discuss PM involvement in the next few weeks 
 * Discuss high level ideas for the Calendar algorithm 
 * Discuss team time management and activities
-* Discuss Google calendar import feasability
+* Discuss Google calendar import feasibility
 
 ### Plans and Goals:
 * Have a base draft of the algorithm we will need for Calendar
