@@ -23,6 +23,7 @@
 * Have a base draft of the algorithm we will need for Calendar
 * Complete TaskService
 * Begin working on Calendar feature
+* Break down tasks and add them to our GetItDone kanban board and add assignee
 
 
 ## Individual Contributions
@@ -37,8 +38,15 @@
     * Plans and Goals: 
 * Sofia Barry
     * Goals from last week:
+      - Help with data base implementation
+      - Learn more about creating a REST API with Spring Boot and React 
     * Progress and Issues:
+      - Completed Task model class
+      - Began working on TaskService
     * Plans and Goals:
+      - Help with breakdown of Tasks and create kanban for the team
+      - Complete TaskService and test communication with Firebase
+      - Assist Tye with the implementation of Calendar feature 
 * Aidan Petta
     * Goals from last week:
       - Implement Spring Boot and start firebase database
