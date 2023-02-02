@@ -1,3 +1,5 @@
+package com.cse403.getitdone.task;
+
 import java.util.Date;
 
 public class Task {
