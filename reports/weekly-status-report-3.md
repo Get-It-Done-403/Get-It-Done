@@ -3,6 +3,9 @@
 ## Team Report
 
 ### Goals From Last Week:
+* Design feature classes for Java backend
+* Connect Firebase to backend
+* Have a basic "Hello World" API working
 
 ### Progress and Issues:
 
