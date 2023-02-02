@@ -29,6 +29,6 @@ public class FireBase {
     }
 
     void runQuery() {}
-    void deletTask() {}
+    void deleteTask() {}
 
 }
