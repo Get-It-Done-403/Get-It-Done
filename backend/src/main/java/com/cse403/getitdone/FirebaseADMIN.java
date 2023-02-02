@@ -1,19 +1,11 @@
 package com.cse403.getitdone;
 
 import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
-import com.google.firebase.database.*;
 import com.google.common.collect.ImmutableMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 
 public class FirebaseADMIN {
     private Firestore db;
