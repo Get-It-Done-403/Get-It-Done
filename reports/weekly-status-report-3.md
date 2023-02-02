@@ -30,8 +30,14 @@
 
 * Tye Coleman
   * Goals from last week:
+     - Design the architecture of the backend API
+     - Help with setting up the database 
   * Progress and Issues:
+     - Designed the architecture of the backend services
+     - Made the skeleton structrure for the Task class 
   * Plans and Goals:
+     - Start implementing the Calendar class
+     - Connect Task and Calendar class to the database
 * Mitchell Ly
     * Goals from last week:
     * Progress and Issues: 
