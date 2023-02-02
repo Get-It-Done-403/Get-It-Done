@@ -66,5 +66,11 @@
       - Talk about importing google calendar 
 * Lance
     * Goals from last week:
+      - Finish rough draft of UI
+      - Assist in architecture of front end
     * Progress and Issues:
+      - Finished creation of UI
+      - Helped with planning of front end
     * Plans and Goals:
+      - Assisst in creation and implementation of front end
+      - Refine UI as needed
