@@ -20,14 +20,17 @@ import {
     addDoc,
     } from "firebase/firestore";
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_AUTH_DOMAIN_KEY,
-    projectId: process.env.REACT_APP_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_APP_ID,
-    measurementId: process.env.REACT_APP_MEASUREMENT_ID
+    apiKey: "AIzaSyCG7M9rwHWYKPvB03II8geGlQZBRxMrdTw",
+    authDomain: "get-it-done-7a708.firebaseapp.com",
+    databaseURL: "https://get-it-done-7a708-default-rtdb.firebaseio.com",
+    projectId: "get-it-done-7a708",
+    storageBucket: "get-it-done-7a708.appspot.com",
+    messagingSenderId: "798304706961",
+    appId: "1:798304706961:web:f2592d4ddd734528317a30",
+    measurementId: "G-EM5NELFXRE"
 };
 
 // Initialize Firebase
@@ -72,6 +75,17 @@ const sendPasswordReset = async (email) => {
         alert(err.message);
     }
 };
+
+
+// For frontend when passing data to the backend please send back the user uid if possible
+// here is an example
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const uid = user.uid;
+        const stringVersion = String(uid)
+    } else {
+    }
+});
 
 const logout = () => {
     signOut(auth);
