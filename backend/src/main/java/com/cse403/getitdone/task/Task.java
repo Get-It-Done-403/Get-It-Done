@@ -3,7 +3,11 @@ package com.cse403.getitdone.task;
 import java.time.LocalDateTime;
 
 public class Task {
+<<<<<<< HEAD
 //    private String uid;
+=======
+    private String uid;
+>>>>>>> origin/main
     private String tid;
     private String title;
     private LocalDateTime dueDate;
@@ -14,7 +18,11 @@ public class Task {
     public Task(final String uid, final String title,
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute,
                 final int hoursToComplete) {
+<<<<<<< HEAD
 //        this.uid = uid;
+=======
+        this.uid = uid;
+>>>>>>> origin/main
         this.title = title;
         this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = hoursToComplete;
@@ -25,7 +33,11 @@ public class Task {
 
     public Task(final String uid, final String title,
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute) {
+<<<<<<< HEAD
 //        this.uid = uid;
+=======
+        this.uid = uid;
+>>>>>>> origin/main
         this.title = title;
         this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = -1;
@@ -34,6 +46,7 @@ public class Task {
         this.tid = java.util.UUID.randomUUID().toString();
     }
 
+<<<<<<< HEAD
 //    public String getUid() {
 //        return this.uid;
 //    }
@@ -41,6 +54,15 @@ public class Task {
 //    public void setUid(final String uid) {
 //        this.uid = uid;
 //    }
+=======
+    public String getUid() {
+        return this.uid;
+    }
+
+    public void setUid(final String uid) {
+        this.uid = uid;
+    }
+>>>>>>> origin/main
 
     public String getTid() {
         return this.tid;
