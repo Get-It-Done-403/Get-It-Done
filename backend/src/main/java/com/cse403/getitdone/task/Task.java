@@ -1,28 +1,28 @@
 package com.cse403.getitdone.task;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Task {
     private String title;
-    private Date dueDate;
+    private LocalDateTime dueDate;
     private int hoursToComplete;
     private boolean isCompleted;
 
 
     public Task(final String title,
-                final int year, final month, final date, final hrs, final min,
+                final int year, final int month, final int dayOfMonth, final int hour, final int minute,
                 final int hoursToComplete) {
         this.title = title;
-        this.dueDate = new Date(year, month, date, hrs, min);
+        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = hoursToComplete;
         this.isCompleted = false;
     }
 
     public Task(final String title,
-                final int year, final month, final date, final hrs, final min) {
+                final int year, final int month, final int dayOfMonth, final int hour, final int minute,) {
         this.title = title;
-        this.dueDate = new Date(year, month, date, hrs, min);
-        this.hoursToComplete = null;
+        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+        this.hoursToComplete = -1;
         this.isCompleted = false;
     }
 
@@ -34,12 +34,12 @@ public class Task {
         this.title = title;
     }
 
-    public Date getDueDate() {
+    public LocalDateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(final int year, final int month, final int date, final int hrs, final int min) {
-        this.dueDate = new Date(year, month, date, hrs, min);
+    public void setDueDate(final int year, final int month, final int dayOfMonth, final int hour, final int minute) {
+        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
     }
 
     public int getHoursToComplete() {
@@ -61,7 +61,7 @@ public class Task {
     @Override
     public int hashCode() {
         return Integer.valueOf(this.title) +
-                ((this.hoursToComplete == null) ? 0: Integer.valueOf(this.hoursToComplete)) * this.dueDate.hashCode();
+                ((this.hoursToComplete == -1) ? 0: Integer.valueOf(this.hoursToComplete)) * this.dueDate.hashCode();
     }
 
     @Override
@@ -72,8 +72,8 @@ public class Task {
             Task e = (Task) o;
             return this.title.equals(e.title)
                     && this.dueDate.equals(e.dueDate)
-                    && this.hoursToComplete.equals(e.hoursToComplete)
-                    && this.isCompleted.equals(e.isCompleted);
+                    && this.hoursToComplete == e.hoursToComplete
+                    && this.isCompleted == e.isCompleted;
         }
     }
 
