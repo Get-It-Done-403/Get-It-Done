@@ -3,27 +3,38 @@ package com.cse403.getitdone.task;
 import java.time.LocalDateTime;
 
 public class Task {
+    private String uid;
     private String title;
     private LocalDateTime dueDate;
     private int hoursToComplete;
     private boolean isCompleted;
 
 
-    public Task(final String title,
+    public Task(final String uid, final String title,
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute,
                 final int hoursToComplete) {
+        this.uid = uid;
         this.title = title;
         this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = hoursToComplete;
         this.isCompleted = false;
     }
 
-    public Task(final String title,
+    public Task(final String uid, final String title,
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute) {
+        this.uid = uid;
         this.title = title;
         this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = -1;
         this.isCompleted = false;
+    }
+
+    public String getUid() {
+        return this.uid;
+    }
+
+    public void setUid(final String uid) {
+        this.uid = uid;
     }
 
     public String getTitle() {
