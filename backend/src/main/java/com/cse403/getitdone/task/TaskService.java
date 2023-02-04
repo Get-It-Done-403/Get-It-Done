@@ -1,6 +1,5 @@
 package com.cse403.getitdone.task;
 
-import com.cse403.getitdone.FirebaseADMIN;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -19,6 +18,7 @@ public class TaskService {
 
     public String saveTaskDetails(final String uid, final Task task) throws InterruptedException, ExecutionException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
+
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
                 .collection(COL_NAME).document(uid)
                 .collection(SUBCOL_NAME).document(task.getTid())
@@ -45,15 +45,12 @@ public class TaskService {
         }
     }
 
-    public String updateTaskDetails(Task task) throws InterruptedException, ExecutionException {
+    public String deleteTask(final String uid, final String tid) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection(COL_NAME).document(task.getTitle()).set(task);
-        return collectionsApiFuture.get().getUpdateTime().toString();
-    }
-
-    public String deleteTask(String name) {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> writeResult = dbFirestore.collection(COL_NAME).document(name).delete();
-        return "Task ID " + name + " has been deleted";
+        ApiFuture<WriteResult> writeResult = dbFirestore
+                .collection(COL_NAME).document(uid)
+                .collection(SUBCOL_NAME).document(tid)
+                .delete();
+        return "uid " + uid + ": task with tid " + tid + " has been deleted";
     }
 }
