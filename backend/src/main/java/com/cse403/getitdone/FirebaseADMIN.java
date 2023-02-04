@@ -7,15 +7,16 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -40,13 +41,53 @@ public class FirebaseADMIN {
         Task tester = new Task("go to class", 2023, 2, 3, 12, 30);
         Map<String, Task> map = new HashMap<>();
         map.put("uid", tester);
-        ApiFuture<WriteResult> future = db.collection("users").document("aidan").set(map);
-        System.out.println("Update time : " + future.get().getUpdateTime());
+        ApiFuture<WriteResult> future = db
+                .collection("users")
+                .document("aidan")
+                .set(map);
     }
 
     public void addCalendarToUser() {}
 
     public void deleteTaskToUser() {}
+
+    //Deletes entire document from collection tasks
+    public void deleteDocument(String docName) {
+        ApiFuture<WriteResult> deleted = db
+                .collection("users")
+                .document("aidan")
+                .collection("tasks")
+                .document(docName)
+                .delete();
+    }
+
+    public void deleteFieldFromTask() {
+        DocumentReference docRef = db
+                .collection("users")
+                .document("aidan")
+                .collection("tasks")
+                .document();
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("taskFieldToDelte", FieldValue.delete());
+        ApiFuture<WriteResult> writeResult = docRef.update(updates);
+    }
+
+    public void deleteCollection(CollectionReference collection, int batchSize) {
+        try {
+            ApiFuture<QuerySnapshot> future = collection.limit(batchSize).get();
+            int deleted = 0;
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                document.getReference().delete();
+                deleted++;
+            }
+            if (deleted >= batchSize) {
+                deleteCollection(collection, batchSize);
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void deleteCalendar() {}
 
