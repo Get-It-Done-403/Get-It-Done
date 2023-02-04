@@ -1,2 +1,59 @@
-package com.cse403.getitdone.task;public class TaskService {
+package com.cse403.getitdone.task;
+
+import com.cse403.getitdone.FirebaseADMIN;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.cloud.FirestoreClient;
+import org.springframework.stereotype.Service;
+
+import java.util.concurrent.ExecutionException;
+
+@Service
+public class TaskService {
+
+    public static final String COL_NAME="users";
+    public static final String SUBCOL_NAME="tasks";
+
+    public String saveTaskDetails(final String uid, final Task task) throws InterruptedException, ExecutionException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
+                .collection(COL_NAME).document(uid)
+                .collection(SUBCOL_NAME).document(task.getTid())
+                .set(task);
+        return collectionsApiFuture.get().getUpdateTime().toString();
+    }
+
+    public Task getTaskDetails(final String uid, final String tid) throws InterruptedException, ExecutionException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference documentReference = dbFirestore
+                .collection(COL_NAME).document(uid)
+                .collection(SUBCOL_NAME).document(tid);
+        ApiFuture<DocumentSnapshot> future = documentReference.get();
+
+        DocumentSnapshot document = future.get();
+
+        Task task = null;
+
+        if(document.exists()) {
+            task = document.toObject(Task.class);
+            return task;
+        }else {
+            return null;
+        }
+    }
+
+    public String updateTaskDetails(Task task) throws InterruptedException, ExecutionException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection(COL_NAME).document(task.getTitle()).set(task);
+        return collectionsApiFuture.get().getUpdateTime().toString();
+    }
+
+    public String deleteTask(String name) {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> writeResult = dbFirestore.collection(COL_NAME).document(name).delete();
+        return "Task ID " + name + " has been deleted";
+    }
 }
