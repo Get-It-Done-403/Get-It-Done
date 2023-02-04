@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class Task {
     private String uid;
+    private String tid;
     private String title;
     private LocalDateTime dueDate;
     private int hoursToComplete;
@@ -18,6 +19,8 @@ public class Task {
         this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = hoursToComplete;
         this.isCompleted = false;
+
+        this.tid = java.util.UUID.randomUUID().toString();
     }
 
     public Task(final String uid, final String title,
@@ -27,6 +30,8 @@ public class Task {
         this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = -1;
         this.isCompleted = false;
+
+        this.tid = java.util.UUID.randomUUID().toString();
     }
 
     public String getUid() {
@@ -35,6 +40,10 @@ public class Task {
 
     public void setUid(final String uid) {
         this.uid = uid;
+    }
+
+    public String getTid() {
+        return this.tid;
     }
 
     public String getTitle() {
