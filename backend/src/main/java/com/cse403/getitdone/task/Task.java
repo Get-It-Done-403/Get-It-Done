@@ -19,7 +19,7 @@ public class Task {
     }
 
     public Task(final String title,
-                final int year, final int month, final int dayOfMonth, final int hour, final int minute,) {
+                final int year, final int month, final int dayOfMonth, final int hour, final int minute) {
         this.title = title;
         this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = -1;
