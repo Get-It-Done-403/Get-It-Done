@@ -11,6 +11,7 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import org.apache.catalina.core.ApplicationPushBuilder;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class FirebaseADMIN {
-    private Firestore db;
+    private final Firestore db;
     FirebaseADMIN(Firestore db) {this.db = db;}
 
     public FirebaseADMIN() throws IOException, ExecutionException, InterruptedException {
@@ -31,8 +32,7 @@ public class FirebaseADMIN {
                 .build();
 
         FirebaseApp.initializeApp(options);
-        Firestore db = FirestoreClient.getFirestore();
-        this.db = db;
+        this.db = FirestoreClient.getFirestore();
     }
 
     Firestore getDb() {return db;}
@@ -48,8 +48,6 @@ public class FirebaseADMIN {
     }
 
     public void addCalendarToUser() {}
-
-    public void deleteTaskToUser() {}
 
     //Deletes entire document from collection tasks
     public void deleteDocument(String docName) {
