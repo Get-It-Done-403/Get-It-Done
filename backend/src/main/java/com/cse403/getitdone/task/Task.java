@@ -1,8 +1,17 @@
 package com.cse403.getitdone.task;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 
+@Entity
+
 public class Task {
+    @Id
+
     private String tid;
     private String title;
     private LocalDateTime dueDate;
@@ -30,6 +39,9 @@ public class Task {
 
         this.tid = java.util.UUID.randomUUID().toString();
     }
+
+    public Task() {}
+
 
     public String getTid() {
         return this.tid;

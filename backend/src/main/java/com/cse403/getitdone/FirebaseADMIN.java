@@ -1,92 +1,26 @@
 package com.cse403.getitdone;
 
-import ch.qos.logback.core.net.ObjectWriter;
-import com.cse403.getitdone.task.Task;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
-import org.apache.catalina.core.ApplicationPushBuilder;
-
+import org.springframework.stereotype.Service;
+import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
+
+@Service
 public class FirebaseADMIN {
-    private final Firestore db;
-    FirebaseADMIN(Firestore db) {this.db = db;}
 
-    public FirebaseADMIN() throws IOException, ExecutionException, InterruptedException {
-        FileInputStream serviceAcc = new FileInputStream("/Users/aidanpetta/IdeaProjects/Get-It-Done/backend/src/main/java/com/cse403/getitdone/servicekey.json");
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAcc))
-                .build();
-
-        FirebaseApp.initializeApp(options);
-        this.db = FirestoreClient.getFirestore();
-    }
-
-    Firestore getDb() {return db;}
-
-    void addTaskToUser(String toAdd) throws ExecutionException, InterruptedException, IOException {
-        Task tester = new Task("go to class", 2023, 2, 3, 12, 30);
-        Map<String, Task> map = new HashMap<>();
-        map.put("uid", tester);
-        ApiFuture<WriteResult> future = db
-                .collection("users")
-                .document("aidan")
-                .set(map);
-    }
-
-    public void addCalendarToUser() {}
-
-    //Deletes entire document from collection tasks
-    public void deleteDocument(String docName) {
-        ApiFuture<WriteResult> deleted = db
-                .collection("users")
-                .document("aidan")
-                .collection("tasks")
-                .document(docName)
-                .delete();
-    }
-
-    public void deleteFieldFromTask() {
-        DocumentReference docRef = db
-                .collection("users")
-                .document("aidan")
-                .collection("tasks")
-                .document();
-        Map<String, Object> updates = new HashMap<>();
-        updates.put("taskFieldToDelte", FieldValue.delete());
-        ApiFuture<WriteResult> writeResult = docRef.update(updates);
-    }
-
-    public void deleteCollection(CollectionReference collection, int batchSize) {
+    @PostConstruct
+    public void init() {
         try {
-            ApiFuture<QuerySnapshot> future = collection.limit(batchSize).get();
-            int deleted = 0;
-            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-            for (QueryDocumentSnapshot document : documents) {
-                document.getReference().delete();
-                deleted++;
-            }
-            if (deleted >= batchSize) {
-                deleteCollection(collection, batchSize);
-            }
-        } catch (ExecutionException | InterruptedException e) {
-            throw new RuntimeException(e);
+            FileInputStream serciceAcc = new FileInputStream("/Users/aidanpetta/IdeaProjects/Get-It-Done/backend/src/main/java/com/cse403/getitdone/servicekey.json");
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setCredentials(GoogleCredentials.fromStream(serciceAcc))
+                    .build();
+            FirebaseApp.initializeApp(options);
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
-
-    public void deleteCalendar() {}
-
 }
