@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GetitdoneApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GetitdoneApplication.class, args);
+        try {
+            SpringApplication.run(GetitdoneApplication.class, args);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
     }
 
 }
