@@ -5,6 +5,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, String> {
-    static Task createTask(Task task) {
-    }
 }
