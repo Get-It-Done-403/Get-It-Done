@@ -1,5 +1,4 @@
 import "../css/mainCSS.css";
-import {Link} from "react-router-dom";
 import NavBar from "../components/NavBar";
 
 
