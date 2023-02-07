@@ -1,6 +1,4 @@
 import {Link} from "react-router-dom";
-import {useState} from "react";
-
 
 function NavBar({currentPage}) {
     const homeButtonCSS = currentPage === "home" ?

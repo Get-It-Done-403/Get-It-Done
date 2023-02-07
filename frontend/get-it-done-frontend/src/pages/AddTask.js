@@ -2,40 +2,36 @@ import "../css/mainCSS.css";
 import NavBar from "../components/NavBar";
 
 
-function CalendarPage() {
-    const monthNames = [{monthName: "January", days: 31}, {monthName: "February", days: 28}, {monthName: "March", days: 31}, {monthName: "April", days: 30}, {monthName: "May", days: 30}, {monthName: "June", days: 30}, {monthName: "July", days: 31}, {monthName: "August", days: 31}, {monthName: "September", days: 30}, {monthName: "October", days: 31}, {monthName: "November", days: 30}, {monthName: "December", days: 31}];
-    const testArray = Array(31).fill(0);
-    const currentMonthName = monthNames[new Date().getMonth()].monthName;
-    // const days = monthNames[new Date().getMonth()].days;
-    const currentYear = new Date().getFullYear();
-
-
+function AddTask() {
     return (
         <div className={"pageBackground"}>
             <div className={"pageContainer"}>
                 <NavBar currentPage={"calendar"}/>
 
                 <div className={"calendarContainer"}>
-                    <h1 className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[30px]"}> {currentMonthName} {currentYear} </h1>
-                    <div className={"allDaysBox"}>
-                        <div className={"dayNameBox"}>Sunday</div>
-                        <div className={"dayNameBox"}>Monday</div>
-                        <div className={"dayNameBox"}>Tuesday</div>
-                        <div className={"dayNameBox"}>Wednesday</div>
-                        <div className={"dayNameBox"}>Thursday</div>
-                        <div className={"dayNameBox"}>Friday</div>
-                        <div className={"saturdayBox"}>Saturday</div>
+                    <h1 className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"}> Enter Name of Task </h1>
+                    <div className={"ml-[12px]"}>
+                        January 13th, 2023
                     </div>
 
-                    <div className={"grid-cols-7 grid-rows-5 grid border-r-2 border-black"}>
-                        {testArray && testArray.map(item => (
-                            <div className={"singleDayBox"}>
-                                test
+                    <form>
+                        <div className={"radio-toolbar"}>
+                            <div className={"ml-[12px] mt-[5px]"}>
+                                <input type="radio" id={"None"} name={"radioButton"} defaultValue="true" />
+                                <label htmlFor={"None"}>X</label>
+                                <input type="radio" id={"Daily"} name={"radioButton"} defaultValue="false" defaultChecked/>
+                                <label htmlFor={"Daily"}>Daily</label>
+                                <input type="radio" id={"Weekly"} name={"radioButton"} defaultValue="true" />
+                                <label htmlFor={"Weekly"}>Weekly</label>
+                                <input type="radio" id={"Monthly"} name={"radioButton"} defaultValue="false" defaultChecked/>
+                                <label htmlFor={"Monthly"}>Monthly</label>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+
+                    </form>
                 </div>
             </div>
+
             <style jsx> {`
                 .calendarContainer {
                     flex: .95;
@@ -76,11 +72,30 @@ function CalendarPage() {
                     border-color: black;
                     border-left: 2px solid;
                     border-bottom: 2px solid;
-                }`}
+                }
+                .radio-toolbar input[type="radio"] {
+                    opacity: 0;
+                    position: fixed;
+                    width: 0;
+                }
+
+                .radio-toolbar label {
+                    display: inline-block;
+                    background-color: #D9D9D9;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    margin-right: 20px;
+                }
+                
+                .radio-toolbar input[type="radio"]:checked + label {
+                    background-color: #A9C9C9;
+                }
+                
+                `}
 
             </style>
         </div>
     );
 }
 
-export default CalendarPage;
+export default AddTask;
