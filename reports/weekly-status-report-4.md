@@ -33,8 +33,16 @@
     * Plans and Goals: 
 * Sofia Barry
     * Goals from last week:
+      - Help with breakdown of Tasks and create kanban for the team
+      - Complete TaskService and test communication with Firebase
+      - Assist Tye with the implementation of Calendar feature 
     * Progress and Issues:
+      - Issue: There is an issue with the data type of the "date" field in the Task class. Not compatible with Firebase. Exploring alternatives.
+      - Setup Gradle CI for Java testing
+      - Completed TaskService, TaskController, and TaskRepository
     * Plans and Goals:
+      - Find an alternative for "date" field data type compatible with Firebase
+      - Thoroughly test TaskService with JUnit testing
 * Aidan Petta
     * Goals from last week:
       - Setup firebase to read and write data from frontend and backend
