@@ -17,19 +17,27 @@
 
 ### Plans and Goals:
 * Have a base draft of algorithm for the calendar
-* add functionality to inport google calendar
-*
+* add functionality to import google calendar
+* Make sure we can make api calls from the frontend
 
 
 ## Individual Contributions
 
 * Tye Coleman
   * Goals from last week:
-  * Progress and Issues:
+      - Start implementing the Calendar class
+      - Connect Task and Calendar class to the database
+   * Progress and Issues: 
+      - Implemented CalendarController and most methods in CalendarService
+      - Created HTTP endpoint tests
+      - Planned out the algorithm for Task allocation
   * Plans and Goals:
+      - Create more Junit tests for the Calendar and Task classes
+      - Finish implementation for the Calendar class
+      - Create the User class and connect with the database
 * Mitchell Ly
     * Goals from last week:
-    * Progress and Issues: 
+    * Progress and Issues:
     * Plans and Goals: 
 * Sofia Barry
     * Goals from last week:
