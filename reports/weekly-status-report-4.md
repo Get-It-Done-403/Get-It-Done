@@ -37,7 +37,7 @@
       - Create the User class and connect with the database
 * Mitchell Ly
     * Goals from last week:
-    * Integrate these two pages with the backend (help with login and maybe start pulling and pushing code to the database)
+      * Integrate these two pages with the backend (help with login and maybe start pulling and pushing code to the database)
       * Continue implementing more pages (settings and more)
       * Continue to revise and improve designs and functionality of pages
     * Progress and Issues:
