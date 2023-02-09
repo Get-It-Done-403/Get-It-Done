@@ -37,8 +37,18 @@
       - Create the User class and connect with the database
 * Mitchell Ly
     * Goals from last week:
+    * Integrate these two pages with the backend (help with login and maybe start pulling and pushing code to the database)
+      * Continue implementing more pages (settings and more)
+      * Continue to revise and improve designs and functionality of pages
     * Progress and Issues:
+    * Added pop up modules to add tasks
+    * Set up forms to input data and send through with our APIs
+    * Set up frontend testing to ensure correct functionality 
+    * Started implementing profile page
     * Plans and Goals: 
+    * Have login page designed and implemented along with the backend 
+    * Add more tests 
+    * Add functional buttons that actually do stuff now
 * Sofia Barry
     * Goals from last week:
       - Help with breakdown of Tasks and create kanban for the team
