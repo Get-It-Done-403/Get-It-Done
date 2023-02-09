@@ -43,6 +43,7 @@
     * Plans and Goals:
       - Find an alternative for "date" field data type compatible with Firebase
       - Thoroughly test TaskService with JUnit testing
+      - Work on algorithm for Calendar
 * Aidan Petta
     * Goals from last week:
       - Setup firebase to read and write data from frontend and backend
