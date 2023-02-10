@@ -1,5 +1,6 @@
 package com.cse403.getitdone.utils;
 
+import com.cse403.getitdone.task.Task;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -49,5 +50,29 @@ public class CalendarEntry {
 
     public void setEndDate(final String endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.valueOf(this.eid) * Integer.valueOf(this.tid);
+    }
+
+    @Override
+    public boolean equals( Object o ) {
+        if (!(o instanceof CalendarEntry)) {
+            return false;
+        } else {
+             CalendarEntry e = (CalendarEntry) o;
+            return this.eid.equals(e.eid)
+                    && this.tid.equals(e.tid)
+                    && this.startDate.equals(e.startDate)
+                    && this.endDate.equals(e.endDate);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("CalendarEntry [entry id=%s, task id=%s, startDate=%s, endDate=%s]",
+                eid, tid, startDate, endDate);
     }
 }
