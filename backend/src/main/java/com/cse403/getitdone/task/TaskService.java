@@ -1,11 +1,14 @@
 package com.cse403.getitdone.task;
 
+import com.cse403.getitdone.FirebaseADMIN;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.FirestoreClient;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutionException;
