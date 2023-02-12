@@ -16,10 +16,7 @@ import java.util.Objects;
 public class GetitdoneApplication {
 
     public static void main(String[] args) {
-
         ClassLoader classLoader = GetitdoneApplication.class.getClassLoader();
-
-
         try {
             //File file = new File(Objects.requireNonNull(classLoader.getResource("/Users/aidanpetta/IdeaProjects/Get-It-Done/backend/src/main/java/com/cse403/getitdone/servicekey.json")).getFile());
             FileInputStream serciceAcc = new FileInputStream("/Users/aidanpetta/IdeaProjects/Get-It-Done/backend/src/main/java/com/cse403/getitdone/servicekey.json");
