@@ -11,10 +11,12 @@ public class ScheduleService {
 
     public String scheduleTask(final Task task) {
 
-        for(int i = 0; i < task.getHoursToComplete(); i++) {
-            CalendarEntry entry = new CalendarEntry();
+        //scheduleTask() from ScheduleService
 
-        }
+        // 1. Get availability from Google Calendar API
+        // 2. Break down task and create smaller block (CalendarEntry)
+        // 3. add events to calendar API
+        // 4. Send those entries to db   task -> entries (this would call a function from CalendarService)
 
         return null;
     }
