@@ -5,6 +5,31 @@ import {useState} from "react";
 import AddTask from "./AddTask";
 
 function HomePage() {
+    const handleClick=(e)=>{
+
+        let task =  {
+            title: "boifdsfdsiiof",
+            description: "newdsadaTgssk",
+            deadline: 2232021,
+            day: 9,
+            month: 13,
+            hour: 2,
+            minute: 2,
+            second: 3
+        }
+        fetch("http://localhost:8080/createTask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                task
+            })
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
 
     const [trigger, setTrigger] = useState(false);
     // let completedTasks = [{"name" : "one"}]
@@ -20,6 +45,7 @@ function HomePage() {
         <div className={"pageBackground"}>
             <div className={"pageContainer"}>
                 <NavBar currentPage={"home"}/>
+                <button className={"bg-black"} onClick={handleClick}> huge button </button>
                 <div className={"tasksPage"}>
                     <h1 className={"text-[36px] ml-[12px] border-b-2 border-[#353535]"}> Today's Tasks </h1>
                     <div className={"tasksContainer"}>
