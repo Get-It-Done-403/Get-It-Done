@@ -12,6 +12,10 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
+=======
+import java.io.FileOutputStream;
+>>>>>>> bfbc3d0 (Added endpoint to retrieve all Tasks)
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -68,7 +72,7 @@ public class TaskService {
                 .collection(SUBCOL_NAME);
 
         ApiFuture<QuerySnapshot> future = collectionReference.get();
-        QuerySnapshot collection = (QuerySnapshot) future.get();
+        QuerySnapshot collection = future.get();
         List<QueryDocumentSnapshot> documents = collection.getDocuments();
 
         List<Task> tasks = new ArrayList<>();

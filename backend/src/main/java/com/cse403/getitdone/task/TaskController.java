@@ -1,5 +1,6 @@
 package com.cse403.getitdone.task;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,13 @@ public class TaskController {
 
     @PostMapping("/createTask")
     public String createTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException {
-        //scheduleTask() from Calendar
-            // BREAK DOWN TASKS AND SEND COLLECTIONS OF EVENTS TO FIREBASE.
-            // CREATE EVENTS AND SEND TO GOOGLE CALENDAR API
+        //scheduleTask() from ScheduleService
+
+            // 1. Get availability from Google Calendar API
+            // 2. Break down task and create smaller block (CalendarEntry)
+            // 3. add events to calendar API
+            // 4. Send those entries to db   task -> entries
+
         return taskService.saveTaskDetails(uid,task);
     }
 
@@ -38,5 +43,10 @@ public class TaskController {
     @DeleteMapping("/deleteTask")
     public String deleteTask(@RequestParam String uid, @RequestParam String tid){
         return taskService.deleteTask(uid, tid);
+    }
+
+    @GetMapping("/getTaskList")
+    public List<Task> getTask(@RequestParam String uid) throws InterruptedException, ExecutionException {
+        return taskService.getTaskList(uid);
     }
 }
