@@ -2,34 +2,49 @@ import "../css/mainCSS.css";
 import NavBar from "../components/NavBar";
 
 
-function AddTask() {
+function AddTask(props) {
+
+    function handleCancel() {
+        props.setTrigger(false)
+    }
+
+    function handleSubmit(event) {
+        let task = {"name" : event.target.taskName.value};
+        props.setRemainingTasks([...props.remainingTasks, task]);
+        props.setTrigger(false);
+        event.preventDefault()
+    }
+
     return (
         <div className={"pageBackground"}>
             <div className={"pageContainer"}>
-                <NavBar currentPage={"calendar"}/>
+                <NavBar currentPage={"None"}/>
 
-                <div className={"calendarContainer"}>
-                    <h1 className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"}> Enter Name of Task </h1>
-                    <div className={"ml-[12px]"}>
-                        January 13th, 2023
+                <form className={"calendarContainer"} onSubmit={handleSubmit}>
+                        <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} id={"taskName"} placeholder={"Enter Name of Task "}/>
+                        <input type="date" className={"ml-[12px]"}/>
+
+                            <div className={"radio-toolbar"}>
+                                <div className={"ml-[12px] mt-[5px]"}>
+                                    <input type="radio" id={"None"} name={"radioButton"} defaultValue="true" defaultChecked={true}/>
+                                    <label htmlFor={"None"}>None</label>
+                                    <input type="radio" id={"Daily"} name={"radioButton"} defaultValue="false"/>
+                                    <label htmlFor={"Daily"}>Daily</label>
+                                    <input type="radio" id={"Weekly"} name={"radioButton"} defaultValue="true" />
+                                    <label htmlFor={"Weekly"}>Weekly</label>
+                                    <input type="radio" id={"Monthly"} name={"radioButton"} defaultValue="false"/>
+                                    <label htmlFor={"Monthly"}>Monthly</label>
+                                </div>
+                            </div>
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} placeholder={"Enter Time Commitment"}/>
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} placeholder={"Enter Description"}/>
+                    <div className={"flex-1 flex"}>
+                    <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
+                    <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={handleCancel}> Cancel  </button>
                     </div>
 
-                    <form>
-                        <div className={"radio-toolbar"}>
-                            <div className={"ml-[12px] mt-[5px]"}>
-                                <input type="radio" id={"None"} name={"radioButton"} defaultValue="true" />
-                                <label htmlFor={"None"}>X</label>
-                                <input type="radio" id={"Daily"} name={"radioButton"} defaultValue="false" defaultChecked/>
-                                <label htmlFor={"Daily"}>Daily</label>
-                                <input type="radio" id={"Weekly"} name={"radioButton"} defaultValue="true" />
-                                <label htmlFor={"Weekly"}>Weekly</label>
-                                <input type="radio" id={"Monthly"} name={"radioButton"} defaultValue="false" defaultChecked/>
-                                <label htmlFor={"Monthly"}>Monthly</label>
-                            </div>
-                        </div>
+                </form>
 
-                    </form>
-                </div>
             </div>
 
             <style jsx> {`
@@ -37,6 +52,9 @@ function AddTask() {
                     flex: .95;
                     font-family: Text;
                     color: black;
+                    // background-color: black;
+                    flex-direction: column;
+                    display: flex;
                     padding: 30px;
                 }
                 .allDaysBox {

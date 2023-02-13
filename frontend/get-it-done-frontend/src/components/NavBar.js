@@ -3,15 +3,15 @@ import {Link} from "react-router-dom";
 function NavBar({currentPage}) {
     const homeButtonCSS = currentPage === "home" ?
         "flex flex-col justify-center text-center display-flex w-[150px] " +
-        "bg-opacity-50 h-[70px] bg-[#31FFFF]"
-        : "mt-4 mb-5"
+        "bg-opacity-50 h-[69px] bg-[#31FFFF]"
+        : "mt-4 mb-4"
     const calendarButtonCSS = currentPage === "calendar" ?
         "flex flex-col justify-center text-center display-flex w-[150px] " +
-        "bg-opacity-50 h-[70px] bg-[#31FFFF]"
+        "bg-opacity-50 h-[69px] bg-[#31FFFF]"
         : "mt-4 mb-5"
     const settingsButtonCSS = currentPage === "settings" ?
         "flex flex-col justify-center text-center display-flex w-[150px] " +
-        "bg-opacity-50 h-[70px] bg-[#31FFFF]"
+        "bg-opacity-50 h-[69px] bg-[#31FFFF]"
         : "mt-4 mb-5"
 
     return (
