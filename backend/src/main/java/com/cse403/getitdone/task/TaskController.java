@@ -24,6 +24,9 @@ public class TaskController {
 
     @PostMapping("/createTask")
     public String createTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException {
+        //scheduleTask() from Calendar
+            // BREAK DOWN TASKS AND SEND COLLECTIONS OF EVENTS TO FIREBASE.
+            // CREATE EVENTS AND SEND TO GOOGLE CALENDAR API
         return taskService.saveTaskDetails(uid,task);
     }
 
