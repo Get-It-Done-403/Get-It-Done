@@ -5,24 +5,26 @@ import { getAnalytics } from "firebase/analytics";
 import {
     GoogleAuthProvider,
     getAuth,
-    signInWithPopUp,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
     signOut,
-    } from "firebase/auth";
-    import {
+} from "firebase/auth";
+import {
     getFirestore,
     query,
     getDocs,
     collection,
     where,
     addDoc,
-    } from "firebase/firestore";
+} from "firebase/firestore";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
+function firebaseConfig() {
+
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -30,6 +32,26 @@ const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+const googleProvider = new GoogleAuthProvider();
+const signInWithGoogle = async () => {
+    try {
+        const res = await auth.signInWithPopup(auth, googleProvider);
+        const user = res.user;
+        const q = query(collection(db, "users"), where("uid", "==", user.uid));
+        const docs = await getDocs(q);
+        if (docs.docs.length === 0) {
+            await addDoc(collection(db, "users"), {
+                uid: user.uid,
+                name: user.displayName,
+                authProvider: "google",
+                email: user.email,
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+};
 
 const logInWithEmailAndPassword = async (email, password) => {
     try {
@@ -50,7 +72,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
             authProvider: "local",
             email,
         });
-        } catch (err) {
+    } catch (err) {
         console.error(err);
         alert(err.message);
     }
@@ -85,6 +107,7 @@ const logout = () => {
 export {
     auth,
     db,
+    signInWithGoogle,
     logInWithEmailAndPassword,
     registerWithEmailAndPassword,
     sendPasswordReset,

@@ -19,12 +19,16 @@ public class GetitdoneApplication {
         ClassLoader classLoader = GetitdoneApplication.class.getClassLoader();
         try {
             //File file = new File(Objects.requireNonNull(classLoader.getResource("/Users/aidanpetta/IdeaProjects/Get-It-Done/backend/src/main/java/com/cse403/getitdone/servicekey.json")).getFile());
-            FileInputStream serciceAcc = new FileInputStream("/Users/aidanpetta/IdeaProjects/Get-It-Done/backend/src/main/java/com/cse403/getitdone/servicekey.json");
+            FileInputStream serciceAcc = new FileInputStream("/Users/aidanpetta/IdeaProjects/Get-It-Done/backend/src/main/resources/servicekey.json");
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serciceAcc))
                     .setDatabaseUrl("https://get-it-done-7a708-default-rtdb.firebaseio.com")
                     .build();
-            FirebaseApp.initializeApp(options);
+            if(FirebaseApp.getApps().isEmpty()) {
+                FirebaseApp.initializeApp(options);
+            }
+
+
         } catch (Exception e){
             e.printStackTrace();
         }

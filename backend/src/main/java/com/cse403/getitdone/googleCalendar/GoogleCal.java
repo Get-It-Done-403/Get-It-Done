@@ -44,7 +44,7 @@ public class GoogleCal {
      */
     private static final List<String> SCOPES =
             Collections.singletonList(CalendarScopes.CALENDAR_READONLY);
-    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+    private static final String CREDENTIALS_FILE_PATH = "backend/src/main/resources/credentials.json";
 
     /**
      * Creates an authorized Credential object.
@@ -70,9 +70,8 @@ public class GoogleCal {
                 .setAccessType("offline")
                 .build();
         LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-        Credential credential = new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
         //returns an authorized Credential object.
-        return credential;
+        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
     public static void main(String... args) throws IOException, GeneralSecurityException {
