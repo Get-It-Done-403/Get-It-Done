@@ -34,8 +34,8 @@ public class CalendarController {
         return calendarService.getThisMonth();
     }
 
-    @PostMapping("/allocateTask")
-    public Calendar allocateTask(@RequestBody Task task) throws InterruptedException, ExecutionException {
-        return calendarService.allocateTask(task);
-    }
+//    @PostMapping("/allocateTask")
+//    public Calendar allocateTask(@RequestBody Task task) throws InterruptedException, ExecutionException {
+//        return calendarService.allocateTask(task);
+//    }
 }
