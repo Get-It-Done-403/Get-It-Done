@@ -1,16 +1,19 @@
 package com.cse403.getitdone.task;
 
-import com.cse403.getitdone.FirebaseADMIN;
 import com.google.api.core.ApiFuture;
+
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.FirestoreClient;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -56,4 +59,29 @@ public class TaskService {
                 .delete();
         return "uid " + uid + ": task with tid " + tid + " has been deleted";
     }
+
+    public List<Task> getTaskList(String uid) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+
+        CollectionReference collectionReference = dbFirestore
+                .collection(COL_NAME).document(uid)
+                .collection(SUBCOL_NAME);
+
+        ApiFuture<QuerySnapshot> future = collectionReference.get();
+        QuerySnapshot collection = future.get();
+        List<QueryDocumentSnapshot> documents = collection.getDocuments();
+
+        List<Task> tasks = new ArrayList<>();
+
+        if (documents.isEmpty()) return tasks;
+
+        documents.forEach(queryDocumentSnapshot -> {
+            if (queryDocumentSnapshot.exists()) {
+                tasks.add(queryDocumentSnapshot.toObject(Task.class));
+            }
+        });
+        return tasks;
+    }
 }
+
+

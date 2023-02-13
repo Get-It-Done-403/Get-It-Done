@@ -1,19 +1,39 @@
 import "../css/mainCSS.css";
 import NavBar from "../components/NavBar";
-
+import { v4 as uuid } from "uuid";
 
 function AddTask(props) {
-
+    const uid = uuid();
     function handleCancel() {
         props.setTrigger(false)
     }
 
-    function handleSubmit(event) {
-        let task = {"name" : event.target.taskName.value};
-        props.setRemainingTasks([...props.remainingTasks, task]);
-        props.setTrigger(false);
+    // Creates new task in database
+    const handleSubmit = (event) => {
+        // let task = {"name" : event.target.taskName.value};
+        // props.setRemainingTasks([...props.remainingTasks, task]);
         event.preventDefault()
-    }
+        const task = {
+            "hoursToComplete": event.target.hoursToComplete.value,
+            "isCompleted":false,
+            "tid": uid,
+            "title": event.target.taskName.value
+        }
+
+        fetch("http://localhost:8080/createTask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(task),
+
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error(error));
+        props.setTrigger(false);
+    };
+
 
     return (
         <div className={"pageBackground"}>
@@ -21,8 +41,8 @@ function AddTask(props) {
                 <NavBar currentPage={"None"}/>
 
                 <form className={"calendarContainer"} onSubmit={handleSubmit}>
-                        <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} id={"taskName"} placeholder={"Enter Name of Task "}/>
-                        <input type="date" className={"ml-[12px]"}/>
+                        <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"taskName"} placeholder={"Enter Name of Task "}/>
+                        <input type="date" className={"ml-[12px]"} id={"dueDate"}/>
 
                             <div className={"radio-toolbar"}>
                                 <div className={"ml-[12px] mt-[5px]"}>
@@ -36,8 +56,8 @@ function AddTask(props) {
                                     <label htmlFor={"Monthly"}>Monthly</label>
                                 </div>
                             </div>
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} placeholder={"Enter Time Commitment"}/>
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} placeholder={"Enter Description"}/>
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required placeholder={"Enter Time Commitment in Hours"}/>
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
                     <div className={"flex-1 flex"}>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={handleCancel}> Cancel  </button>
