@@ -3,12 +3,13 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {
-    GoogleAuthProvider,
     getAuth,
+    GoogleAuthProvider,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
     signOut,
+    onAuthStateChanged,
 } from "firebase/auth";
 import {
     getFirestore,
@@ -18,8 +19,6 @@ import {
     where,
     addDoc,
 } from "firebase/firestore";
-
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 function firebaseConfig() {
@@ -110,7 +109,9 @@ export {
     signInWithGoogle,
     logInWithEmailAndPassword,
     registerWithEmailAndPassword,
+    signInWithEmailAndPassword,
     sendPasswordReset,
+    sendPasswordResetEmail,
     logout,
 };
 

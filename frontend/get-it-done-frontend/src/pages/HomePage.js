@@ -9,13 +9,13 @@ function HomePage() {
 
         let task =  {
             title: "boifdsfdsiiof",
-            description: "newdsadaTgssk",
+            //description: "newdsadaTgssk",
             deadline: 2232021,
             day: 9,
             month: 13,
             hour: 2,
             minute: 2,
-            second: 3
+            //second: 3
         }
         fetch("http://localhost:8080/createTask", {
             method: "POST",
