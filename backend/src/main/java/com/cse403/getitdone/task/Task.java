@@ -16,7 +16,7 @@ public class Task {
 
     private String tid;
     private String title;
-    private DateTime dueDate;
+    private String dueDate;
     private int hoursToComplete;
     private boolean isCompleted;
 
@@ -26,8 +26,8 @@ public class Task {
                 final int hoursToComplete) {
         Date date = new Date(year, month, dayOfMonth, hour, minute);
         this.title = title;
-        this.dueDate = new DateTime(date);
-//        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+        this.dueDate = new DateTime(date).toStringRfc3339();
+        //        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = hoursToComplete;
         this.isCompleted = false;
 
@@ -39,7 +39,7 @@ public class Task {
         Date date = new Date(year, month, dayOfMonth, hour, minute);
         this.title = title;
 //        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
-        this.dueDate = new DateTime(date);
+        this.dueDate = new DateTime(date).toStringRfc3339();
         this.hoursToComplete = -1;
         this.isCompleted = false;
 
@@ -61,12 +61,13 @@ public class Task {
         this.title = title;
     }
 
-    public LocalDateTime getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
     public void setDueDate(final int year, final int month, final int dayOfMonth, final int hour, final int minute) {
-        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+        Date date = new Date(year, month, dayOfMonth, hour, minute);
+        this.dueDate = new DateTime(date).toStringRfc3339();
     }
 
     public int getHoursToComplete() {
