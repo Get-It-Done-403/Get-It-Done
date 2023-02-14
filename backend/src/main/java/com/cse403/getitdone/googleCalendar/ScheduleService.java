@@ -85,11 +85,11 @@ public class ScheduleService {
                     .setDescription("Event Scheduled by Get It Done");
 
             EventDateTime startDateTime = new EventDateTime()
-                    .setDateTime(entry.getStartDate())
+                    .setDateTime(new DateTime(entry.getStartDate()))
                     .setTimeZone(userTimeZone.toString());
 
             EventDateTime endStartDate = new EventDateTime()
-                    .setDateTime(entry.getEndDate())
+                    .setDateTime(new DateTime(entry.getEndDate()))
                     .setTimeZone(userTimeZone.toString());
 
             event.setStart(startDateTime);
@@ -143,7 +143,7 @@ public class ScheduleService {
             // placeholder tid for tasks that we got from the api
             String tid = "Pre-existing task";
             // create new calendar entry and add to the timeslot
-            CalendarEntry scheduledEvent = new CalendarEntry(tid, startDate, item.getEnd().getDate());
+            CalendarEntry scheduledEvent = new CalendarEntry(tid, startDate.toStringRfc3339(), item.getEnd().getDate().toStringRfc3339());
             timeSlots[(int) index].add(scheduledEvent);
         }
     }
@@ -204,9 +204,12 @@ public class ScheduleService {
     private CalendarEntry addEntry(ArrayList<CalendarEntry> schedule, Date potentialStart, Date potentialEnd) {
         CalendarEntry newEntry = null;
         for (CalendarEntry entry : schedule) {
-
-            Date entryStart = new Date(entry.getStartDate().getValue());
-            Date entryEnd = new Date(entry.getEndDate().getValue());
+            String startDateString = entry.getStartDate();
+            String endDateString = entry.getEndDate();
+            DateTime startDate = new DateTime(startDateString);
+            DateTime endDate = new DateTime(endDateString);
+            Date entryStart = new Date(startDate.getValue());
+            Date entryEnd = new Date(endDate.getValue());
 
             if (entryStart.before(potentialStart) && entryEnd.after(potentialEnd)) {
                 /* this means the potential time slot overlaps with the entry
@@ -236,7 +239,7 @@ public class ScheduleService {
                 }
             } else {
                 // set the new entry for the day
-                newEntry = new CalendarEntry(this.tid, new DateTime(potentialStart), new DateTime(potentialEnd));
+                newEntry = new CalendarEntry(this.tid, new DateTime(potentialStart).toStringRfc3339(), new DateTime(potentialEnd).toStringRfc3339());
                 break;
             }
         }
