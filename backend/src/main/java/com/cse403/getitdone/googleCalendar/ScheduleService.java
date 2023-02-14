@@ -174,7 +174,7 @@ public class ScheduleService {
             ArrayList<CalendarEntry> oneDay = timeSlots[i];
             if (oneDay != null) {
                 for (CalendarEntry entry : oneDay) {
-                    firstStartDate = entry.getStartDate();
+                    firstStartDate = DateTime.parseRfc3339(entry.getStartDate());
                     break;
                 }
             }
