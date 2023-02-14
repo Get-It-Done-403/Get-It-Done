@@ -25,6 +25,7 @@ public class Task {
         this.dueDate = dueDate;
         this.hoursToComplete = hoursToComplete;
         this.isCompleted = false;
+        this.tid = java.util.UUID.randomUUID().toString();
     }
 
 
