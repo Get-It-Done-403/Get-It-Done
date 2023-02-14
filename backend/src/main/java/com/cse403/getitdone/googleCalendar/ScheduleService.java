@@ -69,6 +69,36 @@ public class ScheduleService {
         // divide up the task and add it to the time slots
         List<CalendarEntry> newEntries = allocateTime(task);
 
+        // set up credentials again to push to the calendar
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+
+        Calendar service =
+                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, GoogleCal.getCredentials(HTTP_TRANSPORT))
+                        .setApplicationName(APPLICATION_NAME)
+                        .build();
+
+
+        for (CalendarEntry entry : newEntries) {
+            // add to Google Calendar
+            Event event = new Event()
+                    .setSummary(task.getTitle())
+                    .setDescription("Event Scheduled by Get It Done");
+
+            EventDateTime startDateTime = new EventDateTime()
+                    .setDateTime(entry.getStartDate())
+                    .setTimeZone(userTimeZone.toString());
+
+            EventDateTime endStartDate = new EventDateTime()
+                    .setDateTime(entry.getEndDate())
+                    .setTimeZone(userTimeZone.toString());
+
+            event.setStart(startDateTime);
+            event.setEnd(endStartDate);
+
+            // TODO: add to database. confirm format for the database first.
+        }
+
+
         return newEntries;
     }
 
