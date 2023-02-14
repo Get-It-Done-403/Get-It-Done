@@ -20,6 +20,13 @@ public class Task {
     private int hoursToComplete;
     private boolean isCompleted;
 
+    public Task(final String uid, final String title, final String dueDate, final int hoursToComplete) {
+        this.title = title;
+        this.dueDate = dueDate;
+        this.hoursToComplete = hoursToComplete;
+        this.isCompleted = false;
+    }
+
 
     public Task(final String uid, final String title,
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute,
