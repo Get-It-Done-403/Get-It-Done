@@ -1,18 +1,14 @@
 import "../css/mainCSS.css";
-import NavBar from "../components/NavBar";
+import NavBar from "./NavBar";
 import { v4 as uuid } from "uuid";
 
 function AddTask(props) {
     const uid = uuid();
-    function handleCancel() {
-        props.setTrigger(false)
-    }
 
     // Creates new task in database
     const handleSubmit = (event) => {
         // let task = {"name" : event.target.taskName.value};
         // props.setRemainingTasks([...props.remainingTasks, task]);
-        event.preventDefault()
         const task = {
             "hoursToComplete": event.target.hoursToComplete.value,
             "isCompleted":false,
@@ -20,7 +16,7 @@ function AddTask(props) {
             "title": event.target.taskName.value
         }
 
-        fetch("http://localhost:8080/createTask", {
+        fetch("http://localhost:8080/createTask?uid=" + props.userID, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -31,7 +27,8 @@ function AddTask(props) {
             .then((response) => response.json())
             .then((data) => console.log(data))
             .catch((error) => console.error(error));
-        props.setTrigger(false);
+        props.setTrigger("default");
+        window.location.reload(false);
     };
 
 
@@ -60,7 +57,7 @@ function AddTask(props) {
                     <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
                     <div className={"flex-1 flex"}>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
-                    <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={handleCancel}> Cancel  </button>
+                    <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={(() => {props.setTrigger("default")})}> Cancel  </button>
                     </div>
 
                 </form>
