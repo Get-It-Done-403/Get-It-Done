@@ -1,11 +1,13 @@
 package com.cse403.getitdone.task;
 
 
+import com.google.api.client.util.DateTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 
@@ -14,7 +16,7 @@ public class Task {
 
     private String tid;
     private String title;
-    private LocalDateTime dueDate;
+    private DateTime dueDate;
     private int hoursToComplete;
     private boolean isCompleted;
 
@@ -22,8 +24,10 @@ public class Task {
     public Task(final String uid, final String title,
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute,
                 final int hoursToComplete) {
+        Date date = new Date(year, month, dayOfMonth, hour, minute);
         this.title = title;
-        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+        this.dueDate = new DateTime(date);
+//        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.hoursToComplete = hoursToComplete;
         this.isCompleted = false;
 
@@ -32,8 +36,10 @@ public class Task {
 
     public Task(final String uid, final String title,
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute) {
+        Date date = new Date(year, month, dayOfMonth, hour, minute);
         this.title = title;
-        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+//        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+        this.dueDate = new DateTime(date);
         this.hoursToComplete = -1;
         this.isCompleted = false;
 
