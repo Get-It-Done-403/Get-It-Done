@@ -26,16 +26,16 @@ public class TaskControllerTest {
     public void getTaskDetailsSuccess() throws Exception {
         String urlTemplate = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/getTaskDetails")
                 .queryParam("uid", "aidan")
-                .queryParam("tid", "a7755165-c8f9-44e2-bd83-fdf4b075e214")
+                .queryParam("tid", "866ac858-0ec8-4d5e-9a0f-58262cc8302b")
                 .encode()
                 .toUriString();
 
         JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("tid", "a7755165-c8f9-44e2-bd83-fdf4b075e214");
-        responseObj.addProperty("title", "first Task");
+        responseObj.addProperty("tid", "866ac858-0ec8-4d5e-9a0f-58262cc8302b");
+        responseObj.addProperty("title", "do not remove");
         responseObj.add("dueDate", JsonNull.INSTANCE);
-        responseObj.addProperty("hoursToComplete", 1);
-        responseObj.addProperty("isCompleted", false);
+        responseObj.addProperty("hoursToComplete", 0);
+        responseObj.addProperty("isCompleted", true);
 
         assertThat(this.restTemplate.getForObject(urlTemplate,
                 String.class))
@@ -50,31 +50,44 @@ public class TaskControllerTest {
                 .toUriString();
 
         JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("tid", "a7755165-c8f9-44e2-bd83-fdf4b075e214");
-        responseObj.addProperty("title", "first Task");
+        responseObj.addProperty("tid", "866ac858-0ec8-4d5e-9a0f-58262cc8302b");
+        responseObj.addProperty("title", "do not remove");
         responseObj.add("dueDate", JsonNull.INSTANCE);
-        responseObj.addProperty("hoursToComplete", 1);
-        responseObj.addProperty("isCompleted", false);
+        responseObj.addProperty("hoursToComplete", 0);
+        responseObj.addProperty("isCompleted", true);
 
         JsonObject responseObj2 = new JsonObject();
-        responseObj2.addProperty("tid", "fe42245d-603a-4743-a44b-9b8824c05c1d");
-        responseObj2.addProperty("title", "not target two");
+        responseObj2.addProperty("tid", "e623885f-2f80-4284-894a-0f1234671cd6");
+        responseObj2.addProperty("title", "do not remove 2");
         responseObj2.add("dueDate", JsonNull.INSTANCE);
-        responseObj2.addProperty("hoursToComplete", 223);
+        responseObj2.addProperty("hoursToComplete", 1);
         responseObj2.addProperty("isCompleted", false);
 
         JsonObject responseObj3 = new JsonObject();
-        responseObj3.addProperty("tid", "33de9358-d276-456a-a5ec-66f0beba2c1f");
-        responseObj3.addProperty("title", "sixth");
+        responseObj3.addProperty("tid", "9593d218-5fbe-4e35-b7bd-59eb0bbcfa8b");
+        responseObj3.addProperty("title", "do not remove 3");
         responseObj3.add("dueDate", JsonNull.INSTANCE);
-        responseObj3.addProperty("hoursToComplete", 6);
-        responseObj3.addProperty("isCompleted", true);
+        responseObj3.addProperty("hoursToComplete", 43);
+        responseObj3.addProperty("isCompleted", false);
 
         assertThat(this.restTemplate.getForObject(urlTemplate,
                 String.class))
                 .contains(responseObj.toString())
                 .contains(responseObj2.toString())
                 .contains(responseObj3.toString());
+    }
+
+    @Test
+    public void deleteTaskSuccess() throws Exception {
+        String urlTemplate = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/deleteTask")
+                .queryParam("uid", "aidan")
+                .queryParam("tid", "07828dfb-9593-4037-addf-6e9a6e962cb9")
+                .encode()
+                .toUriString();
+
+        assertThat(this.restTemplate.getForObject(urlTemplate,
+                String.class))
+                .contains("uid aidan: task with tid 07828dfb-9593-4037-addf-6e9a6e962cb9 has been deleted");
     }
 
 }
