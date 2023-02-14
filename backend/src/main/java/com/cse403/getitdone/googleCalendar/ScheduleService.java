@@ -112,8 +112,15 @@ public class ScheduleService {
 
         // current time
         DateTime now = new DateTime(System.currentTimeMillis());
+<<<<<<< Updated upstream
         // due date
         ZonedDateTime zonedDateTime = getZonedDateTime(LocalDateTime.parse(task.getDueDate()));
+=======
+        LocalDateTime endTime = LocalDateTime.parse(task.getDueDate());
+        TimeZone userTimeZone = TimeZone.getDefault();
+        ZoneId zone = ZoneId.of(userTimeZone.getID());
+>>>>>>> Stashed changes
+
         String endTimeStamp = zonedDateTime.format(DateTimeFormatter.RFC_1123_DATE_TIME);
         // get all events from now to due date
         Events events = service.events().list("primary")

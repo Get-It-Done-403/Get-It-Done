@@ -13,7 +13,11 @@ function AddTask(props) {
             "hoursToComplete": event.target.hoursToComplete.value,
             "isCompleted":false,
             "tid": uid,
-            "title": event.target.taskName.value
+            "title": event.target.taskName.value,
+            "year": event.target.year.value,
+            "dayOfMonth": event.target.dayOfMonth.value,
+            // "hour": event.target.hour.value,
+            // "minute": event.target.minute.value
         }
 
         fetch("http://localhost:8080/createTask?uid=" + props.userID, {

@@ -1,7 +1,9 @@
 package com.cse403.getitdone;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.cse403.getitdone.task.Task;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 
@@ -11,7 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.http.HttpHeaders;
+
+import java.net.URI;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TaskControllerTest {
@@ -40,6 +47,25 @@ public class TaskControllerTest {
         assertThat(this.restTemplate.getForObject(urlTemplate,
                 String.class))
                 .contains(responseObj.toString());
+    }
+
+    @Test
+    public void createTaskSuccess() throws Exception {
+        final String baseUrl = "http://localhost:8080/createTask?uid=aidan";
+        URI uri = new URI(baseUrl);
+
+        Task task = new Task("aidan", "title", 2024, 1, 1, 10, 30, 5);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-COM-PERSIST", "true");
+
+        HttpEntity<Task> request = new HttpEntity<>(task, headers);
+
+        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+
+        System.out.println(result);
+
+        assertEquals(200, result.getStatusCodeValue());
     }
 
     @Test
