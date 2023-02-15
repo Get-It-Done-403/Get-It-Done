@@ -47,6 +47,21 @@ $ npm start
 
 ### Run the system
 
+In order to run the application, the server must be started and then we can run our frontend. From command your line:
+```
+# Go into the server directory
+$ cd backend
+
+# Run the server
+$ ./gradlew bootRun
+
+# Go to the react project directory
+$ cd ../frontend/get-it-done-frontend 
+
+# Run the app
+$ npm start
+```
+
 ----------------------------------------
              
 ## Goals and Ideas
