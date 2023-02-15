@@ -1,8 +1,14 @@
 package com.cse403.getitdone.task;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import com.cse403.getitdone.googleCalendar.ScheduleService;
+import com.cse403.getitdone.utils.CalendarEntry;
+import org.hibernate.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,16 +30,16 @@ public class TaskController {
     }
 
     @PostMapping("/createTask")
-    public String createTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException {
+    public List<CalendarEntry> createTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException, GeneralSecurityException, IOException {
         //scheduleTask() from ScheduleService
 
             // 1. Get availability from Google Calendar API
             // 2. Break down task and create smaller block (CalendarEntry)
             // 3. add events to calendar API
             // 4. Send those entries to db   task -> entries
-        System.out.println(task.toString());
+        taskService.saveTaskDetails(uid, task);
 
-        return taskService.saveTaskDetails(uid,task);
+        return ScheduleService.scheduleTask(uid, task);
     }
 
     @PostMapping("/updateTask")
