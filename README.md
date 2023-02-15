@@ -15,30 +15,75 @@
   
   ### Repo Layout
   ```
-  +- {placeholder}
-  +- java
-    +-com
-       +- backend
-           +- getitdone
-               +- App.java
-               |
-               +- customer
-               |   +- Customer.java
-               |   +- CustomerController.java
-               |   +- CustomerService.java
-               |   +- CustomerRepository.java
-               |
-               +- task
-               |   +- Task.java
-               |   +- TaskController.java
-               |   +- TaskService.java
-               |   +- TaskRepository.java
-               |
-               +- calendar
-               |   +- Calendar.java
-               |   +- CalendarController.java
-               |   +- CalendarService.java
-               |   +- CalendarRepository.java
-               |
-               +- utils
+  +- frontend
+    +- get-it-done-frontend
+      +- src 
+        +- components
+        | +- AddTask.js
+        | +- EditTask.js
+        | +- Header.js
+        | +- NavBar.js
+        |
+        +- css
+        | +- Login.css
+        | +- mainCSS.css
+        | +- Register.cc
+        | +- Reset.css
+        |
+        +- fonts
+        |
+        +- pages
+        | +- homePage
+        |   +- HomePage.js
+        |   |
+        |   +- HomePageFlow.js
+        |   |
+        | +- CalendarPage.js
+        | +- Register.js
+        | +- Reset.js
+        |
+        +- App.css
+        |
+        +- App.js
+        |
+        +- App.test.js
+        |
+        +- index.css
+        |
+        +- index.js
+        |
+        
+  +- backend
+    +- java
+      +-com
+         +- cse403
+             +- getitdone
+                 +- FireBaseADMIN.java
+                 |
+                 +- GetitdoneApplication.java
+                 |
+                 +- customer
+                 |   +- Customer.java
+                 |   +- CustomerController.java
+                 |   +- CustomerService.java
+                 |   +- CustomerRepository.java
+                 |
+                 +- task
+                 |   +- Task.java
+                 |   +- TaskController.java
+                 |   +- TaskService.java
+                 |   +- TaskRepository.java
+                 |
+                 +- calendar
+                 |   +- CalendarService.java
+                 |
+                 +- googleCalendar
+                 |  +- GoogleCal.java
+                 |  +- ScheduleService.java
+                 |
+                 +- utils
+                 | +- CalendarEntry.java
+                 |
+               
+
      ```
