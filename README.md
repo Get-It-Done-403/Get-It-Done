@@ -1,4 +1,15 @@
 # Get it Done
+
+## Beta Release
+
+### User Cases for Beta Release
+
+### Build and test the system
+
+### Run the system
+
+----------------------------------------
+## Design
              
 ### Goals and Ideas
 
