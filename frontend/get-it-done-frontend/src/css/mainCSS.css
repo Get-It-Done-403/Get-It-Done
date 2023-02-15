@@ -39,7 +39,7 @@
 .tasksPage {
     display: flex;
     flex-direction: column;
-    flex: .8;
+    flex: .9;
     font-family: Text;
     color: black;
     padding: 30px;
