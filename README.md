@@ -22,7 +22,7 @@
 
 ----------------------------------------
              
-### Goals and Ideas
+## Goals and Ideas
 
 * Ideas 
   - A productivity web application that allows users to plan, track assignment progress, and view their calendar. 
