@@ -44,6 +44,8 @@ public class TaskController {
 
     @PostMapping("/updateTask")
     public String updateTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException {
+        //scheduleTask() from ScheduleService
+        // remove previous calendar entries
         return taskService.saveTaskDetails(uid,task);
     }
 
