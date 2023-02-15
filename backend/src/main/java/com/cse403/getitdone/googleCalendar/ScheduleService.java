@@ -56,6 +56,7 @@ public class ScheduleService {
         // 3. add events to calendar API
         // 4. Send those entries to db   task -> entries (this would call a function from CalendarService)
 
+
         service =
                 new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, GoogleCal.getCredentials(HTTP_TRANSPORT))
                         .setApplicationName(APPLICATION_NAME)
@@ -125,6 +126,7 @@ public class ScheduleService {
 
         // current time
         DateTime now = new DateTime(System.currentTimeMillis());
+        System.out.println(now);
         // due date
         String taskDate = task.getDueDate();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
@@ -134,6 +136,8 @@ public class ScheduleService {
         Events events = service.events().list("primary")
                 .setTimeMin(now)
                 .setTimeMax(DateTime.parseRfc3339(taskDate))
+                .setOrderBy("startTime")
+                .setSingleEvents(true)
                 .execute();
         List<Event> items = events.getItems();
         // get the time zone of the user
@@ -141,10 +145,9 @@ public class ScheduleService {
         ZoneId zone = ZoneId.of(userTimeZone.getID());
 
         firstStartDate = items.get(0).getStart().getDateTime();
-
+        System.out.println(firstStartDate);
         for (Event item : items) {
             System.out.println(item);
-
             // get the start time for the event
             EventDateTime startTime = item.getStart();
             DateTime startDate = startTime.getDateTime();
@@ -155,13 +158,13 @@ public class ScheduleService {
             ZonedDateTime zonedStartTime = getZonedDateTime(localStartDate);
 
             // note that index 0 means the next day, not today.
-            long index = ChronoUnit.DAYS.between(zonedStartTime, zonedDateTime);
-            System.out.println("index: " + index);
+            long index = ChronoUnit.DAYS.between(zonedStartTime, zonedDateTime) + 1;
             // placeholder tid for tasks that we got from the api
             String tid = "Pre-existing task";
             // create new calendar entry and add to the timeslot
 
             CalendarEntry scheduledEvent = new CalendarEntry(tid, startDate.toString(), item.getEnd().getDateTime().toString());
+            System.out.println(timeSlots.length - (int) index);
             timeSlots[timeSlots.length - (int) index].add(scheduledEvent);
         }
     }
@@ -183,9 +186,7 @@ public class ScheduleService {
 
         Random random = new Random();
         // get a random number to represent a time between 9:00 and 20:00
-//        int defaultTime = random.nextInt(12) + 9;
-        int defaultTime = 9;
-        System.out.println("random number: " + defaultTime);
+        int defaultTime = random.nextInt(12) + 9;
         // construct a Date object for the default time
         // first find a non-null element in timeslot
 
@@ -201,31 +202,49 @@ public class ScheduleService {
         Date potentialStart = calendarStart.getTime();
         Date potentialEnd = calendarEnd.getTime();
 
+
         List<CalendarEntry> newEntries = new ArrayList<>();
         for (int i = 0; i < timeSlots.length; i++) {
+            if (newEntries.size() == entryCount) {
+                break;
+            }
             ArrayList<CalendarEntry> tmp = new ArrayList<>(timeSlots[i]);
             CalendarEntry newEntry = addEntry(tmp, potentialStart, potentialEnd);
-            newEntries.add(newEntry);
+            System.out.println(newEntry);
+                newEntries.add(newEntry);
 
+//            System.out.println("old potential start: "+ potentialStart);
+//            System.out.println("old potential end: " + potentialEnd);
             // TODO: Handle edge cases for example end of the month
             java.util.Calendar newStart = java.util.Calendar.getInstance();
             newStart.setTime(new Date(firstStartDate.getValue()));
             newStart.set(java.util.Calendar.DAY_OF_MONTH, calendarStart.get(java.util.Calendar.DAY_OF_MONTH) + 1);
+            newStart.set(java.util.Calendar.HOUR_OF_DAY, calendarStart.get(java.util.Calendar.HOUR_OF_DAY));
             calendarStart.set(java.util.Calendar.DAY_OF_MONTH, newStart.get(java.util.Calendar.DAY_OF_MONTH));
             // do the same for the end time
             java.util.Calendar newEnd = java.util.Calendar.getInstance();
             newEnd.setTime(new Date(firstStartDate.getValue()));
-            newEnd.set(java.util.Calendar.DAY_OF_MONTH, calendarStart.get(java.util.Calendar.DAY_OF_MONTH) + 1);
+            newEnd.set(java.util.Calendar.DAY_OF_MONTH, calendarEnd.get(java.util.Calendar.DAY_OF_MONTH) + 1);
+            newEnd.set(java.util.Calendar.HOUR_OF_DAY, calendarEnd.get(java.util.Calendar.HOUR_OF_DAY));
             calendarEnd.set(java.util.Calendar.DAY_OF_MONTH, newEnd.get(java.util.Calendar.DAY_OF_MONTH));
             potentialStart = newStart.getTime();
             potentialEnd = newEnd.getTime();
+//            System.out.println("new potential start: "+ potentialStart);
+//            System.out.println("new potential end: " + potentialEnd);
+
         }
 
         return newEntries;
     }
 
     private static CalendarEntry addEntry(ArrayList<CalendarEntry> schedule, Date potentialStart, Date potentialEnd) {
+        System.out.println("potential start: " + potentialStart);
+        System.out.println("potential end: " + potentialEnd);
         CalendarEntry newEntry = null;
+        System.out.println(schedule);
+        if (schedule.isEmpty()) {
+            newEntry = new CalendarEntry(tid, new DateTime(potentialStart).toStringRfc3339(), new DateTime(potentialEnd).toStringRfc3339());
+        }
         for (CalendarEntry entry : schedule) {
             String startDateString = entry.getStartDate();
             String endDateString = entry.getEndDate();
@@ -233,9 +252,10 @@ public class ScheduleService {
             DateTime endDate = new DateTime(endDateString);
             Date entryStart = new Date(startDate.getValue());
             Date entryEnd = new Date(endDate.getValue());
-
+            System.out.println("entry : " + entryStart);
+            System.out.println("potential: " + potentialStart);
             if ((entryStart.before(potentialStart) && entryEnd.after(potentialEnd)) || entryStart.compareTo(potentialStart) == 0 || entryEnd.compareTo(potentialEnd) == 0) {
-                System.out.println("there is an overlap");
+                System.out.println("overlap");
                 /* this means the potential time slot overlaps with the entry
                  we will schedule it after the end of entry time.
 
@@ -255,16 +275,12 @@ public class ScheduleService {
                     calendarEnd.set(java.util.Calendar.HOUR_OF_DAY, entryEnd.getHours() + 1);
                     potentialEnd = calendarEnd.getTime();
 
-
-                    if (schedule != null) {
-                        return addEntry(schedule, potentialStart, potentialEnd);
-                    }
+                    return addEntry(schedule, potentialStart, potentialEnd);
                 }
             } else {
                 // set the new entry for the day
-
                 newEntry = new CalendarEntry(tid, new DateTime(potentialStart).toStringRfc3339(), new DateTime(potentialEnd).toStringRfc3339());
-                break;
+                return newEntry;
             }
         }
         return newEntry;
