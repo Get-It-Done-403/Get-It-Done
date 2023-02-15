@@ -65,7 +65,7 @@ function HomePage(props) {
                                                 </li>
                                             </button>
                                         </div>
-                                        : singleTask.title.includes(searchTask) ?
+                                        : singleTask.title.toLowerCase().includes(searchTask.toLowerCase()) ?
 
                                             <div key={singleTask.tid}>
                                                 <button className={"w-full text-left"} onClick={() => editTask(singleTask)}>
@@ -93,7 +93,7 @@ function HomePage(props) {
                                                 </li>
                                             </button>
                                         </div>
-                                        : singleTask.title.includes(searchTask) ?
+                                        : singleTask.title.toLowerCase().includes(searchTask.toLowerCase()) ?
 
                                             <div key={singleTask.tid}>
                                                 <button className={"w-full text-left"} onClick={() => editTask(singleTask)}>
@@ -123,7 +123,7 @@ function HomePage(props) {
                                         </button>
                                         {/*</button>*/}
                                     </div>
-                                    : singleTask.title.includes(searchTask) ? <div className={"mt-2"}>
+                                    : singleTask.title.toLowerCase().includes(searchTask.toLowerCase()) ? <div className={"mt-2"}>
                                         {/*<button className={"w-full text-left"} onClick={() => editTask(singleTask)}>*/}
                                         <button className={'w-full text-left'}  onClick={() => editTask(singleTask)}>
                                             <li className={"bg-[#FFFFFF] p-3 bg-opacity-40 rounded-[7px] text-[12px] mt-3 mb-3"}>
