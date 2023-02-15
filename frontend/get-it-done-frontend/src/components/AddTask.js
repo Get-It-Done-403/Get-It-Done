@@ -13,7 +13,8 @@ function AddTask(props) {
             "hoursToComplete": event.target.hoursToComplete.value,
             "isCompleted":false,
             "tid": uid,
-            "title": event.target.taskName.value
+            "title": event.target.taskName.value,
+            "dueDate": event.target.dueDate.value
         }
 
         fetch("http://localhost:8080/createTask?uid=" + props.userID, {
@@ -28,7 +29,7 @@ function AddTask(props) {
             .then((data) => console.log(data))
             .catch((error) => console.error(error));
         props.setTrigger("default");
-        window.location.reload(false);
+        // window.location.reload(false);
     };
 
 
@@ -39,22 +40,22 @@ function AddTask(props) {
 
                 <form className={"calendarContainer"} onSubmit={handleSubmit}>
                         <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"taskName"} placeholder={"Enter Name of Task "}/>
-                        <input type="date" className={"ml-[12px]"} id={"dueDate"}/>
+                        <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"}/>
 
-                            <div className={"radio-toolbar"}>
-                                <div className={"ml-[12px] mt-[5px]"}>
-                                    <input type="radio" id={"None"} name={"radioButton"} defaultValue="true" defaultChecked={true}/>
-                                    <label htmlFor={"None"}>None</label>
-                                    <input type="radio" id={"Daily"} name={"radioButton"} defaultValue="false"/>
-                                    <label htmlFor={"Daily"}>Daily</label>
-                                    <input type="radio" id={"Weekly"} name={"radioButton"} defaultValue="true" />
-                                    <label htmlFor={"Weekly"}>Weekly</label>
-                                    <input type="radio" id={"Monthly"} name={"radioButton"} defaultValue="false"/>
-                                    <label htmlFor={"Monthly"}>Monthly</label>
-                                </div>
-                            </div>
+                            {/*<div className={"radio-toolbar"}>*/}
+                            {/*    <div className={"ml-[12px] mt-[5px]"}>*/}
+                            {/*        <input type="radio" id={"None"} name={"radioButton"} defaultValue="true" defaultChecked={true}/>*/}
+                            {/*        <label htmlFor={"None"}>None</label>*/}
+                            {/*        <input type="radio" id={"Daily"} name={"radioButton"} defaultValue="false"/>*/}
+                            {/*        <label htmlFor={"Daily"}>Daily</label>*/}
+                            {/*        <input type="radio" id={"Weekly"} name={"radioButton"} defaultValue="true" />*/}
+                            {/*        <label htmlFor={"Weekly"}>Weekly</label>*/}
+                            {/*        <input type="radio" id={"Monthly"} name={"radioButton"} defaultValue="false"/>*/}
+                            {/*        <label htmlFor={"Monthly"}>Monthly</label>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                     <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required placeholder={"Enter Time Commitment in Hours"}/>
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
+                    {/*<input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>*/}
                     <div className={"flex-1 flex"}>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={(() => {props.setTrigger("default")})}> Cancel  </button>
