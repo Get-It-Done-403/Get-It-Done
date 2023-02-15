@@ -10,13 +10,40 @@
 ## Beta Release
 
 ### Operational User Cases for Beta Release
-
 1. User is able to log in
 2. User is able to add a new task
 3. User is able to see scheduled tasks on their Google Calendar
 
 ### Build and test the system
 
+To build and test this application, you will need [Git](https://git-scm.com/), [Node Js](https://nodejs.org/en/download/), and [Gradle](https://gradle.org/install/). This project uses the [Spring Boot framework](https://spring.io/), Java's JDK 17 for the backend architecture and [React JS](https://reactjs.org/) for the frontend. 
+
+
+From your command line:
+
+```
+# Clone this repository
+$ git clone https://github.com/Get-It-Done-403/Get-It-Done.git
+
+# Go into the server directory
+$ cd backend
+
+# Run the server
+$ ./gradlew bootRun
+
+# Test the server
+$ ./gradlew test
+
+#Go to the react project directory
+$ cd ../frontend/get-it-done-frontend 
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
+```
+Note on testing: It is likely that current test will fail depending on the data stored in the database. If there are changes to the data base, the tests will need to be updates to match existing data in the database.
 
 ### Run the system
 
