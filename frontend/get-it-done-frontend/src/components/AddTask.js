@@ -4,6 +4,8 @@ import { v4 as uuid } from "uuid";
 
 function AddTask(props) {
     const uid = uuid();
+    const date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000) //local Date
+
 
     // Creates new task in database
     const handleSubmit = (event) => {
@@ -40,8 +42,7 @@ function AddTask(props) {
 
                 <form className={"calendarContainer"} onSubmit={handleSubmit}>
                         <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"taskName"} placeholder={"Enter Name of Task "}/>
-                        <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"}/>
-
+                        <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"} defaultValue={date.toISOString().substring(0,16)} required/>
                             {/*<div className={"radio-toolbar"}>*/}
                             {/*    <div className={"ml-[12px] mt-[5px]"}>*/}
                             {/*        <input type="radio" id={"None"} name={"radioButton"} defaultValue="true" defaultChecked={true}/>*/}
