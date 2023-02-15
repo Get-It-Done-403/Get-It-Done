@@ -3,6 +3,9 @@
 ## Team Report
 
 ### Goals From Last Week:
+* Have a base draft of algorithm for the calendar
+* add functionality to import google calendar
+* Make sure we can make api calls from the frontend
 
 ### Progress and Issues:
 
