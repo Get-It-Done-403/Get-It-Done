@@ -1,17 +1,71 @@
 # Get it Done
 
+## Table of Contents
+* [Beta release](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#beta-release)
+  * [Build and test the system](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#build-and-test-the-system)
+  * [Run the system](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#run-the-system) 
+* [Goals and Ideas](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#goals-and-ideas)
+* [Repo layout](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#repo-layout)
+
 ## Beta Release
 
-### User Cases for Beta Release
+### Operational User Cases for Beta Release
+1. User is able to log in
+2. User is able to add a new task
+3. User is able to edit task entries
+4. User is able to see scheduled tasks on their Google Calendar
 
 ### Build and test the system
 
+To build and test this application, you will need [Git](https://git-scm.com/), [Node Js](https://nodejs.org/en/download/), and [Gradle](https://gradle.org/install/). This project uses the [Spring Boot framework](https://spring.io/), Java's JDK 17 for the backend architecture and [React JS](https://reactjs.org/) for the frontend. 
+
+
+From your command line:
+
+```
+# Clone this repository
+$ git clone https://github.com/Get-It-Done-403/Get-It-Done.git
+
+# Go into the server directory
+$ cd backend
+
+# Run the server
+$ ./gradlew bootRun
+
+# Test the server
+$ ./gradlew test
+
+# Go to the react project directory
+$ cd ../frontend/get-it-done-frontend 
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
+```
+**Note on testing:** It is likely that current test will fail depending on entries on the database. If there are changes to the data base entries, the tests will need to be updates to match existing data in the database. Our testing uses ```RestTemplate```.
+
 ### Run the system
 
+In order to run the application, the server must be started and then we can run our frontend. From command your line:
+```
+# Go into the server directory
+$ cd backend
+
+# Run the server
+$ ./gradlew bootRun
+
+# Go to the react project directory
+$ cd ../frontend/get-it-done-frontend 
+
+# Run the app
+$ npm start
+```
+
 ----------------------------------------
-## Design
              
-### Goals and Ideas
+## Goals and Ideas
 
 * Ideas 
   - A productivity web application that allows users to plan, track assignment progress, and view their calendar. 

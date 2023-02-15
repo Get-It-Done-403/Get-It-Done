@@ -6,20 +6,31 @@ import AddTask from "./components/AddTask";
 // import Reset from "./pages/Reset";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePageFlow from "./pages/homePage/HomePageFlow";
+import Signup from "./pages/Signup";
+import { Container } from 'react-bootstrap'
+import {AuthProvider} from "./pages/Contexts/AuthContext";
+
 
 function App() {
-  return (
-      <Router>
-          <div>
-            <Header/>
-            <Routes>
-                <Route path="/" element={<HomePageFlow/>}/>
-                <Route path="/calendar" element={<CalendarPage/>}/>
-                <Route path="/settings" element={<AddTask/>}/>
-            </Routes>
-          </div>
-      </Router>
-  );
+    return (
+        <AuthProvider>
+            <Container className="d-flex align-items-center justify-content-center"
+                       style={{ minHeight: "100vh" }}
+            >
+                <Router>
+
+                        <Header/>
+                        <Routes>
+                            <Route path="/" element={<HomePageFlow/>}/>
+                            <Route path="/calendar" element={<CalendarPage/>}/>
+                            <Route path="/settings" element={<AddTask/>}/>
+                            <Route path="/signup" element={<Signup/>}/>
+                        </Routes>
+
+                </Router>
+            </Container>
+        </AuthProvider>
+    );
 }
 
 export default App;
