@@ -1,8 +1,9 @@
 package com.cse403.getitdone;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.google.gson.JsonNull;
+import com.cse403.getitdone.task.Task;
 import com.google.gson.JsonObject;
 
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.time.OffsetDateTime;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TaskControllerTest {
@@ -21,6 +29,8 @@ public class TaskControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    private String tid;
 
 
     @Test
@@ -80,32 +90,43 @@ public class TaskControllerTest {
 
     @Test
     public void creatTaskSuccess() throws Exception {
-//        final String baseUrl = "http://localhost:8080/createTask";
-//        URI uri = new URI(baseUrl);
-//        Task task = new Task("test add endpoint", "2024-01-01T10:30", 5);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("X-COM-PERSIST", "true");
-//
-//        HttpEntity<Task> request = new HttpEntity<>(task, headers);
-//
-//        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
-//
-////        Verify request succeed
-//        assertEquals(201, result.getStatusCodeValue());
+        String urlTemplate = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/createTask")
+                .queryParam("uid", "aidan")
+                .encode()
+                .toUriString();
+
+        Task task = new Task("test add endpoint", "2024-01-01T10:30", 5);
+        this.tid = task.getTid();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Task> request = new HttpEntity<>(task, headers);
+        String response = restTemplate.postForObject(urlTemplate, task, String.class);
+
+        String timestamp = OffsetDateTime.now().toString();
+
+        // Response should return a timestamp with today's date and time.
+        assertEquals(timestamp.substring(0, 10),  response.substring(0, 10));
     }
 
     @Test
     public void deleteTaskSuccess() throws Exception {
         String urlTemplate = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/deleteTask")
                 .queryParam("uid", "aidan")
-                .queryParam("tid", "07828dfb-9593-4037-addf-6e9a6e962cb9")
+                .queryParam("tid", this.tid)
                 .encode()
                 .toUriString();
 
-        assertThat(this.restTemplate.getForObject(urlTemplate,
-                String.class))
-                .contains("uid aidan: task with tid 07828dfb-9593-4037-addf-6e9a6e962cb9 has been deleted");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(urlTemplate, HttpMethod.DELETE, entity, String.class);
+
+        assertEquals("200 OK" , response.getStatusCode());
+        assertEquals("uid aidan: task with tid "+ tid +" has been deleted" , response.getBody());
     }
 
 }
