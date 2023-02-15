@@ -16,6 +16,7 @@ import com.google.api.services.calendar.model.Events;
 import org.checkerframework.checker.units.qual.C;
 import org.springframework.cglib.core.Local;
 
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.security.GeneralSecurityException;
@@ -29,11 +30,24 @@ import static com.cse403.getitdone.googleCalendar.GoogleCal.JSON_FACTORY;
 
 public class ScheduleService {
 
-    private ArrayList<CalendarEntry>[] timeSlots;
-    private String tid;
+    private static ArrayList<CalendarEntry>[] timeSlots;
+    private static String tid;
+    private static DateTime firstStartDate;
+    private static Calendar service;
+    private static final NetHttpTransport HTTP_TRANSPORT;
+
+    static {
+        try {
+            HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
-    public List<CalendarEntry> scheduleTask(String uid, final Task task) throws GeneralSecurityException, IOException {
+    public static List<CalendarEntry> scheduleTask(String uid, final Task task) throws GeneralSecurityException, IOException {
 
         //scheduleTask() from ScheduleService
 
@@ -42,9 +56,19 @@ public class ScheduleService {
         // 3. add events to calendar API
         // 4. Send those entries to db   task -> entries (this would call a function from CalendarService)
 
-        this.tid = task.getTid();
+        service =
+                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, GoogleCal.getCredentials(HTTP_TRANSPORT))
+                        .setApplicationName(APPLICATION_NAME)
+                        .build();
+
+
+        tid = task.getTid();
         // get the due date, so we can calculate how many days we have left until the task is due
-        ZonedDateTime zonedDate = getZonedDateTime(LocalDateTime.parse(task.getDueDate()));
+        String taskDate = task.getDueDate();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+        LocalDateTime localDate = LocalDateTime.parse(taskDate, formatter);
+        ZonedDateTime zonedDate = getZonedDateTime(localDate);
         TimeZone userTimeZone = TimeZone.getDefault();
         ZoneId zone = ZoneId.of(userTimeZone.getID());
         // current date
@@ -57,9 +81,9 @@ public class ScheduleService {
         }
 
         // initialize timeslots
-        timeSlots = new ArrayList[(int) daysBetween];
+        timeSlots = new ArrayList[(int) daysBetween + 1];
 
-        for (int i = 0; i < (int) daysBetween; i++) {
+        for (int i = 0; i <= (int) daysBetween; i++) {
             timeSlots[i] = new ArrayList<CalendarEntry>();
         }
 
@@ -69,15 +93,7 @@ public class ScheduleService {
         // divide up the task and add it to the time slots
         List<CalendarEntry> newEntries = allocateTime(task);
 
-        // set up credentials again to push to the calendar
-        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-
-        Calendar service =
-                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, GoogleCal.getCredentials(HTTP_TRANSPORT))
-                        .setApplicationName(APPLICATION_NAME)
-                        .build();
-
-
+        System.out.println(newEntries);
         for (CalendarEntry entry : newEntries) {
             // add to Google Calendar
             Event event = new Event()
@@ -94,6 +110,9 @@ public class ScheduleService {
 
             event.setStart(startDateTime);
             event.setEnd(endStartDate);
+            String calendarId = "primary";
+            // event created
+            service.events().insert(calendarId, event).execute();
 
             // TODO: add to database. confirm format for the database first.
         }
@@ -102,35 +121,33 @@ public class ScheduleService {
         return newEntries;
     }
 
-    private void getUserAvailability(String uid, final Task task) throws GeneralSecurityException, IOException {
-        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-
-        Calendar service =
-                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, GoogleCal.getCredentials(HTTP_TRANSPORT))
-                        .setApplicationName(APPLICATION_NAME)
-                        .build();
+    private static void getUserAvailability(String uid, final Task task) throws GeneralSecurityException, IOException {
 
         // current time
         DateTime now = new DateTime(System.currentTimeMillis());
         // due date
-        ZonedDateTime zonedDateTime = getZonedDateTime(LocalDateTime.parse(task.getDueDate()));
-        String endTimeStamp = zonedDateTime.format(DateTimeFormatter.RFC_1123_DATE_TIME);
+        String taskDate = task.getDueDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+        LocalDateTime localDate = LocalDateTime.parse(taskDate, formatter);
+        ZonedDateTime zonedDateTime = getZonedDateTime(localDate);
         // get all events from now to due date
         Events events = service.events().list("primary")
                 .setTimeMin(now)
-                .setTimeMax(DateTime.parseRfc3339(endTimeStamp))
+                .setTimeMax(DateTime.parseRfc3339(taskDate))
                 .execute();
         List<Event> items = events.getItems();
-
         // get the time zone of the user
         TimeZone userTimeZone = TimeZone.getDefault();
         ZoneId zone = ZoneId.of(userTimeZone.getID());
 
+        firstStartDate = items.get(0).getStart().getDateTime();
+
         for (Event item : items) {
+            System.out.println(item);
 
             // get the start time for the event
             EventDateTime startTime = item.getStart();
-            DateTime startDate = startTime.getDate();
+            DateTime startDate = startTime.getDateTime();
             Instant instant = Instant.ofEpochMilli(startDate.getValue());
             // convert to LocalDateTime
             LocalDateTime localStartDate = LocalDateTime.ofInstant(instant, zone);
@@ -138,17 +155,18 @@ public class ScheduleService {
             ZonedDateTime zonedStartTime = getZonedDateTime(localStartDate);
 
             // note that index 0 means the next day, not today.
-            long index = ChronoUnit.DAYS.between(zonedStartTime, zonedDateTime) - 1;
-
+            long index = ChronoUnit.DAYS.between(zonedStartTime, zonedDateTime);
+            System.out.println("index: " + index);
             // placeholder tid for tasks that we got from the api
             String tid = "Pre-existing task";
             // create new calendar entry and add to the timeslot
-            CalendarEntry scheduledEvent = new CalendarEntry(tid, startDate.toStringRfc3339(), item.getEnd().getDate().toStringRfc3339());
-            timeSlots[(int) index].add(scheduledEvent);
+
+            CalendarEntry scheduledEvent = new CalendarEntry(tid, startDate.toString(), item.getEnd().getDateTime().toString());
+            timeSlots[timeSlots.length - (int) index].add(scheduledEvent);
         }
     }
 
-    private List<CalendarEntry> allocateTime(Task task) {
+    private static List<CalendarEntry> allocateTime(Task task) {
         int entryCount = task.getHoursToComplete();
 
 
@@ -165,20 +183,11 @@ public class ScheduleService {
 
         Random random = new Random();
         // get a random number to represent a time between 9:00 and 20:00
-        int defaultTime = random.nextInt(12) + 9;
-
+//        int defaultTime = random.nextInt(12) + 9;
+        int defaultTime = 9;
+        System.out.println("random number: " + defaultTime);
         // construct a Date object for the default time
         // first find a non-null element in timeslot
-        DateTime firstStartDate = null;
-        for (int i = 0; i < timeSlots.length; i++) {
-            ArrayList<CalendarEntry> oneDay = timeSlots[i];
-            if (oneDay != null) {
-                for (CalendarEntry entry : oneDay) {
-                    firstStartDate = DateTime.parseRfc3339(entry.getStartDate());
-                    break;
-                }
-            }
-        }
 
         // we need to do some converting and make a Date object for the potential time slot which is at defaultTime ending at
         // defaultTime + 1 (assuming that the chunks are only one hour)
@@ -186,8 +195,9 @@ public class ScheduleService {
         calendarStart.setTime(new Date(firstStartDate.getValue()));
         calendarStart.set(java.util.Calendar.HOUR_OF_DAY, defaultTime);
         // do the same for the end time
-        java.util.Calendar calendarEnd = calendarStart;
-        calendarStart.set(java.util.Calendar.HOUR_OF_DAY, defaultTime + 1);
+        java.util.Calendar calendarEnd = java.util.Calendar.getInstance();
+        calendarEnd.setTime(new Date(firstStartDate.getValue()));
+        calendarEnd.set(java.util.Calendar.HOUR_OF_DAY, defaultTime + 1);
         Date potentialStart = calendarStart.getTime();
         Date potentialEnd = calendarEnd.getTime();
 
@@ -196,12 +206,25 @@ public class ScheduleService {
             ArrayList<CalendarEntry> tmp = new ArrayList<>(timeSlots[i]);
             CalendarEntry newEntry = addEntry(tmp, potentialStart, potentialEnd);
             newEntries.add(newEntry);
+
+            // TODO: Handle edge cases for example end of the month
+            java.util.Calendar newStart = java.util.Calendar.getInstance();
+            newStart.setTime(new Date(firstStartDate.getValue()));
+            newStart.set(java.util.Calendar.DAY_OF_MONTH, calendarStart.get(java.util.Calendar.DAY_OF_MONTH) + 1);
+            calendarStart.set(java.util.Calendar.DAY_OF_MONTH, newStart.get(java.util.Calendar.DAY_OF_MONTH));
+            // do the same for the end time
+            java.util.Calendar newEnd = java.util.Calendar.getInstance();
+            newEnd.setTime(new Date(firstStartDate.getValue()));
+            newEnd.set(java.util.Calendar.DAY_OF_MONTH, calendarStart.get(java.util.Calendar.DAY_OF_MONTH) + 1);
+            calendarEnd.set(java.util.Calendar.DAY_OF_MONTH, newEnd.get(java.util.Calendar.DAY_OF_MONTH));
+            potentialStart = newStart.getTime();
+            potentialEnd = newEnd.getTime();
         }
 
         return newEntries;
     }
 
-    private CalendarEntry addEntry(ArrayList<CalendarEntry> schedule, Date potentialStart, Date potentialEnd) {
+    private static CalendarEntry addEntry(ArrayList<CalendarEntry> schedule, Date potentialStart, Date potentialEnd) {
         CalendarEntry newEntry = null;
         for (CalendarEntry entry : schedule) {
             String startDateString = entry.getStartDate();
@@ -211,7 +234,8 @@ public class ScheduleService {
             Date entryStart = new Date(startDate.getValue());
             Date entryEnd = new Date(endDate.getValue());
 
-            if (entryStart.before(potentialStart) && entryEnd.after(potentialEnd)) {
+            if ((entryStart.before(potentialStart) && entryEnd.after(potentialEnd)) || entryStart.compareTo(potentialStart) == 0 || entryEnd.compareTo(potentialEnd) == 0) {
+                System.out.println("there is an overlap");
                 /* this means the potential time slot overlaps with the entry
                  we will schedule it after the end of entry time.
 
@@ -231,7 +255,6 @@ public class ScheduleService {
                     calendarEnd.set(java.util.Calendar.HOUR_OF_DAY, entryEnd.getHours() + 1);
                     potentialEnd = calendarEnd.getTime();
 
-                    schedule.remove(entry);
 
                     if (schedule != null) {
                         return addEntry(schedule, potentialStart, potentialEnd);
@@ -239,7 +262,8 @@ public class ScheduleService {
                 }
             } else {
                 // set the new entry for the day
-                newEntry = new CalendarEntry(this.tid, new DateTime(potentialStart).toStringRfc3339(), new DateTime(potentialEnd).toStringRfc3339());
+
+                newEntry = new CalendarEntry(tid, new DateTime(potentialStart).toStringRfc3339(), new DateTime(potentialEnd).toStringRfc3339());
                 break;
             }
         }
@@ -247,7 +271,7 @@ public class ScheduleService {
     }
 
 
-    private ZonedDateTime getZonedDateTime(LocalDateTime time) {
+    private static ZonedDateTime getZonedDateTime(LocalDateTime time) {
         TimeZone userTimeZone = TimeZone.getDefault();
         ZoneId zone = ZoneId.of(userTimeZone.getID());
         // Convert LocalDateTime to ZonedDateTime
