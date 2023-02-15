@@ -12,6 +12,10 @@ function EditTask(props) {
     var strTime = hours + ':' + minutes;
     const date = curr.toISOString().substring(0,11).concat(strTime);
 
+    const getTimeZone = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000) //local Date
+    const timeZone = getTimeZone.toTimeString().split("-")[1].substring(0,4)
+    const withColons = "-" + timeZone.substring(0,2) + ":" + timeZone.substring(2,4)
+
 
 
     const  deleteTask = (event) => {
@@ -33,7 +37,7 @@ function EditTask(props) {
         sendTask.title = event.target.title.value
         sendTask.isCompleted = document.querySelector('input[name="isCompleted"]:checked').value
         sendTask.hoursToComplete = event.target.hoursToComplete.value
-        sendTask.dueDate = event.target.dueDate.value
+        sendTask.dueDate = (event.target.dueDate.value).concat(":00" + withColons)
 
         fetch('http://localhost:8080/updateTask?uid=' + props.userID,  {
             method: "POST",
@@ -51,8 +55,6 @@ function EditTask(props) {
         <div className={"pageBackground"}>
             <div className={"pageContainer"}>
                 <NavBar currentPage={"None"}/>
-                <button className={"bg-black "} onClick={() => alert(date)}> hi </button>
-                <button className={"bg-black "} onClick={() => alert(props.currentTask.dueDate)}> Bye </button>
                 <form className={"calendarContainer"} onSubmit={editTask}>
                     <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"title"} defaultValue={props.currentTask.title}/>
                     <div className={"grid grid-row-2 grid-cols-2"}>

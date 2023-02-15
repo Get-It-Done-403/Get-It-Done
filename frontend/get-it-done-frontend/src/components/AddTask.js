@@ -5,18 +5,23 @@ import { v4 as uuid } from "uuid";
 function AddTask(props) {
     const uid = uuid();
     const date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000) //local Date
+    const timeZone = date.toTimeString().split("-")[1].substring(0,4)
+    const withColons = "-" + timeZone.substring(0,2) + ":" + timeZone.substring(2,4)
+    // let test = date.toISOString().substring(0,16).concat(":00").concat(withColons)
+    // test.concat(withColons)
 
 
     // Creates new task in database
     const handleSubmit = (event) => {
         // let task = {"name" : event.target.taskName.value};
         // props.setRemainingTasks([...props.remainingTasks, task]);
+        const timeZone = date.toTimeString().split("-")[1]
         const task = {
             "hoursToComplete": event.target.hoursToComplete.value,
             "isCompleted":false,
             "tid": uid,
             "title": event.target.taskName.value,
-            "dueDate": event.target.dueDate.value
+            "dueDate": (event.target.dueDate.value).concat(":00").concat(withColons)
         }
 
         fetch("http://localhost:8080/createTask?uid=" + props.userID, {
@@ -39,10 +44,9 @@ function AddTask(props) {
         <div className={"pageBackground"}>
             <div className={"pageContainer"}>
                 <NavBar currentPage={"None"}/>
-
                 <form className={"calendarContainer"} onSubmit={handleSubmit}>
-                        <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"taskName"} placeholder={"Enter Name of Task "}/>
-                        <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"} defaultValue={date.toISOString().substring(0,16)} required/>
+                    <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"taskName"} placeholder={"Enter Name of Task "}/>
+                    <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"} defaultValue={date.toISOString().substring(0,16)} required/>
                             {/*<div className={"radio-toolbar"}>*/}
                             {/*    <div className={"ml-[12px] mt-[5px]"}>*/}
                             {/*        <input type="radio" id={"None"} name={"radioButton"} defaultValue="true" defaultChecked={true}/>*/}
@@ -61,11 +65,8 @@ function AddTask(props) {
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={(() => {props.setTrigger("default")})}> Cancel  </button>
                     </div>
-
                 </form>
-
             </div>
-
             <style jsx> {`
                 .calendarContainer {
                     flex: .95;

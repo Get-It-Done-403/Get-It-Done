@@ -37,7 +37,7 @@ function HomePage(props) {
             }
 
 
-    )},)
+    )}, [])
 
 
     useEffect(() => {
