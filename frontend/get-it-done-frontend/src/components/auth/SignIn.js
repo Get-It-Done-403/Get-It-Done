@@ -40,9 +40,9 @@ const SignIn = () => {
 
     return (
         <div className={"pageBackground"}>
-            <div className={"logoHeader"}> Get It Done </div>
             <div className={"module"}>
-                <div className={"bg-[#CCCCCC] flex flex-1 flex-col pl-10 pr-10 pt-10 pb-5 rounded-md"}>
+                <div className={"logoHeader"}> Get It Done </div>
+                <div className={"bg-[#CCCCCC] flex flex-1 flex-col pl-10 pr-10 pt-10 pb-5 rounded-bl-md rounded-br-md"}>
                     <div className={"text-[60px] text-center"}> Sign In </div>
                     <form onSubmit={handleSignIn} className={"flex flex-1 flex-col mt-6"}>
                         <input
@@ -82,16 +82,17 @@ const SignIn = () => {
                 .logoHeader {
                     padding: 5px;
                     display: flex;
+                    min-width: 500px;
+                    max-width: 500px;
                     flex: .1;
-                    margin-top: 50px;
-                    min-width: 300px;
-                    max-width: 300px;
+                    // margin-top: 50px;
                     background-color: rgb(99, 120, 159);
                     justify-content: center;
                     align-items: center;
                     align-self: center;
                     font-size: 24px;
-                    border-radius: 6px;
+                    border-top-left-radius: 6px;
+                    border-top-right-radius: 6px;
                 }`}
             </style>
         </div>
