@@ -12,8 +12,9 @@
 ### Operational User Cases for Beta Release
 1. User is able to log in
 2. User is able to add a new task
-3. User is able to edit task entries
-4. User is able to see scheduled tasks on their Google Calendar
+3. User is able to search a task
+4. User is able to edit task entries
+5. User is able to see scheduled tasks on their Google Calendar
 
 ### Build and test the system
 
