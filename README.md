@@ -34,7 +34,7 @@ $ ./gradlew bootRun
 # Test the server
 $ ./gradlew test
 
-#Go to the react project directory
+# Go to the react project directory
 $ cd ../frontend/get-it-done-frontend 
 
 # Install dependencies
@@ -43,7 +43,7 @@ $ npm install
 # Run the app
 $ npm start
 ```
-Note on testing: It is likely that current test will fail depending on the data stored in the database. If there are changes to the data base, the tests will need to be updates to match existing data in the database.
+**Note on testing:** It is likely that current test will fail depending on entries on the database. If there are changes to the data base entries, the tests will need to be updates to match existing data in the database. Our testing uses ```RestTemplate```.
 
 ### Run the system
 
