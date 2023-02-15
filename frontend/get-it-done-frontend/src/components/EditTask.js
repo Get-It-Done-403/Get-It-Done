@@ -3,16 +3,15 @@ import NavBar from "./NavBar";
 
 function EditTask(props) {
 
-    const curr = new Date(props.currentTask.dueDate);
-    var hours = curr.getHours();
-    var minutes = curr.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    // hours = hours % 12;
-    // hours = hours ? hours : 12; // the hour '0' should be '12'
+    const dueDate = new Date(props.currentTask.dueDate);
+    const curr = new Date(dueDate.getTime() - new Date().getTimezoneOffset() * 60000) //local Date
+    let hours = curr.getUTCHours();
+    var minutes = curr.getUTCMinutes() < 10 ? '0'+ curr.getUTCMinutes()  : curr.getUTCMinutes() ;
     hours = (hours < 10) ? '0' + hours.toString() : hours.toString();
     minutes = minutes < 10 ? '0'+minutes : minutes;
     var strTime = hours + ':' + minutes;
     const date = curr.toISOString().substring(0,11).concat(strTime);
+
 
 
     const  deleteTask = (event) => {
@@ -48,18 +47,12 @@ function EditTask(props) {
         window.location.reload(false);
     }
 
-    function test() {
-        // alert(curr);
-        // alert(curr.getTime());
-        alert(date);
-        // alert(strTime)
-    }
-
     return (
         <div className={"pageBackground"}>
             <div className={"pageContainer"}>
                 <NavBar currentPage={"None"}/>
-                <button onClick={test}> Test</button>
+                <button className={"bg-black "} onClick={() => alert(date)}> hi </button>
+                <button className={"bg-black "} onClick={() => alert(props.currentTask.dueDate)}> Bye </button>
                 <form className={"calendarContainer"} onSubmit={editTask}>
                     <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"title"} defaultValue={props.currentTask.title}/>
                     <div className={"grid grid-row-2 grid-cols-2"}>
