@@ -28,11 +28,11 @@ public class GoogleCal {
     /**
      * Application name.
      */
-    private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
+    static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
     /**
      * Global instance of the JSON factory.
      */
-    private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+    static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     /**
      * Directory to store authorization tokens for this application.
      */
@@ -44,7 +44,7 @@ public class GoogleCal {
      */
     private static final List<String> SCOPES =
             Collections.singletonList(CalendarScopes.CALENDAR_READONLY);
-    private static final String CREDENTIALS_FILE_PATH = "backend/src/main/resources/credentials.json";
+    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
     /**
      * Creates an authorized Credential object.
@@ -53,7 +53,7 @@ public class GoogleCal {
      * @return An authorized Credential object.
      * @throws IOException If the credentials.json file cannot be found.
      */
-    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
+    static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
             throws IOException {
         // Load client secrets.
         InputStream in = GoogleCal.class.getResourceAsStream(CREDENTIALS_FILE_PATH);

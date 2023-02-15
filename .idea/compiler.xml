@@ -6,4 +6,9 @@
       <module name="com.cse403.getitdone.test" target="17" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="getitdone.main" options="--add-exports java.base/jdk.internal.logger=ALL-UNNAMED" />
+    </option>
+  </component>
 </project>
