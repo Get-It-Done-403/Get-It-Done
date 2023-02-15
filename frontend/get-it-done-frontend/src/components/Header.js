@@ -1,8 +1,15 @@
+import {Link} from "react-router-dom";
+
 function Header() {
     return (
         <div className={"header"}>
             <div className={"logoHeader"}> Get It Done </div>
-            <div className={"ml-auto mr-12 self-center text-[#181818] text-[28px]"}>  Profile </div>
+            <div className={"ml-auto mr-12 self-center text-[#181818] text-[28px]"}>
+                <Link to={"/profile"}>
+                    Profile
+                </Link>
+            </div>
+
             <style jsx> {`
                 .header {
                     background-color: rgba(225, 225, 225, 16);

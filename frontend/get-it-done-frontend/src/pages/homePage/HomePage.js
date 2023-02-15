@@ -69,7 +69,7 @@ function HomePage(props) {
             }
 
 
-    )}, [])
+    )}, [props.trigger])
 
     return (
         <div className={"pageBackground"}>
@@ -81,7 +81,6 @@ function HomePage(props) {
                          <h1 className={"text-[36px] flex-1 ml-[12px] border-b-2 border-[#353535] text-center"}> {currentMonthName} {actualDate} {currentYear}</h1>
                          <button className={"border-2 rounded-[10000px] p-3"} onClick={nextDate}> Next </button>
                      </div>
-                     <input type={"text"} className={" mt-[12px] text-center border-b-[1px] border-black"} placeholder={"Search for Tasks"} onChange={(e) => setSearchTask(e.target.value)}/>
                      <div className={"tasksContainer"}>
                          <div className={"p-3 rounded-[7px] mr-8 bg-[#FF3434] bg-opacity-95 text-white text-[28px] flex flex-[.5] list-item flex-col text-center"}>
                              Remaining Tasks
@@ -95,8 +94,9 @@ function HomePage(props) {
                     </div>
                 </div>
                 <div className={"upcomingTasks"}>
+                    <input type={"text"} className={"mt-2 text-center border-b-[1px] w-full border-black bg-[#EFEFEF]"} placeholder={"Search for Tasks"} onChange={(e) => setSearchTask(e.target.value)}/>
                     <div className={"flex-1 flex-col flex w-full p-5"}>
-                        <div className={"text-[20px] text-center border-b-2 border-[#353535] "}> Upcoming Tasks </div>
+                        <div className={"text-[20px] mt-[20px] text-center border-b-2 border-[#353535] "}> Upcoming Tasks </div>
                         <div className={"text-[12px]"}>
                             <DisplayTask searchTask={searchTask} tasks={tasks} todayDate={todayDate} completedBool={false} editTask={editTask} todayBool={false} overdueBool={false}/>
                         </div>
