@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { auth } from "../../firebase";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {auth, provider} from "../../firebase";
+import {useCreateUserWithEmailAndPassword, useSignInWithGoogle} from "react-firebase-hooks/auth";
 import "../../css/mainCSS.css"
 import {Link} from "react-router-dom";
 import {Redirect} from "react-router-dom";
@@ -9,6 +9,7 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [createUserWithEmailAndPassword, user, error] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth, provider);
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -21,6 +22,19 @@ const SignUp = () => {
                 console.log(error);
             });
     };
+
+    const handleGoogleSignIn = (e) => {
+        signInWithGoogle()
+            .then((userCredentials) => {
+                console.log(userCredentials)
+                setEmail(userCredentials.user.email)
+                localStorage.setItem("email", userCredentials.user.email)
+                window.location = '/'
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
     return (
         <div className={"pageBackground"}>
@@ -45,6 +59,7 @@ const SignUp = () => {
                             />
                             <button  className={"bg-[#63789F] mt-10 rounded-[100px] text-[20px] p-3"} type={"submit"}> SIGN UP </button>
                         </form>
+                    <button  className={"bg-[#63789F] rounded-[100px] w-[250px] text-[20px] p-3 mb-2"} onClick={handleGoogleSignIn}> SIGN UP WTH GOOGLE </button>
                     <div className={"flex"}> Already have an account? <Link to={"signin"} className={"ml-4 text-[#14509F] font-medium"}> Sign In</Link> </div>
                 </div>
             </div>

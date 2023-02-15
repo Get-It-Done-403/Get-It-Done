@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { auth } from "../../firebase";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import React, {useEffect, useState} from "react";
+import { auth, provider } from "../../firebase";
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import {Link} from "react-router-dom";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [signInWithEmailAndPassword, user, error] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle] = useSignInWithGoogle(auth, provider);
 
     const handleSignIn = (e) => {
         e.preventDefault();
@@ -19,6 +20,23 @@ const SignIn = () => {
                 console.log(error);
             });
     };
+
+    const handleGoogleSignIn = (e) => {
+        signInWithGoogle()
+            .then((userCredentials) => {
+                console.log(userCredentials)
+                setEmail(userCredentials.user.email)
+                // localStorage.setItem("email", userCredentials.user.email)
+                window.location = '/'
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+    //
+    // useEffect(() => {
+    //     setEmail(localStorage.getItem('email'))
+    // })
 
     return (
         <div className={"pageBackground"}>
@@ -44,7 +62,9 @@ const SignIn = () => {
                         <button  className={"bg-[#63789F] mt-10 rounded-[100px] text-[20px] p-3"} type={"submit"}> SIGN IN </button>
                     </form>
                     {/*<Link to={"/"} className={"mb-2 text-[#14509F]"}> Forgot Password? </Link>*/}
-                    <div className={"flex"}> Don't have an account? <Link to={"/"} className={"ml-4 text-[#14509F] font-medium"}> Sign Up</Link> </div>
+                    <button  className={"bg-[#63789F] rounded-[100px] w-[250px] text-[20px] p-3 mb-2"} onClick={handleGoogleSignIn}> SIGN IN WTH GOOGLE </button>
+
+                    <div className={"flex ml-2"}> Don't have an account? <Link to={"/"} className={"ml-4 text-[#14509F] font-medium"}> Sign Up</Link> </div>
 
                 </div>
             </div>
