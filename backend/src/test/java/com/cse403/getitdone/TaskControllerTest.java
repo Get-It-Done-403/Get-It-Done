@@ -22,6 +22,23 @@ public class TaskControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+//    @Test
+//    public void creatTaskSuccess() throws Exception {
+//        final String baseUrl = "http://localhost:8080/createTask";
+//        URI uri = new URI(baseUrl);
+//        Task task = new Task("test add endpoint", "2024-01-01T10:30", 5);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.set("X-COM-PERSIST", "true");
+//
+//        HttpEntity<Task> request = new HttpEntity<>(task, headers);
+//
+//        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+//
+////        Verify request succeed
+//        assertEquals(201, result.getStatusCodeValue());
+//    }
+
     @Test
     public void getTaskDetailsSuccess() throws Exception {
         String urlTemplate = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/getTaskDetails")
