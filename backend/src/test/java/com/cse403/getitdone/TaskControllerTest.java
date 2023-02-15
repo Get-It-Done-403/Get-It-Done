@@ -1,7 +1,9 @@
 package com.cse403.getitdone;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.cse403.getitdone.task.Task;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 
@@ -11,7 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TaskControllerTest {
@@ -23,19 +31,36 @@ public class TaskControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
+    public void testAddEmployeeSuccess() throws Exception {
+        final String baseUrl = "http://localhost:8080/createTask";
+        URI uri = new URI(baseUrl);
+        Task task = new Task("aidan", "test add endpoint", 2023, 1, 1, 10, 30, 5);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-COM-PERSIST", "true");
+
+        HttpEntity<Task> request = new HttpEntity<>(task, headers);
+
+        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+
+//        Verify request succeed
+        assertEquals(201, result.getStatusCodeValue());
+    }
+
+    @Test
     public void getTaskDetailsSuccess() throws Exception {
         String urlTemplate = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/getTaskDetails")
                 .queryParam("uid", "aidan")
-                .queryParam("tid", "866ac858-0ec8-4d5e-9a0f-58262cc8302b")
+                .queryParam("tid", "f7cceca9-764d-4c74-b0d0-bdc67cffd7d7")
                 .encode()
                 .toUriString();
 
         JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("tid", "866ac858-0ec8-4d5e-9a0f-58262cc8302b");
-        responseObj.addProperty("title", "do not remove");
-        responseObj.add("dueDate", JsonNull.INSTANCE);
-        responseObj.addProperty("hoursToComplete", 0);
-        responseObj.addProperty("isCompleted", true);
+        responseObj.addProperty("tid", "f7cceca9-764d-4c74-b0d0-bdc67cffd7d7");
+        responseObj.addProperty("title", "do not remove test");
+        responseObj.addProperty("dueDate", "2023-02-15T14:53");
+        responseObj.addProperty("hoursToComplete", 2);
+        responseObj.addProperty("isCompleted", false);
 
         assertThat(this.restTemplate.getForObject(urlTemplate,
                 String.class))
@@ -50,24 +75,24 @@ public class TaskControllerTest {
                 .toUriString();
 
         JsonObject responseObj = new JsonObject();
-        responseObj.addProperty("tid", "866ac858-0ec8-4d5e-9a0f-58262cc8302b");
-        responseObj.addProperty("title", "do not remove");
-        responseObj.add("dueDate", JsonNull.INSTANCE);
-        responseObj.addProperty("hoursToComplete", 0);
-        responseObj.addProperty("isCompleted", true);
+        responseObj.addProperty("tid", "f7cceca9-764d-4c74-b0d0-bdc67cffd7d7");
+        responseObj.addProperty("title", "do not remove test");
+        responseObj.addProperty("dueDate", "2023-02-15T14:53");
+        responseObj.addProperty("hoursToComplete", 2);
+        responseObj.addProperty("isCompleted", false);
 
         JsonObject responseObj2 = new JsonObject();
-        responseObj2.addProperty("tid", "e623885f-2f80-4284-894a-0f1234671cd6");
-        responseObj2.addProperty("title", "do not remove 2");
-        responseObj2.add("dueDate", JsonNull.INSTANCE);
-        responseObj2.addProperty("hoursToComplete", 1);
+        responseObj2.addProperty("tid", "c3ec1646-274f-424f-942d-fe9bf553650d");
+        responseObj2.addProperty("title", "do not remove test 2");
+        responseObj2.addProperty("dueDate", "2023-02-15T14:53");
+        responseObj2.addProperty("hoursToComplete", 2);
         responseObj2.addProperty("isCompleted", false);
 
         JsonObject responseObj3 = new JsonObject();
-        responseObj3.addProperty("tid", "9593d218-5fbe-4e35-b7bd-59eb0bbcfa8b");
-        responseObj3.addProperty("title", "do not remove 3");
-        responseObj3.add("dueDate", JsonNull.INSTANCE);
-        responseObj3.addProperty("hoursToComplete", 43);
+        responseObj3.addProperty("tid", "663e0db5-44ff-4bd7-9f6c-1c0d566fb09c");
+        responseObj3.addProperty("title", "do not remove test 3");
+        responseObj3.addProperty("dueDate", "2023-02-15T14:53");
+        responseObj3.addProperty("hoursToComplete", 2);
         responseObj3.addProperty("isCompleted", false);
 
         assertThat(this.restTemplate.getForObject(urlTemplate,
