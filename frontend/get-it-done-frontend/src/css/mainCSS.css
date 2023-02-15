@@ -19,6 +19,20 @@
     /*color: white;*/
 }
 
+.module {
+    display: flex;
+    padding: 50px;
+    min-width: 600px;
+    max-width: 600px;
+    max-height: 70vh;
+    min-height: 70vh;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    align-self: center;
+}
+
 .pageContainer {
     display: flex;
     flex: .95;
@@ -29,7 +43,7 @@
     background-color: rgba(239, 239, 239, 49);
     flex: .15;
     align-items: center;
-    /*justify-content: center;*/
+    justify-content: center;
     flex-direction: column;
     font-family: Text;
     font-size: 20px;
@@ -39,7 +53,7 @@
 .tasksPage {
     display: flex;
     flex-direction: column;
-    flex: .8;
+    flex: .9;
     font-family: Text;
     color: black;
     padding: 30px;
@@ -49,6 +63,6 @@
     display: flex;
     flex: .6;
     /*padding: ;*/
-    margin-top: 10px;
+    margin-top: 18px;
     /*background-color: green;*/
 }

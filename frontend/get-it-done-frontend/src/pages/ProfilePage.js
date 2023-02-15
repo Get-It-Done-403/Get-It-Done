@@ -1,6 +1,7 @@
 import "../css/mainCSS.css";
 import React, {useEffect} from "react";
 import NavBar from "../components/NavBar";
+import {Link} from "react-router-dom";
 import {useState} from "react";
 
 function ProfilePage(props) {
@@ -9,7 +10,10 @@ function ProfilePage(props) {
             <div className={"pageContainer"}>
                 <NavBar currentPage={"profile"}/>
                 <div className={"tasksPage"}>
-                    <h1 className={"text-[36px] ml-[12px] border-b-2 border-[#353535]"}> Welcome, {props.userID} </h1>
+                    <h1 className={"text-[36px] ml-[12px] border-b-2 border-[#353535] grid grid-cols-2"}>
+                        Welcome, {props.userEmail}
+                        <button className={"bg-blue-100 h-full w-1/4 rounded-md justify-self-end"} onClick={() => props.signOut()}> SIGN OUT </button>
+                    </h1>
                 </div>
             </div>
         </div>

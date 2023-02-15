@@ -26,7 +26,7 @@ function EditTask(props) {
             method: 'DELETE'
         })
         props.setTrigger("default")
-        window.location.reload(false);
+        // window.location.reload(false);
 
     }
 
@@ -48,7 +48,7 @@ function EditTask(props) {
 
         })
         props.setTrigger("default")
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     return (

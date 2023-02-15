@@ -4,17 +4,17 @@ import AddTask from "../../components/AddTask";
 import EditTask from "../../components/EditTask";
 import {useEffect} from "react";
 
-function HomePageFlow()  {
+function HomePageFlow(props)  {
     const [trigger, setTrigger] = useState("default")
     const [currentTask, setCurrentTask] = useState({})
-    const userID = "aidan"
+    const userID = props.userEmail
 
 
     return (
         {
             default: (
             <>
-                <HomePage setTrigger={setTrigger} setCurrentTask={setCurrentTask} userID={userID}/>
+                <HomePage setTrigger={setTrigger} setCurrentTask={setCurrentTask} userID={userID} trigger={trigger}/>
             </>
             ),
             addTask: (
