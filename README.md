@@ -1,15 +1,26 @@
 # Get it Done
 
+## Table of Contents
+* [Beta release]()
+  * [Build and test the system]()
+  * [Run the system]() 
+* [Goals and Ideas]()
+* [Repo layout]()
+
 ## Beta Release
 
-### User Cases for Beta Release
+### Operational User Cases for Beta Release
+
+1. User is able to log in
+2. User is able to add a new task
+3. User is able to see scheduled tasks on their Google Calendar
 
 ### Build and test the system
+
 
 ### Run the system
 
 ----------------------------------------
-## Design
              
 ### Goals and Ideas
 
