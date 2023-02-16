@@ -58,7 +58,7 @@ function HomePage(props) {
                          <div className={"p-3 rounded-[7px] mr-8 bg-[#FF3434] bg-opacity-95 text-white text-[28px] flex flex-[.5] list-item flex-col text-center"}>
                              Remaining Tasks
                              <DisplayTask searchTask={searchTask} tasks={tasks} todayDate={todayDate} completedBool={'false'} editTask={editTask} todayBool={'true'} overdueBool={'false'}/>
-                             <button className={"w-full bg-[#F2F2F2] mt-3 text-center rounded-[7px] p-3 text-[16px] text-[#251B1B]"} onClick={() => {props.setTrigger("addTask")}}> Create new Task </button>
+                             <button data-testid="createTask" className={"w-full bg-[#F2F2F2] mt-3 text-center rounded-[7px] p-3 text-[16px] text-[#251B1B]"} onClick={() => {props.setTrigger("addTask")}}> Create new Task </button>
                          </div>
                          <div className={"p-3 bg-[#15CD32] rounded-[7px] bg-opacity-95 text-white text-[28px] flex flex-[.5] display-flex flex-col text-center"}>
                             Completed Tasks

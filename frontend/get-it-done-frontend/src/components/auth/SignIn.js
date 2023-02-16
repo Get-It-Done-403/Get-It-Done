@@ -51,8 +51,10 @@ const SignIn = () => {
                             placeholder={"Email"}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            data-testid="loginEmail"
                         />
                         <input
+                            id={"loginPassword"}
                             className={"p-2 border-2 border-black mt-4 text-black"}
                             type={"password"}
                             placeholder={"Password"}
