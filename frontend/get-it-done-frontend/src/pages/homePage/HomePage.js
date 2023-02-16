@@ -36,6 +36,8 @@ function HomePage(props) {
     const [actualDate, setActualDate] = useState(todayDate.getUTCDate())
     const [tasks, setTasks] = useState([]);
 
+    const [username, setUsername] = useState("")
+
     const [searchTask, setSearchTask] = useState("")
 
     function backDate() {
@@ -57,7 +59,6 @@ function HomePage(props) {
         setCurrentYear(todayDate.getFullYear())
         setActualDate(date)
     }, [todayDate])
-
 
     useEffect(() => {
         fetch("http://localhost:8080/getTaskList?uid=" + props.userID)

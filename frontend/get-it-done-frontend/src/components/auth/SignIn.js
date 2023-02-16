@@ -25,7 +25,7 @@ const SignIn = () => {
         signInWithGoogle()
             .then((userCredentials) => {
                 console.log(userCredentials)
-                setEmail(userCredentials.user.email)
+                // setEmail(userCredentials.user.email)
                 // localStorage.setItem("email", userCredentials.user.email)
                 window.location = '/'
             })
@@ -64,7 +64,7 @@ const SignIn = () => {
                     {/*<Link to={"/"} className={"mb-2 text-[#14509F]"}> Forgot Password? </Link>*/}
                     <button  className={"bg-[#63789F] rounded-[100px] w-[250px] text-[20px] p-3 mb-2"} onClick={handleGoogleSignIn}> SIGN IN WTH GOOGLE </button>
 
-                    <div className={"flex ml-2"}> Don't have an account? <Link to={"/"} className={"ml-4 text-[#14509F] font-medium"}> Sign Up</Link> </div>
+                    <div className={"flex ml-2"}> Don't have an account? <Link to={"/signup"} className={"ml-4 text-[#14509F] font-medium"}> Sign Up</Link> </div>
 
                 </div>
             </div>
