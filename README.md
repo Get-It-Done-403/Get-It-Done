@@ -89,14 +89,22 @@ $ npm start
         | +- EditTask.js
         | +- Header.js
         | +- NavBar.js
+          +- auth
+          | +- AuthDetails.js
+          | +- ForgotPassword.js
+          | +- GetItDone.png
+          | +- SignIn.js
+          | +- SignUp.js
         |
         +- css
-        | +- Login.css
         | +- mainCSS.css
         | +- Register.cc
         | +- Reset.css
         |
         +- fonts
+        | +- Asar-Regular.tff
+        | +- PlayfairDisplay-Italic-VariableFont_wght.tff
+        | +- PlayfairDisplay-VariableFont_wght.tff
         |
         +- pages
         | +- homePage
@@ -105,14 +113,18 @@ $ npm start
         |   +- HomePageFlow.js
         |   |
         | +- CalendarPage.js
+        | +- ProfilePage.js
         | +- Register.js
         | +- Reset.js
+        | +- SettingsPage.js
         |
         +- App.css
         |
         +- App.js
         |
         +- App.test.js
+        |
+        +- firebase.js
         |
         +- index.css
         |
