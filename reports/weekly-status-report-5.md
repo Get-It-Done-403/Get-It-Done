@@ -29,8 +29,17 @@
 
 * Tye Coleman
   * Goals from last week:
+    - Create more Junit tests for the Calendar and Task classes
+    - Finish implementation for the Calendar class
+    - Create the User class and connect with the database
   * Progress and Issues:
+    - Implemented Schedule Service which creates new calendar entries and adds to the user's google calendar
+    - There are still edge cases that needs handling for schedule task
+    - Sometimes the results I get for schedule task is in consistent 
   * Plans and Goals:
+    - Handle errors and edge cases in Schedule Service
+    - Make sure the user only needs to log into google once to use the google calendar api
+    - Make tests for schedule service
 * Mitchell Ly
     * Goals from last week:
     * Progress and Issues: 
