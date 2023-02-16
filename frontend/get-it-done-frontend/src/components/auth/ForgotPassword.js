@@ -1,13 +1,10 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import {useSignInWithEmailAndPassword, useSignInWithGoogle, useSendPasswordResetEmail} from "react-firebase-hooks/auth";
-import {auth, provider} from "../../firebase";
+import {useSendPasswordResetEmail} from "react-firebase-hooks/auth";
+import {auth} from "../../firebase";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [signInWithEmailAndPassword, user, error] = useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle] = useSignInWithGoogle(auth, provider);
     const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
 
     const forgotPassword = (e) => {

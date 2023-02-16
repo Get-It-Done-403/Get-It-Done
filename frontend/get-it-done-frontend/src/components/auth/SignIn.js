@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { auth, provider } from "../../firebase";
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import {Link} from "react-router-dom";
@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [signInWithEmailAndPassword, user, error] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle] = useSignInWithGoogle(auth, provider);
 
     const handleSignIn = (e) => {
@@ -20,11 +20,6 @@ const SignIn = () => {
                 console.log(error);
             });
     };
-
-    const forgotPassword = (e) => {
-        e.preventDefault()
-        window.location = '/forgotpassword'
-    }
 
     const handleGoogleSignIn = (e) => {
         signInWithGoogle()

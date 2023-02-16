@@ -3,12 +3,11 @@ import {auth, provider} from "../../firebase";
 import {useCreateUserWithEmailAndPassword, useSignInWithGoogle} from "react-firebase-hooks/auth";
 import "../../css/mainCSS.css"
 import {Link} from "react-router-dom";
-import {Redirect} from "react-router-dom";
 
 const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [createUserWithEmailAndPassword, user, error] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
     const [signInWithGoogle] = useSignInWithGoogle(auth, provider);
 
     const handleSignUp = (e) => {

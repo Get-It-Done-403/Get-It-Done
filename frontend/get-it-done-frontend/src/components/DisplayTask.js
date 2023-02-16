@@ -1,13 +1,13 @@
 import "../css/mainCSS.css";
-import React, {useEffect} from "react";
+import React from "react";
 
 function DisplayTask(props) {
 
     return (
         <div>
             {props.tasks && props.tasks.map(singleTask => (
-                singleTask.isCompleted === props.completedBool && (singleTask.dueDate.substring(0,10) === props.todayDate.toISOString().substring(0,10)) === props.todayBool
-                && (new Date(props.todayDate.toISOString().substring(0,10)) > new Date(singleTask.dueDate.substring(0,10))) === props.overdueBool ?
+                (singleTask.isCompleted).toString() === props.completedBool && (singleTask.dueDate.substring(0,10) === props.todayDate.toISOString().substring(0,10)).toString() === props.todayBool
+                && (new Date(props.todayDate.toISOString().substring(0,10)) > new Date(singleTask.dueDate.substring(0,10))).toString() === props.overdueBool ?
                 props.searchTask === "" ?
 
                 <div key={singleTask.tid}>

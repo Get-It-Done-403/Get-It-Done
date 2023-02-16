@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar";
 
 function CalendarPage() {
     const monthNames = [{monthName: "January", days: 31}, {monthName: "February", days: 28}, {monthName: "March", days: 31}, {monthName: "April", days: 30}, {monthName: "May", days: 30}, {monthName: "June", days: 30}, {monthName: "July", days: 31}, {monthName: "August", days: 31}, {monthName: "September", days: 30}, {monthName: "October", days: 31}, {monthName: "November", days: 30}, {monthName: "December", days: 31}];
-    const testArray = Array(31).fill(0);
+    // const testArray = Array(31).fill(0,31);
     const currentMonthName = monthNames[new Date().getMonth()].monthName;
     // const days = monthNames[new Date().getMonth()].days;
     const currentYear = new Date().getFullYear();
@@ -28,11 +28,11 @@ function CalendarPage() {
                     </div>
 
                     <div className={"grid-cols-7 grid-rows-5 grid border-r-2 border-black border-b-2"}>
-                        {testArray && testArray.map(item => (
-                            <div className={"singleDayBox"}>
-
-                            </div>
-                        ))}
+                        {/*{testArray && testArray.map(item => (*/}
+                        {/*    <div key={item} className={"singleDayBox"}>*/}
+                        {/*        {item}*/}
+                        {/*    </div>*/}
+                        {/*))}*/}
                     </div>
                 </div>
             </div>
