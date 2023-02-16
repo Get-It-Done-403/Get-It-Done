@@ -21,15 +21,20 @@ import ProfilePage from "./pages/ProfilePage";
 function App() {
     const [authUser, setAuthUser] = useState(null);
     const [user, loading, error] = useAuthState(auth);
+    const [username, setUsername] = useState("");
 
     useEffect(() => {
         if (user) {
             setAuthUser(user);
+
         } else {
             setAuthUser(null);
         }
 
     }, [user]);
+
+
+
 
     const userSignOut = () => {
         auth.signOut().then(() => {
@@ -37,12 +42,14 @@ function App() {
             console.log("sign out successful");
         }).catch(error => console.log(error));
     }
+
+
     return (
                 authUser ?
                     <Router>
-                        <Header/>
+                        <Header userEmail={authUser.email}/>
                         <Routes>
-                            <Route path="/" element={<HomePageFlow userEmail={authUser.email}/>}/>
+                            <Route path="/" element={<HomePageFlow userEmail={authUser.email} username={username}/>}/>
                             <Route path="/calendar" element={<CalendarPage/>}/>
                             {/*<Route path="/settings" element={<AddTask/>}/>*/}
                             <Route path="/profile" element={<ProfilePage userEmail={authUser.email} signOut={userSignOut}/>}/>
@@ -52,8 +59,8 @@ function App() {
                 </Router> :
                     <Router>
                         <Routes>
-                            <Route path={"/"} element={<SignUp/>}/>
-                            <Route path={"/signin"} element={<SignIn/>}/>
+                            <Route path={"/"} element={<SignIn/>}/>
+                            <Route path={"/signup"} element={<SignUp/>}/>
                         </Routes>
                     </Router>
     );

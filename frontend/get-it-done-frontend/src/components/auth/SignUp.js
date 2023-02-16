@@ -27,8 +27,8 @@ const SignUp = () => {
         signInWithGoogle()
             .then((userCredentials) => {
                 console.log(userCredentials)
-                setEmail(userCredentials.user.email)
-                localStorage.setItem("email", userCredentials.user.email)
+                // setEmail(userCredentials.user.email)
+                // localStorage.setItem("email", userCredentials.user.email)
                 window.location = '/'
             })
             .catch((error) => {
@@ -88,11 +88,13 @@ const SignUp = () => {
                     min-width: 300px;
                     max-width: 500px;
                     max-height: 450px;
+                    background-color: rgb(99, 120, 159);
                     justify-content: center;
                     align-items: center;
                     align-self: center;
                     font-size: 24px;
-                    border-radius: 6px;
+                    border-top-left-radius: 6px;
+                    border-top-right-radius: 6px;
                 }`}
             </style>
         </div>

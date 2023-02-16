@@ -20,7 +20,7 @@ public class Task {
     private int hoursToComplete;
     private boolean isCompleted;
 
-    public Task(final String uid, final String title, final String dueDate, final int hoursToComplete) {
+    public Task(final String title, final String dueDate, final int hoursToComplete) {
         this.title = title;
         this.dueDate = dueDate;
         this.hoursToComplete = hoursToComplete;
@@ -29,7 +29,7 @@ public class Task {
     }
 
 
-    public Task(final String uid, final String title,
+    public Task(final String title,
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute,
                 final int hoursToComplete) {
         Date date = new Date(year, month, dayOfMonth, hour, minute);
@@ -42,7 +42,7 @@ public class Task {
         this.tid = java.util.UUID.randomUUID().toString();
     }
 
-    public Task(final String uid, final String title,
+    public Task(final String title,
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute) {
         Date date = new Date(year, month, dayOfMonth, hour, minute);
         this.title = title;

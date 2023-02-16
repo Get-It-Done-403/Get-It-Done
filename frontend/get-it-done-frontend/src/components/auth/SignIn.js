@@ -25,7 +25,7 @@ const SignIn = () => {
         signInWithGoogle()
             .then((userCredentials) => {
                 console.log(userCredentials)
-                setEmail(userCredentials.user.email)
+                // setEmail(userCredentials.user.email)
                 // localStorage.setItem("email", userCredentials.user.email)
                 window.location = '/'
             })
@@ -64,7 +64,7 @@ const SignIn = () => {
                     {/*<Link to={"/"} className={"mb-2 text-[#14509F]"}> Forgot Password? </Link>*/}
                     <button  className={"bg-[#90B1EE] rounded-[100px] w-[250px] text-[20px] p-3 mb-2"} onClick={handleGoogleSignIn}> SIGN IN WTH GOOGLE </button>
 
-                    <div className={"flex ml-2"}> Don't have an account? <Link to={"/"} className={"ml-4 text-[#14509F] font-medium"}> Sign Up</Link> </div>
+                    <div className={"flex ml-2"}> Don't have an account? <Link to={"/signup"} className={"ml-4 text-[#14509F] font-medium"}> Sign Up</Link> </div>
 
                 </div>
             </div>
@@ -80,7 +80,7 @@ const SignIn = () => {
                     color: white;
                     font-family: "Light";
                 }
-                .signInBackground{
+                .signUpBackground{
                     background-color: rgba(100, 125, 172, 100);
                     font-family: "Light", "Serif";
                     min-height: 100vh;
@@ -88,7 +88,7 @@ const SignIn = () => {
                     flex-direction: column;
                     flex: 1;
                 }
-                .SignInLogo {
+                .SignUpLogo {
                     padding: 5px;
                     display: flex;
                     flex: .1;
@@ -96,11 +96,13 @@ const SignIn = () => {
                     min-width: 300px;
                     max-width: 500px;
                     max-height: 450px;
+                    background-color: rgb(99, 120, 159);
                     justify-content: center;
                     align-items: center;
                     align-self: center;
                     font-size: 24px;
-                    border-radius: 6px;
+                    border-top-left-radius: 6px;
+                    border-top-right-radius: 6px;
                 }`}
             </style>
         </div>
