@@ -41,9 +41,24 @@
     - Make sure the user only needs to log into google once to use the google calendar api
     - Make tests for schedule service
 * Mitchell Ly
-    * Goals from last week:
-    * Progress and Issues: 
-    * Plans and Goals: 
+  * Goals from last week:
+    - Have login page designed and implemented along with the backend
+    - Add more tests
+    - Add functional buttons that actually do stuff now  
+  * Progress and Issues: 
+    - Connected Add Task to backend
+    - Connected Edit Task to backend
+    - Connected Get Tasks to backend 
+    - Added search functionality 
+    - Connected username to backend and change username 
+    - Added signin auth with email and google 
+    - Connecting to backend was really hard at first, we kept accidently maxing out our database 
+    - Fixed all ESLINT warnings in the code 
+    - Made a lot more code reusable by putting them in componenets 
+  * Plans and Goals: 
+    - Fix a couple of minor issues with the backend 
+    - Imrpove front end visibility and usability 
+    - Add settings page and calendar page   
 * Sofia Barry
     * Goals from last week:
       - Find an alternative for "date" field data type compatible with Firebase
