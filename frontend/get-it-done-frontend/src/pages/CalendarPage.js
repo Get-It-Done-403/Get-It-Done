@@ -27,10 +27,10 @@ function CalendarPage() {
                         <div className={"saturdayBox"}>Saturday</div>
                     </div>
 
-                    <div className={"grid-cols-7 grid-rows-5 grid border-r-2 border-black"}>
+                    <div className={"grid-cols-7 grid-rows-5 grid border-r-2 border-black border-b-2"}>
                         {testArray && testArray.map(item => (
                             <div className={"singleDayBox"}>
-                                test
+
                             </div>
                         ))}
                     </div>

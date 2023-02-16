@@ -17,7 +17,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "./firebase";
 import ProfilePage from "./pages/ProfilePage";
 import ForgotPassword from "./components/auth/ForgotPassword";
-
+import SettingsPage from "./pages/SettingsPage";
 
 function App() {
     const [authUser, setAuthUser] = useState(null);
@@ -54,8 +54,10 @@ function App() {
                             <Route path="/calendar" element={<CalendarPage/>}/>
                             {/*<Route path="/settings" element={<AddTask/>}/>*/}
                             <Route path="/profile" element={<ProfilePage userEmail={authUser.email} signOut={userSignOut}/>}/>
-                            <Route path="/signin" element={<SignIn/>}/>
-                            <Route path="/signup" element={<SignUp/>}/>
+                            {/*<Route path="/signin" element={<SignIn/>}/>*/}
+                            {/*<Route path="/signup" element={<SignUp/>}/>*/}
+                            <Route path="/settings" element={<SettingsPage/>}/>
+
                         </Routes>
                 </Router> :
                     <Router>
