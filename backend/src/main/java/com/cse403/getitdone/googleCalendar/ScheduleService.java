@@ -103,14 +103,17 @@ public class ScheduleService {
 
             EventDateTime startDateTime = new EventDateTime()
                     .setDateTime(new DateTime(entry.getStartDate()))
-                    .setTimeZone(userTimeZone.toString());
+                    .setTimeZone(userTimeZone.getID());
 
             EventDateTime endStartDate = new EventDateTime()
                     .setDateTime(new DateTime(entry.getEndDate()))
-                    .setTimeZone(userTimeZone.toString());
+                    .setTimeZone(userTimeZone.getID());
 
             event.setStart(startDateTime);
             event.setEnd(endStartDate);
+            System.out.println(startDateTime);
+            System.out.println(endStartDate);
+
             String calendarId = "primary";
             // event created
             service.events().insert(calendarId, event).execute();
