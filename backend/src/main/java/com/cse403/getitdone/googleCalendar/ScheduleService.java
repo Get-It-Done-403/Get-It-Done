@@ -2,6 +2,7 @@ package com.cse403.getitdone.googleCalendar;
 
 import com.cse403.getitdone.task.Task;
 import com.cse403.getitdone.utils.CalendarEntry;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -39,6 +40,7 @@ public class ScheduleService {
     static {
         try {
             HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+
         } catch (GeneralSecurityException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -146,8 +148,12 @@ public class ScheduleService {
         // get the time zone of the user
         TimeZone userTimeZone = TimeZone.getDefault();
         ZoneId zone = ZoneId.of(userTimeZone.getID());
+        if (items == null) {
+            firstStartDate = new DateTime(System.currentTimeMillis());
+        } else {
+            firstStartDate = items.get(0).getStart().getDateTime();
+        }
 
-        firstStartDate = items.get(0).getStart().getDateTime();
         System.out.println(firstStartDate);
         for (Event item : items) {
             System.out.println(item);
@@ -167,6 +173,7 @@ public class ScheduleService {
             // create new calendar entry and add to the timeslot
 
             CalendarEntry scheduledEvent = new CalendarEntry(tid, startDate.toString(), item.getEnd().getDateTime().toString());
+            System.out.println(timeSlots.length);
             System.out.println(timeSlots.length - (int) index);
             timeSlots[timeSlots.length - (int) index].add(scheduledEvent);
         }
