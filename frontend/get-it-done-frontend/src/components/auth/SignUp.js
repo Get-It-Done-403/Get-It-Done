@@ -27,8 +27,8 @@ const SignUp = () => {
         signInWithGoogle()
             .then((userCredentials) => {
                 console.log(userCredentials)
-                setEmail(userCredentials.user.email)
-                localStorage.setItem("email", userCredentials.user.email)
+                // setEmail(userCredentials.user.email)
+                // localStorage.setItem("email", userCredentials.user.email)
                 window.location = '/'
             })
             .catch((error) => {
