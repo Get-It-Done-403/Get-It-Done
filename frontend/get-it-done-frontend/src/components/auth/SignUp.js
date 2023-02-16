@@ -72,7 +72,7 @@ const SignUp = () => {
                             <button  className={"bg-[#90B1EE] mt-10 rounded-[100px] text-[20px] p-3"} type={"submit"}> SIGN UP </button>
                         </form>
                     <button  className={"bg-[#90B1EE] rounded-[80px] w-[250px] text-[20px] p-3 mb-2"} onClick={handleGoogleSignIn}> SIGN UP WTH GOOGLE </button>
-                    <div className={"flex"}> Already have an account? <Link to={"signin"} className={"ml-4 text-[#14509F] font-medium"}> Sign In</Link> </div>
+                    <div className={"flex"}> Already have an account? <Link to={"/"} className={"ml-4 text-[#14509F] font-medium"}> Sign In</Link> </div>
                 </div>
             </div>
 
@@ -97,7 +97,8 @@ const SignUp = () => {
                     display: flex;
                     flex: .1;
                     margin-top: 50px;
-                    min-width: 300px;
+                    width: 500px;
+                    min-width: 500px;
                     max-width: 500px;
                     max-height: 450px;
                     background-color: rgb(99, 120, 159);

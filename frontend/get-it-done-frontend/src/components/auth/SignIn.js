@@ -87,7 +87,7 @@ const SignIn = () => {
                     color: white;
                     font-family: "Light";
                 }
-                .signUpBackground{
+                .signInBackground{
                     background-color: rgba(100, 125, 172, 100);
                     font-family: "Light", "Serif";
                     min-height: 100vh;
@@ -95,11 +95,12 @@ const SignIn = () => {
                     flex-direction: column;
                     flex: 1;
                 }
-                .SignUpLogo {
+                .SignInLogo {
                     padding: 5px;
                     display: flex;
                     flex: .1;
                     margin-top: 50px;
+                    width: 500px;
                     min-width: 300px;
                     max-width: 500px;
                     max-height: 450px;

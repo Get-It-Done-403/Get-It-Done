@@ -1,6 +1,7 @@
 package com.cse403.getitdone.googleCalendar;
 
 import com.cse403.getitdone.task.Task;
+import com.cse403.getitdone.task.TaskService;
 import com.cse403.getitdone.utils.CalendarEntry;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -9,12 +10,17 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.core.ApiFuture;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.cloud.FirestoreClient;
 import org.checkerframework.checker.units.qual.C;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 
 import javax.sound.midi.SysexMessage;
@@ -25,12 +31,15 @@ import java.time.*;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.concurrent.ExecutionException;
 
 import static com.cse403.getitdone.googleCalendar.GoogleCal.APPLICATION_NAME;
 import static com.cse403.getitdone.googleCalendar.GoogleCal.JSON_FACTORY;
 
 public class ScheduleService {
-
+    public static final String COL_NAME="users";
+    public static final String SUBCOL_NAME="tasks";
+    public static final String SUBSUBCOL_NAME="entries";
     private static ArrayList<CalendarEntry>[] timeSlots;
     private static String tid;
     private static DateTime firstStartDate;
@@ -49,7 +58,7 @@ public class ScheduleService {
     }
 
 
-    public static List<CalendarEntry> scheduleTask(String uid, final Task task) throws GeneralSecurityException, IOException {
+    public static List<CalendarEntry> scheduleTask(String uid, final Task task) throws GeneralSecurityException, IOException, ExecutionException, InterruptedException {
 
         //scheduleTask() from ScheduleService
 
@@ -58,6 +67,7 @@ public class ScheduleService {
         // 3. add events to calendar API
         // 4. Send those entries to db   task -> entries (this would call a function from CalendarService)
 
+        TaskService.saveTaskDetails(uid, task);
 
         service =
                 new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, GoogleCal.getCredentials(HTTP_TRANSPORT))
@@ -167,7 +177,7 @@ public class ScheduleService {
             ZonedDateTime zonedStartTime = getZonedDateTime(localStartDate);
 
             // note that index 0 means the next day, not today.
-            long index = ChronoUnit.DAYS.between(zonedStartTime, zonedDateTime) + 1;
+            long index = ChronoUnit.DAYS.between(zonedStartTime, zonedDateTime);
             // placeholder tid for tasks that we got from the api
             String tid = "Pre-existing task";
             // create new calendar entry and add to the timeslot
@@ -196,7 +206,8 @@ public class ScheduleService {
 
         Random random = new Random();
         // get a random number to represent a time between 9:00 and 20:00
-        int defaultTime = random.nextInt(12) + 9;
+//        int defaultTime = random.nextInt(12) + 9;
+        int defaultTime = 16;
         // construct a Date object for the default time
         // first find a non-null element in timeslot
 
