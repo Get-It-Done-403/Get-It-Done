@@ -16,6 +16,7 @@ import React, {useEffect, useState} from "react";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "./firebase";
 import ProfilePage from "./pages/ProfilePage";
+import ForgotPassword from "./components/auth/ForgotPassword";
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
                         <Routes>
                             <Route path={"/"} element={<SignIn/>}/>
                             <Route path={"/signup"} element={<SignUp/>}/>
+                            <Route path={"/forgotpassword"} element={<ForgotPassword/>}/>
                         </Routes>
                     </Router>
     );
