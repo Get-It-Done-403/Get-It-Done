@@ -39,10 +39,10 @@ const SignIn = () => {
     // })
 
     return (
-        <div className={"pageBackground"}>
+        <div className={"signInBackground"}>
+            <img className={"SignInLogo"} src={require("./GetItDone.png")} alt="Logo"/>
             <div className={"module"}>
-                <div className={"logoHeader"}> Get It Done </div>
-                <div className={"bg-[#CCCCCC] flex flex-1 flex-col pl-10 pr-10 pt-10 pb-5 rounded-bl-md rounded-br-md"}>
+                <div className={"bg-[#F1F8FF] flex flex-1 flex-col pl-10 pr-10 pt-10 pb-5 rounded-md"}>
                     <div className={"text-[60px] text-center"}> Sign In </div>
                     <form onSubmit={handleSignIn} className={"flex flex-1 flex-col mt-6"}>
                         <input
@@ -59,10 +59,10 @@ const SignIn = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <button  className={"bg-[#63789F] mt-10 rounded-[100px] text-[20px] p-3"} type={"submit"}> SIGN IN </button>
+                        <button  className={"bg-[#90B1EE] mt-10 rounded-[100px] text-[20px] p-3"} type={"submit"}> SIGN IN </button>
                     </form>
                     {/*<Link to={"/"} className={"mb-2 text-[#14509F]"}> Forgot Password? </Link>*/}
-                    <button  className={"bg-[#63789F] rounded-[100px] w-[250px] text-[20px] p-3 mb-2"} onClick={handleGoogleSignIn}> SIGN IN WTH GOOGLE </button>
+                    <button  className={"bg-[#90B1EE] rounded-[100px] w-[250px] text-[20px] p-3 mb-2"} onClick={handleGoogleSignIn}> SIGN IN WTH GOOGLE </button>
 
                     <div className={"flex ml-2"}> Don't have an account? <Link to={"/signup"} className={"ml-4 text-[#14509F] font-medium"}> Sign Up</Link> </div>
 
@@ -73,19 +73,30 @@ const SignIn = () => {
 
 
             <style jsx> {`
+                
                 .header {
                     background-color: rgba(225, 225, 225, 16);
                     display: flex;
                     color: white;
                     font-family: "Light";
                 }
-                .logoHeader {
+                .signInBackground{
+                    background-color: rgba(100, 125, 172, 100);
+                    font-family: "Light", "Serif";
+                    min-height: 100vh;
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                }
+                .SignInLogo {
                     padding: 5px;
                     display: flex;
-                    min-width: 500px;
-                    max-width: 500px;
                     flex: .1;
-                    // margin-top: 50px;
+                    margin-top: 50px;
+                    width: 500px;
+                    min-width: 300px;
+                    max-width: 500px;
+                    max-height: 450px;
                     background-color: rgb(99, 120, 159);
                     justify-content: center;
                     align-items: center;

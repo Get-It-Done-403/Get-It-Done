@@ -48,9 +48,20 @@
       - Come up with an action plan for the next few days
       - Revist user cases that have not been implemented yet and assign todos to board accordingly
 * Aidan Petta
-    * Goals from last week:
+    * Goals from last week: 
+        - Finish calendar
+        - work on firebase auth with frontend
+        - create the task algorithm
     * Progress and Issues: 
+        - Firebase Auth is working and reset password is working
+        - Task algoritm is done
+        - google calendar api is implemented
+        - Small bug cases for the google calendar api
+        - added the ability to have a username
     * Plans and Goals: 
+        - Fix remaining bugs
+        - help frontend with styling
+        - finish security details and security implementation with spring boot
 * Lance
     * Goals from last week:
     * Progress and Issues:
