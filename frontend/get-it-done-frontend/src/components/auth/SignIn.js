@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { auth, provider } from "../../firebase";
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import {Link} from "react-router-dom";
+import {getAuth, sendPasswordResetEmail} from "firebase/auth";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
@@ -33,10 +34,16 @@ const SignIn = () => {
                 console.log(error)
             })
     }
-    //
-    // useEffect(() => {
-    //     setEmail(localStorage.getItem('email'))
-    // })
+
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+        .then(() => {
+            window.alert('Password reset email sent, check your inbox.');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
 
     return (
         <div className={"signInBackground"}>

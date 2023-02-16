@@ -4,6 +4,8 @@ import {useCreateUserWithEmailAndPassword, useSignInWithGoogle} from "react-fire
 import "../../css/mainCSS.css"
 import {Link} from "react-router-dom";
 import {Redirect} from "react-router-dom";
+import {getAuth, sendPasswordResetEmail} from "firebase/auth";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const SignUp = () => {
     const [email, setEmail] = useState("");
@@ -35,6 +37,16 @@ const SignUp = () => {
                 console.log(error)
             })
     }
+
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+        .then(() => {
+            window.alert('Password reset email sent, check your inbox.');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
 
     return (
         <div className={"signUpBackground"}>
