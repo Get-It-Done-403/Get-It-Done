@@ -1,12 +1,12 @@
 # User Manual
 
 ## Table of Contents
-* [Description](https://github.com/Get-It-Done-403/Get-It-Done/edit/main/documentation/user-manual.md#description)
-* [How to install the software](https://github.com/Get-It-Done-403/Get-It-Done/edit/main/documentation/user-manual.md#how-to-install-the-software)
-* [How to run the software](https://github.com/Get-It-Done-403/Get-It-Done/edit/main/documentation/user-manual.md#how-to-run-the-software)
-* [How to use the software](https://github.com/Get-It-Done-403/Get-It-Done/edit/main/documentation/user-manual.md#how-to-use-the-software)
-* [How to report a bug](https://github.com/Get-It-Done-403/Get-It-Done/edit/main/documentation/user-manual.md#how-to-report-a-bug)
-* [Known bugs](https://github.com/Get-It-Done-403/Get-It-Done/edit/main/documentation/user-manual.md#known-bugs)
+* [Description](https://github.com/Get-It-Done-403/Get-It-Done/main/documentation/user-manual.md#description)
+* [How to install the software](https://github.com/Get-It-Done-403/Get-It-Done/main/documentation/user-manual.md#how-to-install-the-software)
+* [How to run the software](https://github.com/Get-It-Done-403/Get-It-Done/main/documentation/user-manual.md#how-to-run-the-software)
+* [How to use the software](https://github.com/Get-It-Done-403/Get-It-Done/main/documentation/user-manual.md#how-to-use-the-software)
+* [How to report a bug](https://github.com/Get-It-Done-403/Get-It-Done/main/documentation/user-manual.md#how-to-report-a-bug)
+* [Known bugs](https://github.com/Get-It-Done-403/Get-It-Done/main/documentation/user-manual.md#known-bugs)
 
 ## Description
 What does the system do and why would a user want to use it.
