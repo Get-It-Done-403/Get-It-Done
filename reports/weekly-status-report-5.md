@@ -88,5 +88,17 @@
         - finish security details and security implementation with spring boot
 * Lance
     * Goals from last week:
+       - Set up sign up
+       - set up sign in
+       - set up password reset
     * Progress and Issues:
+       - Finished sign up
+       - Finishd sign in
+       - created password reset
+       - record demo video
+       - Struggled setting up firebase auth
+       - Did not have time to write many frontend tests 
     * Plans and Goals:
+       - Create more comprehensive frontend testing
+       - Help with scheduling algorithm
+       - Help with documenation
