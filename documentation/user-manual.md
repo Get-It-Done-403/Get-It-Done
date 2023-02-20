@@ -10,6 +10,7 @@
 
 ## Description
 What does the system do and why would a user want to use it.
+Get It Done is a productivity web application designed to help people to keep schedule working sessions on their calendar corresponding to larger projects of assignments. This is different to any other 
 
 ## How to install the software
 If your system has prerequisites (e.g., tools, libraries, emulators, third-party applications, etc.), your instructions should list all of them and indicate how to install and configure them. Make sure to indicate what specific version requirements these prerequisites must satisfy. If running the system requires the installation of, e.g., a virtual machine, a database, or an emulator, make sure to provide clear step-by-step instructions.
