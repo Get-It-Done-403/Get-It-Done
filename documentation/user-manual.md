@@ -47,3 +47,12 @@ Fill out the following Google Form link.
 
 ## Known bugs
 Known bugs or limitations should be documented in the bug tracker. A user testing the implemented use case(s) should not encounter trivial bugs (e.g., NPEs) or a large number of bugs that are unlisted in your bug tracker.
+
+### Bug: Schedule overlapping
+* Occurs when a user has consecutive events planned back to back.
+* The algorithm cannot detect the second event and will try to book the new event at the same time as the second event.
+* The scheduling algorithm is being improved to handle edge cases like this.
+
+### Limitation: Missing delete/edit features
+* Currently, the application cannot edit or delete tasks from the user's Google Calendar.
+* When a user edits the task, the soon to be implemented edit algorithm should first delete the calendar entries and run the scheduling algorithm again to adjust to the changes.
