@@ -23,6 +23,27 @@ You can assume that your user is familiar with your particular platform (e.g., u
 
 ## How to report a bug
 This should include not just the mechanics (a pointer to your issue tracker), but also what information is needed. You can set up a bug-report template in your issue tracker, or you can reference a resource about how to write a good bug report. Here is an example for bug reporting guidelines.
+### For each bug make a separate report
+Therefore, an effective bug report will be completed for each issue.
+
+### Details you need
+* How would you describe the bug using no more than 20 words?
+* Explain the problems and not your suggested solution
+* Make sure your software is up-to date with the required version for the application 
+* Write the precise steps to reproduce this error
+    * Indicate whether you can reproduce the bug every time, occasionally, or not at all
+    * Describe how you interact with the software up until the bug
+    * After executing these steps describe the result, vs the expected result
+* Expected and Actual result
+* Severity/Priority
+### For specific bugs or crash bugs
+* If you are running into a crashbug, include the stack trace that you received
+* Include an error code if applicable _Ex : 404, 400, 505_
+
+### To report the bug
+Fill out the following Google Form link.
+[Bug Report Form](https://forms.gle/jw5RDFBB5aZ5PaqY8)
+
 
 ## Known bugs
 Known bugs or limitations should be documented in the bug tracker. A user testing the implemented use case(s) should not encounter trivial bugs (e.g., NPEs) or a large number of bugs that are unlisted in your bug tracker.
