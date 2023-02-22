@@ -39,4 +39,4 @@ When adding new tests for the backend the tests should be added into of "TheFile
 For frontend tests, they should all be stored in the src/tests directory as "PageName".test.js for whatever page you are testing.
 
 ## How to build a release of the software
-To release a new build of a software, all that has to be done is to ensure that the new build passes all the tests and then to commit and merge it with the main branch which will also automatically push that new version to our website provider as well. 
+To release a new build of a software, the main branch must be up to date, the GetitDoneApplication script must be run to start the server, and npm prod must be ran in the get-it-done-frontend directory in the terminal
