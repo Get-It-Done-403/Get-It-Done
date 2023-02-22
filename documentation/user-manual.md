@@ -51,3 +51,9 @@ Fill out the following Google Form link.
 ### Limitation: Missing delete/edit features
 * Currently, the application cannot edit or delete tasks from the user's Google Calendar.
 * When a user edits the task, the soon to be implemented edit algorithm should first delete the calendar entries and run the scheduling algorithm again to adjust to the changes.
+
+### Adding/Deleting Task not showing 
+* Currently, the newly added task or deleted task does not appear right away until the next page refresh.
+
+### Page Loading 
+* Currently, sometimes during a page load the sign in page pops up first the first few seconds.
