@@ -12,7 +12,9 @@
 If your system uses multiple repositories or submodules, provide clear instructions for how to obtain all relevant sources.
 
 ## The layout of your directory structure
-What do the various directories (folders) contain, and where to find source files, tests, documentation, data files, etc.
+Our root folder is mainly split up into three different parts, the frontend folder, the backend folder, and everything else that is needed for the app to actually run and documentation. 
+The frontend folder contains everything that is related towards the website and our react app and tests for the react app too. The source folder for out frontend folder is split into 4 main parts which are the components, css, pages, and tests. All of our tests written with JEST are contained in our tests folder, all of our website pages are contained in pages, any code that is used multiple times is added into to components for better reusability and modularity, and anything styling related is stored in our css folder.
+Our backend folder is split into two main different parts, which is all of our springboot code stored in main and all of our tests for the springboot code stored in test/java. For every new API endpoint feature, it is stored in main/java/com/cse403/getitdone that is stored in its own folder that is usually made up of its own controller and service user. For every new endpoint, it has it's own tests that is stored in the tests folder all written with JUNIT tests.
 
 ## How to build the software
 Provide clear instructions for how to use your project’s build system to build all system components.
