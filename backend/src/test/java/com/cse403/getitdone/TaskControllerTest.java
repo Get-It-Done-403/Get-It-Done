@@ -95,7 +95,7 @@ public class TaskControllerTest {
                 .encode()
                 .toUriString();
 
-        Task task = new Task("test add endpoint", "2024-01-01T10:30", 5);
+        Task task = new Task("test add endpoint", "2024-01-01T10:30", "description text", 5);
         this.tid = task.getTid();
 
         HttpHeaders headers = new HttpHeaders();
