@@ -21,7 +21,7 @@ How to start up the system?
 You can assume that your user is familiar with your particular platform (e.g., use of a Web browser, desktop applications, or mobile applications). For missing functionality, your documentation should simply indicate that this functionality is work in progress.
 
 ## How to report a bug
-This should include not just the mechanics (a pointer to your issue tracker), but also what information is needed. You can set up a bug-report template in your issue tracker, or you can reference a resource about how to write a good bug report. Here is an example for bug reporting guidelines.
+
 ### For each bug make a separate report
 Therefore, an effective bug report will be completed for each issue.
 
