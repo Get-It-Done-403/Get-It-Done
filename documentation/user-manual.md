@@ -11,9 +11,6 @@
 ## Description
 Get It Done is a productivity web application designed to help people schedule working sessions on their calendars corresponding to larger projects or assignments. This is different from any other calendar or productivity app because it breaks down tasks that are a big time commitment into smaller, more manageable sessions to help users complete their work in a timely manner and without the overhead of manually planning their schedule.
 
-## How to install the software
-If your system has prerequisites (e.g., tools, libraries, emulators, third-party applications, etc.), your instructions should list all of them and indicate how to install and configure them. Make sure to indicate what specific version requirements these prerequisites must satisfy. If running the system requires the installation of, e.g., a virtual machine, a database, or an emulator, make sure to provide clear step-by-step instructions.
-
 ## How to run the software
 
 1. Open your prefered browser
@@ -48,7 +45,6 @@ Fill out the following Google Form link.
 
 
 ## Known bugs
-Known bugs or limitations should be documented in the bug tracker. A user testing the implemented use case(s) should not encounter trivial bugs (e.g., NPEs) or a large number of bugs that are unlisted in your bug tracker.
 
 ### Bug: Schedule overlapping
 * Occurs when a user has consecutive events planned back to back.
@@ -58,3 +54,9 @@ Known bugs or limitations should be documented in the bug tracker. A user testin
 ### Limitation: Missing delete/edit features
 * Currently, the application cannot edit or delete tasks from the user's Google Calendar.
 * When a user edits the task, the soon to be implemented edit algorithm should first delete the calendar entries and run the scheduling algorithm again to adjust to the changes.
+
+### Adding/Deleting Task not showing 
+* Currently, the newly added task or deleted task does not appear right away until the next page refresh.
+
+### Page Loading 
+* Currently, sometimes during a page load the sign in page pops up first the first few seconds.
