@@ -12,7 +12,10 @@
 Get It Done is a productivity web application designed to help people schedule working sessions on their calendars corresponding to larger projects or assignments. This is different from any other calendar or productivity app because it breaks down tasks that are a big time commitment into smaller, more manageable sessions to help users complete their work in a timely manner and without the overhead of manually planning their schedule.
 
 ## How to run the software
-How to start up the system?
+
+1. Open your prefered browser
+2. Navigate to https://GetItDone.com
+3. Refer to [How to use the software](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/documentation/user-manual.md#how-to-use-the-software)
 
 ## How to use the software
 You can assume that your user is familiar with your particular platform (e.g., use of a Web browser, desktop applications, or mobile applications). For missing functionality, your documentation should simply indicate that this functionality is work in progress.
