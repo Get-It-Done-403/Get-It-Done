@@ -12,6 +12,7 @@
 * Finished the user and dev documentation
 #### Project Meeting Agenda:
 * Meet for the peer review
+* Discuss progress on assigned parts
 
 
 ### Plans and Goals:
@@ -37,19 +38,19 @@
     * Progress and Issues:
     * Plans and Goals:
 * Aidan Petta
-    * Goals from last week:
+    * Goals from last week: 
+      - Fix remaining bugs
+      - help frontend with styling
+      - finish security details and security implementation with spring boot
     * Progress and Issues: 
+      - Started security features with firebase, 
+      - Worked on fixing edge cases in the scheduling algorithm
+      - Issues with the delete function for google calendar
     * Plans and Goals: 
+      - Fix the delete function
+      - Update the security for firebase
+      - Finish up the scheduling algorithm
 * Lance
-  * Goals from last week:
-    - Create more comprehensive frontend testing
-    - Help with scheduling algorithm
-    - Help with documenation
-  * Progress and Issues:
-    - Created some front end tests but ran into issues due to lack of familiarity with frontend testing
-    - Assisted in user and developer manuals
-  * Plans and Goals:
-    - Update Home page UI to match new needs
-    - Finish front end tests
-    - Look into creating flexbox calendar
-    - Possibly help with scheduling algorithm
+    * Goals from last week:
+    * Progress and Issues:
+    * Plans and Goals:
