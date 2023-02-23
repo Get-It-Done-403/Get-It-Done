@@ -26,8 +26,15 @@
 
 * Tye Coleman
   * Goals from last week:
+    - Handle errors and edge cases in Schedule Service
+    - Make sure the user only needs to log into google once to use the google calendar api
+    - Make tests for schedule service
   * Progress and Issues:
+    - Designed and started implementing a new algorithm to schedule tasks which will be more efficient and handles all cases
+    - Added known bugs to the documentation
   * Plans and Goals:
+    - Finish implementing the new algorithnm
+    - Test Schedule Service for all possible cases
 * Mitchell Ly
     * Goals from last week:
     - Fix a couple of minor issues with the backend 
