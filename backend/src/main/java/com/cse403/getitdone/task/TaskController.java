@@ -37,8 +37,7 @@ public class TaskController {
             // 2. Break down task and create smaller block (CalendarEntry)
             // 3. add events to calendar API
             // 4. Send those entries to db   task -> entries
-//        taskService.saveTaskDetails(uid, task);
-
+        taskService.saveTaskDetails(uid, task);
         return ScheduleService.scheduleTask(uid, task);
     }
 
