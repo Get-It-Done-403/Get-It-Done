@@ -41,6 +41,15 @@
     * Progress and Issues: 
     * Plans and Goals: 
 * Lance
-    * Goals from last week:
-    * Progress and Issues:
-    * Plans and Goals:
+  * Goals from last week:
+    - Create more comprehensive frontend testing
+    - Help with scheduling algorithm
+    - Help with documenation
+  * Progress and Issues:
+    - Created some front end tests but ran into issues due to lack of familiarity with frontend testing
+    - Assisted in user and developer manuals
+  * Plans and Goals:
+    - Update Home page UI to match new needs
+    - Finish front end tests
+    - Look into creating flexbox calendar
+    - Possibly help with scheduling algorithm
