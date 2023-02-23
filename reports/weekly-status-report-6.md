@@ -27,16 +27,40 @@
 
 * Tye Coleman
   * Goals from last week:
+    - Handle errors and edge cases in Schedule Service
+    - Make sure the user only needs to log into google once to use the google calendar api
+    - Make tests for schedule service
   * Progress and Issues:
+    - Designed and started implementing a new algorithm to schedule tasks which will be more efficient and handles all cases
+    - Added known bugs to the documentation
   * Plans and Goals:
+    - Finish implementing the new algorithnm
+    - Test Schedule Service for all possible cases
 * Mitchell Ly
     * Goals from last week:
+    - Fix a couple of minor issues with the backend 
+    - Imrpove front end visibility and usability 
+    - Add settings page and calendar page   
     * Progress and Issues: 
+    - Updated documentation 
+    - Fixed small front end issues
+    - Found bugs and added them to the bug report
     * Plans and Goals: 
+    - Implement final UI 
+    - Fix trvial front end bugs 
+    - Add calendar page 
 * Sofia Barry
     * Goals from last week:
+      - Come up with an action plan for the next few days
+      - Revist user cases that have not been implemented yet and assign todos to board accordingly
     * Progress and Issues:
+      - Currently making changes to include a description field for Task
+      - Created documentation diretory and included user and developer manual files and outline
     * Plans and Goals:
+      - Complete changes related to description field
+      - Modify Task test to reflect change
+      - Modify Task Controller and Service to reflect controller
+      - Support Aidan and Tye with backend issues
 * Aidan Petta
     * Goals from last week: 
       - Fix remaining bugs
