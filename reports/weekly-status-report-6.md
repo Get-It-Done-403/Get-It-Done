@@ -34,8 +34,16 @@
     * Plans and Goals: 
 * Sofia Barry
     * Goals from last week:
+      - Come up with an action plan for the next few days
+      - Revist user cases that have not been implemented yet and assign todos to board accordingly
     * Progress and Issues:
+      - Currently making changes to include a description field for Task
+      - Created documentation diretory and included user and developer manual files and outline
     * Plans and Goals:
+      - Complete changes related to description field
+      - Modify Task test to reflect change
+      - Modify Task Controller and Service to reflect controller
+      - Support Aidan and Tye with backend issues
 * Aidan Petta
     * Goals from last week:
     * Progress and Issues: 
