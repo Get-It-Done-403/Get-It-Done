@@ -64,6 +64,10 @@ $ cd ../frontend/get-it-done-frontend
 $ npm start
 ```
 
+### How to use the software
+
+When the system is started the user will initially be greeted with a login page. In order to access the main features of the application the user must login. If the user does not have an account they must make an account and then login.
+
 ----------------------------------------
              
 ## Goals and Ideas
