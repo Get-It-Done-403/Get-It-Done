@@ -8,14 +8,19 @@
 * Complete user and developer documentation by Tuesday
 
 ### Progress and Issues:
-
+* Draft of algorithm complete, fixing edge cases and bugs
+* Finished the user and dev documentation
 #### Project Meeting Agenda:
-
+* Meet for the peer review
 
 
 ### Plans and Goals:
-
-
+* Fix delete function for google calendar
+* Update UI frontend
+* Fix edit function for tasks
+* Frontend tests
+* Complete the peer review as a team 
+* Implement firebase security
 
 ## Individual Contributions
 
