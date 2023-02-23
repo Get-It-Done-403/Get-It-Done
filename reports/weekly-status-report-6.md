@@ -30,8 +30,17 @@
   * Plans and Goals:
 * Mitchell Ly
     * Goals from last week:
+    - Fix a couple of minor issues with the backend 
+    - Imrpove front end visibility and usability 
+    - Add settings page and calendar page   
     * Progress and Issues: 
+    - Updated documentation 
+    - Fixed small front end issues
+    - Found bugs and added them to the bug report
     * Plans and Goals: 
+    - Implement final UI 
+    - Fix trvial front end bugs 
+    - Add calendar page 
 * Sofia Barry
     * Goals from last week:
       - Come up with an action plan for the next few days
