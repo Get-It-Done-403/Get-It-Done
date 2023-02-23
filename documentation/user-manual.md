@@ -18,7 +18,24 @@ Get It Done is a productivity web application designed to help people schedule w
 3. Refer to [How to use the software](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/documentation/user-manual.md#how-to-use-the-software)
 
 ## How to use the software
-You can assume that your user is familiar with your particular platform (e.g., use of a Web browser, desktop applications, or mobile applications). For missing functionality, your documentation should simply indicate that this functionality is work in progress.
+When the system is started the user will initially be greeted with a login page. In order to access the main features of the application the user must login. If the user does not have an account they must make an account and then login.
+
+#### Home Page
+Once the user is logged in their browser will navigate to that users home page where they can view todays tasks (remaining and completed). If a user wishes to create a new task for that day they can click the create new task button in the remaining tasks section where the browser will then navigate to the create task page. The user can also navigate between days by clicking the next and back butons in the upper right and upper left corner of the home page. Should the user need to find a specific task the home page allows you to search for a specific task. Simply type the name of your desired task in the search bar in the upper right hand corner of the web app. The upcoming tasks and overdue tasks are a work in progress.
+
+The user has the ability to navigate between the home page, calendar page, and settings page by clicking on their corresponding tabs in the sidebar left side of the web app. All pages will have this sidebar. Finally, the user can navigate to the profile page by clicking on their profile name at the top right of the web app. All pages will have this profile button.
+
+#### Calendar Page
+On the calendar page the user will be able to view their tasks in a calendar setting making them more visually digestible. From here they will be able to click on tasks and edit them or create new tasks if they like. However, this page is still a work in progress.
+
+#### Settings Page
+The settings page is still a work on progress.
+
+#### Profile Page
+On the profile page the user can reset their username by filling out the username form and clicking save. In addition, the user can sign out by clicking the sign out button.
+
+#### Task Creation page
+At the task creation page the user is able to create a task by filling out the task creation form. The user is able to create a name for the task, select a date and time the task will be completed on, and how long the task will take.
 
 ## How to report a bug
 

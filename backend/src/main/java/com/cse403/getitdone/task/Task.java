@@ -17,12 +17,14 @@ public class Task {
     private String tid;
     private String title;
     private String dueDate;
+    private String description;
     private int hoursToComplete;
     private boolean isCompleted;
 
-    public Task(final String title, final String dueDate, final int hoursToComplete) {
+    public Task(final String title, final String dueDate, final String description, final int hoursToComplete) {
         this.title = title;
         this.dueDate = dueDate;
+        this.description = description;
         this.hoursToComplete = hoursToComplete;
         this.isCompleted = false;
         this.tid = java.util.UUID.randomUUID().toString();
@@ -35,7 +37,7 @@ public class Task {
         Date date = new Date(year, month, dayOfMonth, hour, minute);
         this.title = title;
         this.dueDate = new DateTime(date).toStringRfc3339();
-        //        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+        this.description = description;
         this.hoursToComplete = hoursToComplete;
         this.isCompleted = false;
 
@@ -46,8 +48,8 @@ public class Task {
                 final int year, final int month, final int dayOfMonth, final int hour, final int minute) {
         Date date = new Date(year, month, dayOfMonth, hour, minute);
         this.title = title;
-//        this.dueDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
         this.dueDate = new DateTime(date).toStringRfc3339();
+        this.description = description;
         this.hoursToComplete = -1;
         this.isCompleted = false;
 
@@ -71,6 +73,14 @@ public class Task {
 
     public String getDueDate() {
         return dueDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
     public void setDueDate(final int year, final int month, final int dayOfMonth, final int hour, final int minute) {
