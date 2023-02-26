@@ -24,7 +24,7 @@ public class TaskService {
     public static final String SUBCOL_NAME="tasks";
     public static final String SUBSUBCOL_NAME="entries";
 
-    public String saveTaskDetails(final String uid, final Task task) throws InterruptedException, ExecutionException {
+    public static String saveTaskDetails(final String uid, final Task task) throws InterruptedException, ExecutionException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
 
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore
