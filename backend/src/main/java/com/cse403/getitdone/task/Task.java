@@ -118,6 +118,7 @@ public class Task {
             Task e = (Task) o;
             return this.title.equals(e.title)
                     && this.dueDate.equals(e.dueDate)
+                    && this.description.equals(e.description)
                     && this.hoursToComplete == e.hoursToComplete
                     && this.isCompleted == e.isCompleted;
         }
@@ -125,8 +126,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("Task [title=%s, dueDate=%s, hoursToComplete=%s, isCompleted]",
-                title, this.dueDate.toString(), hoursToComplete, isCompleted);
+        return String.format("Task [title=%s, dueDate=%s, description=%s, hoursToComplete=%s, isCompleted=%s]",
+                title, this.dueDate, description, hoursToComplete, isCompleted);
     }
 
 }

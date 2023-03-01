@@ -45,6 +45,7 @@ public class TaskControllerTest {
         responseObj.addProperty("tid", "f7cceca9-764d-4c74-b0d0-bdc67cffd7d7");
         responseObj.addProperty("title", "do not remove test");
         responseObj.addProperty("dueDate", "2023-02-15T14:53");
+        responseObj.addProperty("description", "description here");
         responseObj.addProperty("hoursToComplete", 2);
         responseObj.addProperty("isCompleted", false);
 
@@ -64,6 +65,7 @@ public class TaskControllerTest {
         responseObj.addProperty("tid", "f7cceca9-764d-4c74-b0d0-bdc67cffd7d7");
         responseObj.addProperty("title", "do not remove test");
         responseObj.addProperty("dueDate", "2023-02-15T14:53");
+        responseObj.addProperty("description", "description here");
         responseObj.addProperty("hoursToComplete", 2);
         responseObj.addProperty("isCompleted", false);
 
@@ -95,7 +97,7 @@ public class TaskControllerTest {
                 .encode()
                 .toUriString();
 
-        Task task = new Task("test add endpoint", "2024-01-01T10:30", "description text", 5);
+        Task task = new Task("test add endpoint", "2024-01-01T10:30", "description here", 5);
         this.tid = task.getTid();
 
         HttpHeaders headers = new HttpHeaders();
