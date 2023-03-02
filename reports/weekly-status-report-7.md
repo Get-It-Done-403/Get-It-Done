@@ -29,8 +29,14 @@
 
 * Tye Coleman
     * Goals from last week:
+      - Finish implementing the new algorithnm
+      - Test Schedule Service for all possible cases
     * Progress and Issues:
+      - Finished implemented the new algorithm
+      - Experiencing bugs for the newly implemented algorithm
     * Plans and Goals:
+      - Resolve the issues for the new algorithm
+      - Make sure the frontend and backend is connected smoohtly
 * Mitchell Ly
     * Goals from last week:
       - Implement final UI 
