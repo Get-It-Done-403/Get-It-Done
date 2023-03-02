@@ -31,8 +31,16 @@
     * Plans and Goals:
 * Mitchell Ly
     * Goals from last week:
+      - Implement final UI 
+      - Fix trvial front end bugs 
+      - Add calendar page 
     * Progress and Issues:
+      - Have to make other backend changes to implement new UI ideas 
+      - Added support for description in frontend
+      - Added more front end tests
     * Plans and Goals:
+      - Add loading screen 
+      - Finalize everything
 * Sofia Barry
     * Goals from last week:
     * Progress and Issues:
