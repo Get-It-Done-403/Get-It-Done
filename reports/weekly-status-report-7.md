@@ -14,12 +14,14 @@
 
 #### Project Meeting Agenda:
 * Go over the peer reviews given to us.
+* Go over final goals before final release
 
 
 ### Plans and Goals:
-* Fix Delete Function for google Calendar
+* Fix Delete/Edit Function for google Calendar
 * Post web app on firebase hosting for final release 
-* 
+* Complete all changes to code base by Saturday
+* Work on presentation and demo on Sunday and Monday
 
 
 
@@ -43,8 +45,16 @@
       - Finalize everything
 * Sofia Barry
     * Goals from last week:
+      - Complete changes related to description field
+      - Modify Task test to reflect change
+      - Modify Task Controller and Service to reflect controller
+      - Support Aidan and Tye with backend issues
     * Progress and Issues:
+      - Made changes to Task to add description field
+      - Currently working on Delete/Edit functions
     * Plans and Goals:
+      - Compete Edit and Delete by EOD Saturday
+      - Work on presentation and demo
 * Aidan Petta
     * Goals from last week:
       - Fix the delete function
