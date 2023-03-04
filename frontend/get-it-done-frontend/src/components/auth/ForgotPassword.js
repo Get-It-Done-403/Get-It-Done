@@ -1,73 +1,43 @@
 import React, {useState} from "react";
-import { auth, provider } from "../../firebase";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import {Link} from "react-router-dom";
+import {useSendPasswordResetEmail} from "react-firebase-hooks/auth";
+import {auth} from "../../firebase";
 
-const SignIn = () => {
+const ForgotPassword = () => {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle] = useSignInWithGoogle(auth, provider);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
 
-    const handleSignIn = (e) => {
-        e.preventDefault();
-        signInWithEmailAndPassword(email, password)
-            .then((userCredentials) => {
-                console.log(userCredentials);
+    const forgotPassword = (e) => {
+        e.preventDefault()
+        sendPasswordResetEmail(email)
+            .then(() => {
+                alert("Password Reset Email Sent!");
                 window.location = '/'
             })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
-    const handleGoogleSignIn = (e) => {
-        signInWithGoogle()
-            .then((userCredentials) => {
-                console.log(userCredentials)
-                // setEmail(userCredentials.user.email)
-                // localStorage.setItem("email", userCredentials.user.email)
-                window.location = '/'
-            })
-            .catch((error) => {
+            . catch((error) => {
                 console.log(error)
             })
     }
-    //
-    // useEffect(() => {
-    //     setEmail(localStorage.getItem('email'))
-    // })
+
+
 
     return (
         <div className={"signInBackground"}>
             <img className={"SignInLogo"} src={require("./GetItDone.png")} alt="Logo"/>
             <div className={"module"}>
                 <div className={"bg-[#F1F8FF] flex flex-1 flex-col pl-10 pr-10 pt-10 pb-5 rounded-md"}>
-                    <div className={"text-[60px] text-center"}> Sign In </div>
-                    <form onSubmit={handleSignIn} className={"flex flex-1 flex-col mt-6"}>
+                    <div className={"text-[50px] text-center"}> Forgot Password </div>
+                    <form onSubmit={forgotPassword} className={"flex flex-1 flex-col mt-6"}>
                         <input
                             className={"p-2 border-2 border-black text-black"}
                             type={"email"}
                             placeholder={"Email"}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            data-testid="loginEmail"
                         />
-                        <input
-                            id={"loginPassword"}
-                            className={"p-2 border-2 border-black mt-4 text-black"}
-                            type={"password"}
-                            placeholder={"Password"}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <button  className={"bg-[#90B1EE] mt-10 rounded-[100px] text-[20px] p-3"} type={"submit"}> SIGN IN </button>
+                        <button  className={"bg-[#90B1EE] mt-10 rounded-[100px] text-[20px] p-3"} type={"submit"}> REQUEST RESET </button>
                     </form>
                     {/*<Link to={"/"} className={"mb-2 text-[#14509F]"}> Forgot Password? </Link>*/}
-                    <div className={"flex ml-2 justify-center"}>
-                        <button  className={"bg-[#90B1EE] rounded-[100px] w-[200px] text-[20px] p-1 mb-2 mr-2"} onClick={handleGoogleSignIn}> SIGN IN WTH GOOGLE </button>
-                        <button  className={"bg-[#90B1EE] rounded-[100px]  w-[200px] text-[20px] p-1 mb-2"} onClick={() => window.location = '/forgotpassword'}> Forgot Password </button>
-                    </div>
                     <div className={"flex ml-2 justify-center"}>
                         Don't have an account?
                         <Link to={"/signup"} className={"ml-4 text-[#14509F] font-medium"}> Sign Up</Link>
@@ -114,7 +84,6 @@ const SignIn = () => {
                 }`}
             </style>
         </div>
-    );
-};
-
-export default SignIn;
+    )
+}
+export default ForgotPassword

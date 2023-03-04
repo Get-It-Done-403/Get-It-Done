@@ -36,7 +36,7 @@ function ProfilePage(props) {
                 <div className={"tasksPage"}>
                     <h1 className={"text-[36px] ml-[12px] border-b-2 border-[#353535] grid grid-cols-2"}>
                         Welcome, {username}
-                        <button className={"bg-blue-100 h-full w-1/4 rounded-md justify-self-end"} onClick={() => props.signOut()}> SIGN OUT </button>
+                        <button className={"bg-blue-100 h-full w-1/4 rounded-md justify-self-end w-[175px]"} onClick={() => props.signOut()}> SIGN OUT </button>
                     </h1>
                     <div className={""}>
                         <input type={"text"} placeholder={"Set New Username"} className={"border-2 mt-10 w-1/2 p-2"} value={newUsername}

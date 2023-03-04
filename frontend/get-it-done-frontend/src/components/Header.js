@@ -12,7 +12,7 @@ function Header(props) {
             })
             .catch(error => console.error(error));
 
-    }, []);
+    }, [props.userEmail]);
     return (
         <div className={"header"}>
             <div className={"logoHeader"}> Get It Done </div>

@@ -13,9 +13,6 @@ function AddTask(props) {
 
     // Creates new task in database
     const handleSubmit = (event) => {
-        // let task = {"name" : event.target.taskName.value};
-        // props.setRemainingTasks([...props.remainingTasks, task]);
-        const timeZone = date.toTimeString().split("-")[1]
         const task = {
             "hoursToComplete": event.target.hoursToComplete.value,
             "isCompleted":false,
@@ -36,7 +33,7 @@ function AddTask(props) {
             .then((data) => console.log(data))
             .catch((error) => console.error(error));
         props.setTrigger("default");
-        // window.location.reload(false);
+        window.location.reload(false);
     };
 
 
