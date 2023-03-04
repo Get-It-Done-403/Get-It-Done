@@ -1,5 +1,6 @@
 package com.cse403.getitdone.googleCalendar;
 
+import com.cse403.getitdone.calendar.CalendarService;
 import com.cse403.getitdone.task.Task;
 import com.cse403.getitdone.task.TaskService;
 import com.cse403.getitdone.utils.CalendarEntry;
@@ -37,6 +38,7 @@ import java.util.concurrent.ExecutionException;
 
 import static com.cse403.getitdone.googleCalendar.GoogleCal.APPLICATION_NAME;
 import static com.cse403.getitdone.googleCalendar.GoogleCal.JSON_FACTORY;
+import static com.cse403.getitdone.calendar.CalendarService.*;
 
 public class ScheduleService {
     public static final String COL_NAME="users";
@@ -71,7 +73,7 @@ public class ScheduleService {
         // 2. Break down task and create smaller block (CalendarEntry)
         // 3. add events to calendar API
         // 4. Send those entries to db   task -> entries (this would call a function from CalendarService)
-        TaskService.saveTaskDetails(uid, task);
+
         scheduledTimes = new HashMap<>();
         service =
                 new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, GoogleCal.getCredentials(HTTP_TRANSPORT))
@@ -158,7 +160,9 @@ public class ScheduleService {
 
             // TODO: add to database. confirm format for the database first.
         }
-
+        // add to database
+        TaskService.saveTaskDetails(uid, task);
+        CalendarService.addCalendarEntries(uid, tid, newEntries);
 
         return "Success: Events Scheduled";
     }
