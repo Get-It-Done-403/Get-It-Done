@@ -47,7 +47,7 @@ function AddTask(props) {
                 <NavBar currentPage={"None"}/>
                 <form className={"calendarContainer"} onSubmit={handleSubmit}>
                     <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"taskName"} placeholder={"Enter Name of Task "}/>
-                    <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"} defaultValue={date.toISOString().substring(0,16)} required/>
+                    <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"} min={date.toISOString().substring(0,16)} defaultValue={date.toISOString().substring(0,16)} required/>
                             {/*<div className={"radio-toolbar"}>*/}
                             {/*    <div className={"ml-[12px] mt-[5px]"}>*/}
                             {/*        <input type="radio" id={"None"} name={"radioButton"} defaultValue="true" defaultChecked={true}/>*/}
@@ -60,7 +60,7 @@ function AddTask(props) {
                             {/*        <label htmlFor={"Monthly"}>Monthly</label>*/}
                             {/*    </div>*/}
                             {/*</div>*/}
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required placeholder={"Enter Time Commitment in Hours"}/>
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required placeholder={"Enter Time Commitment in Hours"} min={"1"} max={"500"}/>
                     <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
                     <div className={"flex-1 flex"}>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>

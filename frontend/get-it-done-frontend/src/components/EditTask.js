@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 
 function EditTask(props) {
 
+    const todayDate = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000) //local Date
     const dueDate = new Date(props.currentTask.dueDate.substring(0,16));
     const curr = new Date(dueDate.getTime() - new Date().getTimezoneOffset() * 60000) //local Date
     let hours = curr.getUTCHours();
@@ -66,7 +67,7 @@ function EditTask(props) {
                 <form className={"calendarContainer"} onSubmit={editTask}>
                     <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"title"} defaultValue={props.currentTask.title}/>
                     <div className={"grid grid-row-2 grid-cols-2"}>
-                        <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"} defaultValue={date}/>
+                        <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"} min={todayDate.toISOString().substring(0,16)} defaultValue={date}/>
                         <button className={"ml-[12px] self-end justify-self-end w-20 bg-[#D9D9D9] self-right pt-2 pb-2 pl-3 pr-3"} onClick={deleteTask}> Delete  </button>
                     </div>
 
@@ -84,8 +85,8 @@ function EditTask(props) {
                     {/*    </div>*/}
                     {/*</div>*/}
 
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required defaultValue={props.currentTask.hoursToComplete}/>
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required defaultValue={props.currentTask.hoursToComplete} min={"1"} max={"500"}/>
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"} defaultValue={props.currentTask.description}/>
                     <div className={"radio-toolbar"}>
                         <div className={"ml-[12px] mt-[12px]"}>
                             <input type="radio" id={"true"} name={"isCompleted"} defaultValue="true" required defaultChecked={props.currentTask.isCompleted}/>
