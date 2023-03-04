@@ -1,5 +1,6 @@
 package com.cse403.getitdone.googleCalendar;
 
+import com.cse403.getitdone.calendar.CalendarService;
 import com.cse403.getitdone.task.Task;
 import com.cse403.getitdone.task.TaskService;
 import com.cse403.getitdone.utils.CalendarEntry;
@@ -157,8 +158,10 @@ public class ScheduleService {
             service.events().insert(calendarId, event).execute();
 
             // TODO: add to database. confirm format for the database first.
-        }
+            CalendarService.addCalendarEntry(uid, tid, entry);
 
+        }
+//        CalendarService.addCalendarEntries(uid, tid, newEntries);
 
         return "Success: Events Scheduled";
     }

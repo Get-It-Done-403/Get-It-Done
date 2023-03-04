@@ -1,11 +1,19 @@
 # Get it Done
 
 ## Table of Contents
+* [Developer manual](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#developer-manual)
+* [User manual](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#user-manual)
 * [Beta release](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#beta-release)
   * [Build and test the system](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#build-and-test-the-system)
   * [Run the system](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#run-the-system) 
 * [Goals and Ideas](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#goals-and-ideas)
 * [Repo layout](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#repo-layout)
+
+## Developer manual
+Refer to the developer manual [here](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/documentation/developer-manual.md)
+
+## User manual
+Refer to the user manual [here](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/documentation/user-manual.md)
 
 ## Beta Release
 
@@ -64,6 +72,10 @@ $ cd ../frontend/get-it-done-frontend
 $ npm start
 ```
 
+### How to use the software
+
+When the system is started the user will initially be greeted with a login page. In order to access the main features of the application the user must login. If the user does not have an account they must make an account and then login.
+
 ----------------------------------------
              
 ## Goals and Ideas
@@ -89,14 +101,22 @@ $ npm start
         | +- EditTask.js
         | +- Header.js
         | +- NavBar.js
+          +- auth
+          | +- AuthDetails.js
+          | +- ForgotPassword.js
+          | +- GetItDone.png
+          | +- SignIn.js
+          | +- SignUp.js
         |
         +- css
-        | +- Login.css
         | +- mainCSS.css
         | +- Register.cc
         | +- Reset.css
         |
         +- fonts
+        | +- Asar-Regular.tff
+        | +- PlayfairDisplay-Italic-VariableFont_wght.tff
+        | +- PlayfairDisplay-VariableFont_wght.tff
         |
         +- pages
         | +- homePage
@@ -105,14 +125,18 @@ $ npm start
         |   +- HomePageFlow.js
         |   |
         | +- CalendarPage.js
+        | +- ProfilePage.js
         | +- Register.js
         | +- Reset.js
+        | +- SettingsPage.js
         |
         +- App.css
         |
         +- App.js
         |
         +- App.test.js
+        |
+        +- firebase.js
         |
         +- index.css
         |

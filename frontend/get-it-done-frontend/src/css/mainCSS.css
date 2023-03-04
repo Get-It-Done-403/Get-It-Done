@@ -1,11 +1,11 @@
 @font-face {
     font-family: "Light";
-    src: local("PlayfairDisplay-VariableFont_wght"), url("/src/fonts/PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
+    src: local("PlayfairDisplay-VariableFont_wght"), url("/src/css/fonts/PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Text";
-    src: local("Asar-Regular"), url("/src/fonts/Asar-Regular.ttf") format("truetype");
+    src: local("Asar-Regular"), url("/src/css/fonts/Asar-Regular.ttf") format("truetype");
 }
 
 .pageBackground {
@@ -65,4 +65,8 @@
     /*padding: ;*/
     margin-top: 18px;
     /*background-color: green;*/
+}
+
+input#dueDate {
+    max-width: 450px;
 }

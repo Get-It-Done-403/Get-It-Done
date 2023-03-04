@@ -3,12 +3,12 @@ import NavBar from "./NavBar";
 
 function EditTask(props) {
 
-    const dueDate = new Date(props.currentTask.dueDate);
+    const dueDate = new Date(props.currentTask.dueDate.substring(0,16));
     const curr = new Date(dueDate.getTime() - new Date().getTimezoneOffset() * 60000) //local Date
     let hours = curr.getUTCHours();
     var minutes = curr.getUTCMinutes() < 10 ? '0'+ curr.getUTCMinutes()  : curr.getUTCMinutes() ;
     hours = (hours < 10) ? '0' + hours.toString() : hours.toString();
-    minutes = minutes < 10 ? '0'+minutes : minutes;
+    minutes = minutes < 10 ? '0'+ minutes : minutes;
     var strTime = hours + ':' + minutes;
     const date = curr.toISOString().substring(0,11).concat(strTime);
 
@@ -26,7 +26,7 @@ function EditTask(props) {
             method: 'DELETE'
         })
         props.setTrigger("default")
-        // window.location.reload(false);
+        window.location.reload(false);
 
     }
 
@@ -37,7 +37,7 @@ function EditTask(props) {
         sendTask.title = event.target.title.value
         sendTask.isCompleted = document.querySelector('input[name="isCompleted"]:checked').value
         sendTask.hoursToComplete = event.target.hoursToComplete.value
-        sendTask.dueDate = (event.target.dueDate.value).concat(":00" + withColons)
+        sendTask.dueDate = (event.target.dueDate.value).concat(":00").concat(withColons)
 
         fetch('http://localhost:8080/updateTask?uid=' + props.userID,  {
             method: "POST",
@@ -48,7 +48,7 @@ function EditTask(props) {
 
         })
         props.setTrigger("default")
-        // window.location.reload(false);
+        window.location.reload(false);
     }
 
     return (

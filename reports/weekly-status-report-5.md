@@ -29,12 +29,36 @@
 
 * Tye Coleman
   * Goals from last week:
+    - Create more Junit tests for the Calendar and Task classes
+    - Finish implementation for the Calendar class
+    - Create the User class and connect with the database
   * Progress and Issues:
+    - Implemented Schedule Service which creates new calendar entries and adds to the user's google calendar
+    - There are still edge cases that needs handling for schedule task
+    - Sometimes the results I get for schedule task is in consistent 
   * Plans and Goals:
+    - Handle errors and edge cases in Schedule Service
+    - Make sure the user only needs to log into google once to use the google calendar api
+    - Make tests for schedule service
 * Mitchell Ly
-    * Goals from last week:
-    * Progress and Issues: 
-    * Plans and Goals: 
+  * Goals from last week:
+    - Have login page designed and implemented along with the backend
+    - Add more tests
+    - Add functional buttons that actually do stuff now  
+  * Progress and Issues: 
+    - Connected Add Task to backend
+    - Connected Edit Task to backend
+    - Connected Get Tasks to backend 
+    - Added search functionality 
+    - Connected username to backend and change username 
+    - Added signin auth with email and google 
+    - Connecting to backend was really hard at first, we kept accidently maxing out our database 
+    - Fixed all ESLINT warnings in the code 
+    - Made a lot more code reusable by putting them in componenets 
+  * Plans and Goals: 
+    - Fix a couple of minor issues with the backend 
+    - Imrpove front end visibility and usability 
+    - Add settings page and calendar page   
 * Sofia Barry
     * Goals from last week:
       - Find an alternative for "date" field data type compatible with Firebase
@@ -64,5 +88,17 @@
         - finish security details and security implementation with spring boot
 * Lance
     * Goals from last week:
+       - Set up sign up
+       - set up sign in
+       - set up password reset
     * Progress and Issues:
+       - Finished sign up
+       - Finishd sign in
+       - created password reset
+       - record demo video
+       - Struggled setting up firebase auth
+       - Did not have time to write many frontend tests 
     * Plans and Goals:
+       - Create more comprehensive frontend testing
+       - Help with scheduling algorithm
+       - Help with documenation

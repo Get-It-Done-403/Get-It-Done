@@ -23,7 +23,7 @@ public class UserServiceTests {
     public Firestore db;
 
     public void init() throws IOException {
-        FileInputStream serciceAcc = new FileInputStream("/Users/aidanpetta/IdeaProjects/Get-It-Done/backend/src/main/resources/servicekey.json");
+        FileInputStream serciceAcc = new FileInputStream("../backend/src/main/resources/servicekey.json");
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serciceAcc))
                 .setDatabaseUrl("https://get-it-done-7a708-default-rtdb.firebaseio.com")
