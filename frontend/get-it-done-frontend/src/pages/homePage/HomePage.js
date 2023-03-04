@@ -37,9 +37,11 @@ function HomePage(props) {
     useEffect(() => {
         fetch("http://localhost:8080/getTaskList?uid=" + props.userID)
             .then(res=>res.json())
+            .catch((error) => error.response.status >= 500 ? console.error(error) : alert("Error, not connected to database"))
             .then((result)=>{
                 setTasks(result);
             }
+
 
 
     )}, [props.trigger, props.userID])

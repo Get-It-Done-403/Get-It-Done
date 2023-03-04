@@ -25,8 +25,10 @@ function EditTask(props) {
         fetch('http://localhost:8080/deleteTask?uid=' + userID + "&tid=" + taskID, {
             method: 'DELETE'
         })
+        .catch((error) => console.error(error));
+
         props.setTrigger("default")
-        window.location.reload(false);
+        // window.location.reload(false);
 
     }
 
@@ -38,6 +40,7 @@ function EditTask(props) {
         sendTask.isCompleted = document.querySelector('input[name="isCompleted"]:checked').value
         sendTask.hoursToComplete = event.target.hoursToComplete.value
         sendTask.dueDate = (event.target.dueDate.value).concat(":00").concat(withColons)
+        sendTask.description = event.target.description.value
 
         fetch('http://localhost:8080/updateTask?uid=' + props.userID,  {
             method: "POST",
@@ -47,8 +50,13 @@ function EditTask(props) {
             body: JSON.stringify(sendTask),
 
         })
+        .then(response => response.text())
+        .then((response) => {
+            alert(response)
+        })
+        .catch((error) => console.error(error));
         props.setTrigger("default")
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     return (
@@ -77,7 +85,7 @@ function EditTask(props) {
                     {/*</div>*/}
 
                     <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required defaultValue={props.currentTask.hoursToComplete}/>
-                    {/*<input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>*/}
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
                     <div className={"radio-toolbar"}>
                         <div className={"ml-[12px] mt-[12px]"}>
                             <input type="radio" id={"true"} name={"isCompleted"} defaultValue="true" required defaultChecked={props.currentTask.isCompleted}/>

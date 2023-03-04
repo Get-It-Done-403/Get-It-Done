@@ -14,7 +14,7 @@ function ProfilePage(props) {
             .then((response) => response.json())
             .then((data) => console.log(data))
             .catch((error) => console.error(error));
-        window.location.reload(false)
+        // window.location.reload(false)
     };
 
     useEffect(() => {

@@ -18,7 +18,8 @@ function AddTask(props) {
             "isCompleted":false,
             "tid": uid,
             "title": event.target.taskName.value,
-            "dueDate": (event.target.dueDate.value).concat(":00").concat(withColons)
+            "dueDate": (event.target.dueDate.value).concat(":00").concat(withColons),
+            "description": event.target.description.value
         }
 
         fetch("http://localhost:8080/createTask?uid=" + props.userID, {
@@ -29,11 +30,14 @@ function AddTask(props) {
             body: JSON.stringify(task),
 
         })
-            .then((response) => response.json())
-            .then((data) => console.log(data))
+            .then(response => response.text())
+            .then((response) => {
+                alert(response)
+            })
             .catch((error) => console.error(error));
         props.setTrigger("default");
-        window.location.reload(false);
+        // alert(bool.text() + "  OUTSIDE fejsdfkjl")
+        // window.location.reload(false);
     };
 
 
@@ -57,7 +61,7 @@ function AddTask(props) {
                             {/*    </div>*/}
                             {/*</div>*/}
                     <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required placeholder={"Enter Time Commitment in Hours"}/>
-                    {/*<input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>*/}
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
                     <div className={"flex-1 flex"}>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={(() => {props.setTrigger("default")})}> Cancel  </button>
