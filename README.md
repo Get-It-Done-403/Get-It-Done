@@ -1,11 +1,19 @@
 # Get it Done
 
 ## Table of Contents
+* [Developer manual](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#developer-manual)
+* [User manual](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#user-manual)
 * [Beta release](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#beta-release)
   * [Build and test the system](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#build-and-test-the-system)
   * [Run the system](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#run-the-system) 
 * [Goals and Ideas](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#goals-and-ideas)
 * [Repo layout](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/README.md#repo-layout)
+
+## Developer manual
+Refer to the developer manual [here](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/documentation/developer-manual.md)
+
+## User manual
+Refer to the user manual [here](https://github.com/Get-It-Done-403/Get-It-Done/blob/main/documentation/user-manual.md)
 
 ## Beta Release
 
