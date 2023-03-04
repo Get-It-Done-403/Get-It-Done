@@ -30,7 +30,7 @@ public class TaskController {
     }
 
     @PostMapping("/createTask")
-    public List<CalendarEntry> createTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException, GeneralSecurityException, IOException {
+    public String createTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException, GeneralSecurityException, IOException {
         //scheduleTask() from ScheduleService
 
             // 1. Get availability from Google Calendar API

@@ -21,6 +21,7 @@ public class GetitdoneApplication {
     public static void main(String[] args) {
         ClassLoader classLoader = GetitdoneApplication.class.getClassLoader();
         try {
+
             FileInputStream serciceAcc = new FileInputStream("../backend/src/main/resources/servicekey.json");
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serciceAcc))
