@@ -21,8 +21,7 @@ public class GetitdoneApplication {
     public static void main(String[] args) {
         ClassLoader classLoader = GetitdoneApplication.class.getClassLoader();
         try {
-            //File file = new File(Objects.requireNonNull(classLoader.getResource("/Users/aidanpetta/IdeaProjects/Get-It-Done/backend/src/main/java/com/cse403/getitdone/servicekey.json")).getFile());
-            FileInputStream serciceAcc = new FileInputStream("/Users/admin/Get-It-Done/backend/src/main/resources/servicekey.json");
+            FileInputStream serciceAcc = new FileInputStream("../backend/src/main/resources/servicekey.json");
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serciceAcc))
                     .setDatabaseUrl("https://get-it-done-7a708-default-rtdb.firebaseio.com")
