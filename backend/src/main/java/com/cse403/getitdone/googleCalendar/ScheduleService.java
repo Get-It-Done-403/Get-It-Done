@@ -132,7 +132,7 @@ public class ScheduleService {
             service.events().insert(calendarId, event).execute();
 
             // TODO: add to database. confirm format for the database first.
-            CalendarService.addCalendarEntries(uid, tid, entry);
+            CalendarService.addCalendarEntry(uid, tid, entry);
 
         }
 //        CalendarService.addCalendarEntries(uid, tid, newEntries);
