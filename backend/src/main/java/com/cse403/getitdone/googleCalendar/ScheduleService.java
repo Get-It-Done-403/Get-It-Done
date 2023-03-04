@@ -38,6 +38,7 @@ import java.util.concurrent.ExecutionException;
 
 import static com.cse403.getitdone.googleCalendar.GoogleCal.APPLICATION_NAME;
 import static com.cse403.getitdone.googleCalendar.GoogleCal.JSON_FACTORY;
+import static com.cse403.getitdone.calendar.CalendarService.*;
 
 public class ScheduleService {
     public static final String COL_NAME="users";
@@ -72,7 +73,7 @@ public class ScheduleService {
         // 2. Break down task and create smaller block (CalendarEntry)
         // 3. add events to calendar API
         // 4. Send those entries to db   task -> entries (this would call a function from CalendarService)
-        TaskService.saveTaskDetails(uid, task);
+
         scheduledTimes = new HashMap<>();
         service =
                 new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, GoogleCal.getCredentials(HTTP_TRANSPORT))
@@ -158,10 +159,10 @@ public class ScheduleService {
             service.events().insert(calendarId, event).execute();
 
             // TODO: add to database. confirm format for the database first.
-            CalendarService.addCalendarEntry(uid, tid, entry);
-
         }
-//        CalendarService.addCalendarEntries(uid, tid, newEntries);
+        // add to database
+        TaskService.saveTaskDetails(uid, task);
+        CalendarService.addCalendarEntries(uid, tid, newEntries);
 
         return "Success: Events Scheduled";
     }
