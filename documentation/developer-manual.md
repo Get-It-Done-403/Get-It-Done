@@ -23,7 +23,7 @@ $ npm install
 ```
 ### Configure Google's Firebase
 
-Please contact developers to provide you with the corresponding keys to configure Google's Firebase. 
+Please contact developers to provide you with the corresponding keys to configure Google's Firebase.
 
 **Contact Info**
 * Aidan Peta - aidanjp8@uw.edu
@@ -31,9 +31,14 @@ Please contact developers to provide you with the corresponding keys to configur
 * Mitchell Ly - lymit000@uw.edu
 * Sofia Barry - smbarry@uw.edu
 
-Once you have been provided with the ```servicekey.json``` copy content into ```../backend/src/main/resources/servicekey.json```.
+You should receive the following keys:
+* ```servicekey.json```
+* ```credentials.json```
+* ```firebaseConfig```
 
-Similarly, in ```../frontend/get-it-done-frontend/src/firebase.js``` copy the provided key into firebaseConfig. You will see something like this:
+Copy the contents of ```servicekey.json``` into ```../backend/src/main/resources/servicekey.json```. Similarly, copy the contents of ```credentials.json``` into ```../backend/src/main/resources/credentials.json```.
+
+In ```../frontend/get-it-done-frontend/src/firebase.js``` copy the provided key into firebaseConfig. You will see something like this:
 
 ```
 const firebaseConfig = {
