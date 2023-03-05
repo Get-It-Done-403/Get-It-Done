@@ -41,15 +41,26 @@ public class TaskController {
     }
 
     @PostMapping("/updateTask")
-    public String updateTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException {
-        //scheduleTask() from ScheduleService
-        // remove previous calendar entries
-        return taskService.saveTaskDetails(uid,task);
+    public String updateTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException, GeneralSecurityException, IOException {
+        Task prevTask = TaskService.getTaskDetails(uid, task.getTid());
+
+        if (!task.getIsCompleted()
+                && ((prevTask.getHoursToComplete() != task.getHoursToComplete())
+                || !(task.getDueDate().equals(prevTask.getDueDate())))) {
+            ScheduleService.removeTaskCalendarEntries(uid, task.getTid());
+            ScheduleService.scheduleTask(uid, task);
+        }
+
+        if (task.getIsCompleted() && !prevTask.getIsCompleted()) {
+            ScheduleService.removeTaskCalendarEntries(uid, task.getTid());
+        }
+        return TaskService.saveTaskDetails(uid, task);
     }
 
     @DeleteMapping("/deleteTask")
-    public String deleteTask(@RequestParam String uid, @RequestParam String tid){
-        return taskService.deleteTask(uid, tid);
+    public String deleteTask(@RequestParam String uid, @RequestParam String tid) throws GeneralSecurityException, IOException, ExecutionException, InterruptedException {
+        ScheduleService.removeTaskCalendarEntries(uid, tid);
+        return TaskService.deleteTask(uid, tid);
     }
 
     @GetMapping("/getTaskList")
