@@ -48,8 +48,9 @@ public class TaskController {
     }
 
     @DeleteMapping("/deleteTask")
-    public String deleteTask(@RequestParam String uid, @RequestParam String tid){
-        return taskService.deleteTask(uid, tid);
+    public String deleteTask(@RequestParam String uid, @RequestParam String tid) throws GeneralSecurityException, IOException, ExecutionException, InterruptedException {
+//        return taskService.deleteTask(uid, tid);
+        return ScheduleService.removeTaskCalendarEntries(uid, tid);
     }
 
     @GetMapping("/getTaskList")

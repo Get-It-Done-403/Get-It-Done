@@ -1,5 +1,6 @@
 package com.cse403.getitdone.task;
 
+import com.cse403.getitdone.utils.CalendarEntry;
 import com.google.api.core.ApiFuture;
 
 import com.google.cloud.firestore.CollectionReference;
@@ -53,7 +54,29 @@ public class TaskService {
         }
     }
 
-    public String deleteTask(final String uid, final String tid) {
+    public static List<CalendarEntry> getTaskCalendarEntries(final String uid, final String tid)
+            throws InterruptedException, ExecutionException {
+        List<CalendarEntry> entries = new ArrayList<>();
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference documentReference = dbFirestore
+                .collection(COL_NAME).document(uid)
+                .collection(SUBCOL_NAME).document(tid)
+                .collection(SUBSUBCOL_NAME);
+        ApiFuture<QuerySnapshot> future = documentReference.get();
+
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        for (QueryDocumentSnapshot document : documents) {
+            CalendarEntry entry = null;
+
+            if (document.exists()) {
+                entry = document.toObject(CalendarEntry.class);
+                entries.add(entry);
+            }
+        }
+        return entries;
+    }
+
+    public static String deleteTask(final String uid, final String tid) {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> writeResult = dbFirestore
                 .collection(COL_NAME).document(uid)
@@ -69,7 +92,7 @@ public class TaskService {
         return "uid " + uid + ": task with tid " + tid + " has been deleted";
     }
 
-    public void deleteCollection(CollectionReference collection, int batchSize) {
+    public static void deleteCollection(CollectionReference collection, int batchSize) {
         try {
             ApiFuture<QuerySnapshot> future = collection.limit(batchSize).get();
             int deleted = 0;
