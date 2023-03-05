@@ -156,11 +156,11 @@ public class ScheduleService {
                     .setICalUID(entry.getEid())
                     .execute();
 
-            if (events.isEmpty()) //TODO debug here
-                continue;
+            if (events.size() != 0){
+                Event event = events.getItems().get(0);
+                service.events().delete(CALENDAR_ID, event.getId()).execute();
+            }
 
-            Event event = events.getItems().get(0);
-            service.events().delete(CALENDAR_ID, event.getId()).execute();
         }
         return "Success: Events Removed";
     }

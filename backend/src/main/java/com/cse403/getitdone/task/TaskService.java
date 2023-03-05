@@ -35,7 +35,7 @@ public class TaskService {
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
 
-    public Task getTaskDetails(final String uid, final String tid) throws InterruptedException, ExecutionException {
+    public static Task getTaskDetails(final String uid, final String tid) throws InterruptedException, ExecutionException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         DocumentReference documentReference = dbFirestore
                 .collection(COL_NAME).document(uid)

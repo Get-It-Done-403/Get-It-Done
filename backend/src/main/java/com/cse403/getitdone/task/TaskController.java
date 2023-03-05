@@ -42,8 +42,13 @@ public class TaskController {
 
     @PostMapping("/updateTask")
     public String updateTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException, GeneralSecurityException, IOException {
-        ScheduleService.removeTaskCalendarEntries(uid, task.getTid());
-        return ScheduleService.scheduleTask(uid, task);
+        Task prevTask = TaskService.getTaskDetails(uid, task.getTid());
+
+        if (prevTask.getHoursToComplete() != task.getHoursToComplete()) {
+            ScheduleService.removeTaskCalendarEntries(uid, task.getTid());
+            ScheduleService.scheduleTask(uid, task);
+        }
+        return TaskService.saveTaskDetails(uid, task);
     }
 
     @DeleteMapping("/deleteTask")
