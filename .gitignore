@@ -5,3 +5,5 @@ backend/src/main/resources/servicekey.json
 
 # Ignore Gradle build output directory
 build
+
+#ignore env file

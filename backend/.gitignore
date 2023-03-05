@@ -39,3 +39,5 @@ out/
 ### API KEY###
 .env.json
 
+firebase_config.json
+
