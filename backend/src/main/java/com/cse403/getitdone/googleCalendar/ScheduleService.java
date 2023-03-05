@@ -101,7 +101,6 @@ public class ScheduleService {
         long daysBetween = ChronoUnit.DAYS.between(currDate, zonedDate) + 1;
 
 
-        System.out.println("days in between: " + daysBetween);
         if (daysBetween < 0) {
             return "Error: due date not in the future";
         }
@@ -235,12 +234,12 @@ public class ScheduleService {
         // set availability to true (meaning you cannot schedule new tasks) if the due time is before 20:00 and also if the current time is after 9:00
         int dueHour = dueDate.getHour();
         int currHour = currDate.getHour();
-        if (dueHour < 20) {
+        if (dueHour < 20 && dueHour > 9) {
             for (int i = dueHour - 9; i < timeSlots[0].length; i++) {
                 timeSlots[timeSlots.length - 1][i] = true;
             }
         }
-        if (currHour > 9) {
+        if (currHour > 9 && currHour < 20) {
             for (int i = 0; i < currHour - 9; i++) {
                 timeSlots[0][i] = true;
             }
