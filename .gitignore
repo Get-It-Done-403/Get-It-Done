@@ -5,13 +5,7 @@ backend/src/main/resources/servicekey.json
 
 # Ignore Gradle build output directory
 build
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
 #ignore env file
-=======
 /backend/src/main/resources/credentials.json
->>>>>>> Stashed changes
-=======
-/backend/src/main/resources/credentials.json
->>>>>>> Stashed changes
+
