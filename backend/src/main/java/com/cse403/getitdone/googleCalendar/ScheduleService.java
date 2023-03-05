@@ -4,33 +4,16 @@ import com.cse403.getitdone.calendar.CalendarService;
 import com.cse403.getitdone.task.Task;
 import com.cse403.getitdone.task.TaskService;
 import com.cse403.getitdone.utils.CalendarEntry;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.DateTime;
-import com.google.api.client.util.store.FileDataStoreFactory;
-import com.google.api.core.ApiFuture;
 import com.google.api.services.calendar.Calendar;
-import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.cloud.FirestoreClient;
-import org.checkerframework.checker.units.qual.C;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
-
-import javax.sound.midi.SysexMessage;
-import java.awt.*;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.security.GeneralSecurityException;
 import java.time.*;
-import java.time.temporal.Temporal;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -39,12 +22,8 @@ import java.util.concurrent.ExecutionException;
 
 import static com.cse403.getitdone.googleCalendar.GoogleCal.APPLICATION_NAME;
 import static com.cse403.getitdone.googleCalendar.GoogleCal.JSON_FACTORY;
-import static com.cse403.getitdone.calendar.CalendarService.*;
 
 public class ScheduleService {
-    public static final String COL_NAME="users";
-    public static final String SUBCOL_NAME="tasks";
-    public static final String SUBSUBCOL_NAME="entries";
 
     private static boolean[][] timeSlots;
     private static String tid;
@@ -101,7 +80,6 @@ public class ScheduleService {
         long daysBetween = ChronoUnit.DAYS.between(currDate, zonedDate) + 1;
 
 
-        System.out.println("days in between: " + daysBetween);
         if (daysBetween < 0) {
             return "Error: due date not in the future";
         }
@@ -167,7 +145,6 @@ public class ScheduleService {
         String taskDate = task.getDueDate();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
         LocalDateTime localDate = LocalDateTime.parse(taskDate, formatter);
-        ZonedDateTime zonedDateTime = getZonedDateTime(localDate);
         // get all events from now to due date
         Events events = service.events().list("primary")
                 .setTimeMin(now)
@@ -235,12 +212,12 @@ public class ScheduleService {
         // set availability to true (meaning you cannot schedule new tasks) if the due time is before 20:00 and also if the current time is after 9:00
         int dueHour = dueDate.getHour();
         int currHour = currDate.getHour();
-        if (dueHour < 20) {
+        if (dueHour < 20 && dueHour > 9) {
             for (int i = dueHour - 9; i < timeSlots[0].length; i++) {
                 timeSlots[timeSlots.length - 1][i] = true;
             }
         }
-        if (currHour > 9) {
+        if (currHour > 9 && currHour < 20) {
             for (int i = 0; i < currHour - 9; i++) {
                 timeSlots[0][i] = true;
             }
@@ -261,25 +238,12 @@ public class ScheduleService {
         int numHours = endHour - startHour;
         for (int i = 0; i < numHours; i++) {
             timeSlots[day - firstDay][startHour + i - 9] = true;
-
         }
     }
 
 
     private static List<CalendarEntry> allocateTime(Task task) {
         int taskDuration = task.getHoursToComplete();
-
-
-        /* it will be more organized if the task was scheduled around the same time every day
-           so, we will come up with a starting time in between 9am and 8pm and try to schedule it at that time every day
-           the algorithm will encourage the student to finish as soon as possible, so it will schedule it every day starting the current day
-
-           Things to consider after beta release:
-                - option not to schedule on weekends
-                - spread out tasks semi-evenly and not schedule it consecutively if time allows
-                - try not to schedule it during meal times
-                - increase/ decrease time for each calendar entry (not just 1 hour), depending on the student's study habits.
-         */
 
         Random random = new Random();
         // get a random number to represent a time between 9:00 and 19:00
