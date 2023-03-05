@@ -44,9 +44,15 @@ public class TaskController {
     public String updateTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException, GeneralSecurityException, IOException {
         Task prevTask = TaskService.getTaskDetails(uid, task.getTid());
 
-        if (prevTask.getHoursToComplete() != task.getHoursToComplete()) {
+        if (!task.getIsCompleted()
+                && ((prevTask.getHoursToComplete() != task.getHoursToComplete())
+                || !(task.getDueDate().equals(prevTask.getDueDate())))) {
             ScheduleService.removeTaskCalendarEntries(uid, task.getTid());
             ScheduleService.scheduleTask(uid, task);
+        }
+
+        if (task.getIsCompleted() && !prevTask.getIsCompleted()) {
+            ScheduleService.removeTaskCalendarEntries(uid, task.getTid());
         }
         return TaskService.saveTaskDetails(uid, task);
     }

@@ -156,7 +156,7 @@ public class ScheduleService {
                     .setICalUID(entry.getEid())
                     .execute();
 
-            if (events.size() != 0){
+            if (!events.getItems().isEmpty()){
                 Event event = events.getItems().get(0);
                 service.events().delete(CALENDAR_ID, event.getId()).execute();
             }
