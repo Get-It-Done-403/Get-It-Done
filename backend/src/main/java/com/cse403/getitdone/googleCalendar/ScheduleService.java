@@ -112,7 +112,8 @@ public class ScheduleService {
             // add to Google Calendar
             Event event = new Event()
                     .setSummary(task.getTitle())
-                    .setDescription("Event Scheduled by Get It Done");
+                    .setDescription(task.getDescription() + "\n---By Get It Done---")
+                    .setICalUID(entry.getEid());
 
             EventDateTime startDateTime = new EventDateTime()
                     .setDateTime(new DateTime(entry.getStartDate()))
