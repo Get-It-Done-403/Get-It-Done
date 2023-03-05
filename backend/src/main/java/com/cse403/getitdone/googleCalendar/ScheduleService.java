@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.security.GeneralSecurityException;
 import java.time.*;
+import java.time.temporal.Temporal;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -51,6 +52,7 @@ public class ScheduleService {
     private static Calendar service;
     private static Map<Integer, Set<Integer[]>> scheduledTimes;
     private static ZonedDateTime dueDate;
+    private static ZonedDateTime currDate;
     private static final NetHttpTransport HTTP_TRANSPORT;
 
     static {
@@ -89,52 +91,45 @@ public class ScheduleService {
         LocalDateTime localDate = LocalDateTime.parse(taskDate, formatter);
         ZonedDateTime zonedDate = getZonedDateTime(localDate);
         dueDate = zonedDate;
+
         TimeZone userTimeZone = TimeZone.getDefault();
         ZoneId zone = ZoneId.of(userTimeZone.getID());
         // current date
-        ZonedDateTime currDate = ZonedDateTime.now(zone);
+        currDate = ZonedDateTime.now(zone);
+
         // calculate the remaining days until the task is due (we assume that the due date is 20:00 of the zonedDate)
         long daysBetween = ChronoUnit.DAYS.between(currDate, zonedDate) + 1;
+
+
+        System.out.println("days in between: " + daysBetween);
         if (daysBetween < 0) {
             return "Error: due date not in the future";
         }
 
-        // initialize timeslots
-//        timeSlots = new ArrayList[(int) daysBetween + 1];
-//
-//        for (int i = 0; i <= (int) daysBetween; i++) {
-//            timeSlots[i] = new ArrayList<CalendarEntry>();
-//        }
-        if (daysBetween == 0) {
-            timeSlots = new boolean[(int) daysBetween][11];
-        } else {
-            timeSlots = new boolean[(int) daysBetween - 1][11];
-        }
-
+        timeSlots = new boolean[(int) daysBetween + 1][11];
 
         // get availability from the user's Google Calendar update the timeslots
         getUserAvailability(uid, task);
         int availableHours = 0;
 
         // count available hours
+
         for (int i = 0; i < timeSlots.length; i++) {
             boolean[] oneDay = timeSlots[i];
-            System.out.println(Arrays.toString(oneDay));
             for (int j = 0; j < oneDay.length; j++) {
                 if (!oneDay[j]) {
                     availableHours++;
                 }
             }
         }
-        System.out.println("available hours: " + availableHours);
+
         if (availableHours < task.getHoursToComplete()) {
             return "Error: Not enough available hours";
         }
-
+        TaskService.saveTaskDetails(uid, task);
         // divide up the task and add it to the time slots
         List<CalendarEntry> newEntries = allocateTime(task);
 
-        System.out.println(newEntries);
         for (CalendarEntry entry : newEntries) {
             // add to Google Calendar
             Event event = new Event()
@@ -151,17 +146,14 @@ public class ScheduleService {
 
             event.setStart(startDateTime);
             event.setEnd(endStartDate);
-            System.out.println(startDateTime);
-            System.out.println(endStartDate);
 
             String calendarId = "primary";
             // event created
             service.events().insert(calendarId, event).execute();
 
-            // TODO: add to database. confirm format for the database first.
         }
         // add to database
-        TaskService.saveTaskDetails(uid, task);
+
         CalendarService.addCalendarEntries(uid, tid, newEntries);
 
         return "Success: Events Scheduled";
@@ -191,15 +183,12 @@ public class ScheduleService {
         java.util.Calendar temp = java.util.Calendar.getInstance();
         temp.setTime(new Date(tmpDate.getValue()));
 
-        temp.add(java.util.Calendar.DAY_OF_MONTH, 1);
         firstStartDate = new DateTime(temp.getTime());
 
         for (int i = 0; i < items.size(); i++) {
             Event item = items.get(i);
-            System.out.println(item.toString());
             // get the start time for the event
             EventDateTime startTime = item.getStart();
-
 
 
             DateTime startDate = startTime.getDateTime();
@@ -242,10 +231,21 @@ public class ScheduleService {
                 int endHour = zonedEndTime.getHour();
                 setUserAvailability(startHour, endHour, startDay);
             }
-
-
-
         }
+        // set availability to true (meaning you cannot schedule new tasks) if the due time is before 20:00 and also if the current time is after 9:00
+        int dueHour = dueDate.getHour();
+        int currHour = currDate.getHour();
+        if (dueHour < 20) {
+            for (int i = dueHour - 9; i < timeSlots[0].length; i++) {
+                timeSlots[timeSlots.length - 1][i] = true;
+            }
+        }
+        if (currHour > 9) {
+            for (int i = 0; i < currHour - 9; i++) {
+                timeSlots[0][i] = true;
+            }
+        }
+
     }
 
     private static void setUserAvailability(int startHour, int endHour, int day) {
@@ -258,12 +258,10 @@ public class ScheduleService {
         java.util.Calendar temp = java.util.Calendar.getInstance();
         temp.setTime(new Date(firstStartDate.getValue()));
         int firstDay = temp.get(java.util.Calendar.DAY_OF_MONTH);
-        System.out.println("start hour: " + startHour);
-        System.out.println("end hour: " + endHour);
         int numHours = endHour - startHour;
         for (int i = 0; i < numHours; i++) {
-
             timeSlots[day - firstDay][startHour + i - 9] = true;
+
         }
     }
 
@@ -286,15 +284,10 @@ public class ScheduleService {
         Random random = new Random();
         // get a random number to represent a time between 9:00 and 19:00
         int defaultTime = random.nextInt(11) + 9;
-        int dueDateHour = dueDate.getHour();
-        System.out.println("start : " + defaultTime);
         int taskRemaining = taskDuration;
         java.util.Calendar temp = java.util.Calendar.getInstance();
         temp.setTime(new Date(firstStartDate.getValue()));
         int firstDay = temp.get(java.util.Calendar.DAY_OF_MONTH);
-        System.out.println("start day: " + firstDay);
-        System.out.println("start day: " + firstDay);
-        System.out.println("time slot length: " + timeSlots.length);
         Set<Integer> addedDays = new HashSet<>();
 
         while (taskRemaining > 0) {
@@ -308,7 +301,6 @@ public class ScheduleService {
                 boolean[] oneDay = timeSlots[day - firstDay];
 
                 if (!oneDay[defaultTime - 9]) {
-                    System.out.println("no conflict");
                     if (!scheduledTimes.containsKey(day)) {
                         scheduledTimes.put(day, new HashSet<>());
                     }
@@ -319,31 +311,25 @@ public class ScheduleService {
                     startEnd[1] = endTime;
 
                     scheduledTimes.get(day).add(startEnd);
-//                    System.out.println("added for day: " + day + " start time: " + startEnd[0] + " end time: " +  startEnd[1]);
                     taskRemaining--;
-                    System.out.println("task remaining: " + taskRemaining);
                     if (taskRemaining == 0) {
                         break;
                     }
                 } else {
-                    System.out.println("conflict !!!!");
                     int up = defaultTime + 1;
                     int down = defaultTime - 1;
                     int scheduledTime = -1;
                     while (up - 9 < oneDay.length || down - 9 >= 0) {
                         if (up - 9 < oneDay.length && !oneDay[up - 9]) {
-                            if (day != timeSlots.length - 1 && up < dueDateHour) {
-                                scheduledTime = up;
-                                oneDay[up - 9] = true;
-                                break;
-                            }
+                            scheduledTime = up;
+                            oneDay[up - 9] = true;
+                            break;
+
                         }
                         if (down - 9 >= 0 && !oneDay[down - 9]) {
-                            if (day != timeSlots.length - 1 && up < dueDateHour) {
-                                scheduledTime = down;
-                                oneDay[down - 9] = true;
-                                break;
-                            }
+                            scheduledTime = down;
+                            oneDay[down - 9] = true;
+                            break;
                         }
 
                         up++;
@@ -351,7 +337,6 @@ public class ScheduleService {
                     }
 
                     if (scheduledTime != -1) {
-                        System.out.println("start time: " + scheduledTime);
                         if (!scheduledTimes.containsKey(day)) {
                             scheduledTimes.put(day, new HashSet<>());
                         }
@@ -359,9 +344,7 @@ public class ScheduleService {
                         startEnd[0] = scheduledTime;
                         startEnd[1] = scheduledTime + 1;
                         scheduledTimes.get(day).add(startEnd);
-                        System.out.println("added for day: " + day + " start time: " + startEnd[0] + " end time: " +  startEnd[1]);
                         taskRemaining--;
-                        System.out.println("task remaining: " + taskRemaining);
                         if (taskRemaining == 0) {
                             break;
                         }
@@ -369,56 +352,6 @@ public class ScheduleService {
                 }
 
         }
-
-        for (int day : scheduledTimes.keySet()) {
-            System.out.println("day: " + day);
-            for (Integer[] vals : scheduledTimes.get(day)) {
-                for (int val : vals) {
-                    System.out.println(val + " ");
-
-                }
-            }
-        }
-
-//        for (int oneDay : scheduledTimes.keySet()) {
-//            Set<Integer[]> scheduleSet = scheduledTimes.get(oneDay);
-//            Set<Integer> endHours = new HashSet<>();
-//            Set<Integer[]> schedulesToRemove = new HashSet<>();
-//
-//            for (Integer[] schedule : scheduleSet) {
-//                int startHour = schedule[0];
-//                int endHour = schedule[1];
-//
-//                if (endHours.contains(startHour)) {
-//                    // Merge the two schedules into a new schedule
-//                    int otherEndHour = startHour;
-//                    for (Integer[] other : scheduleSet) {
-//                        if (other != schedule && other[0] == startHour) {
-//                            otherEndHour = other[1];
-//                            schedulesToRemove.add(other);
-//                            break;
-//                        }
-//                    }
-//
-//                    Integer[] mergedSchedule = new Integer[] {startHour, otherEndHour};
-//                    scheduleSet.remove(schedule);
-//                    schedulesToRemove.add(schedule);
-//                    scheduleSet.add(mergedSchedule);
-//
-//                    // Add the new end hour to the set
-//                    endHours.add(otherEndHour);
-//
-//                    // Restart the loop to check if the merged schedule matches other schedules
-//                    break;
-//                } else {
-//                    // Add the end hour to the set
-//                    endHours.add(endHour);
-//                }
-//            }
-//
-//            // Remove the old schedules that were merged
-//            scheduleSet.removeAll(schedulesToRemove);
-//        }
 
         List<CalendarEntry> newEntries = new ArrayList<>();
         for (int day : scheduledTimes.keySet()) {
@@ -449,7 +382,6 @@ public class ScheduleService {
                 newEntries.add(newEntry);
             }
         }
-        System.out.println("entries added: " + newEntries.size());
         return newEntries;
     }
 
