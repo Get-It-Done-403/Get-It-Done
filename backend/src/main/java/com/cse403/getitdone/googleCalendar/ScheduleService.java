@@ -11,6 +11,8 @@ import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.Events;
+import org.checkerframework.checker.units.qual.C;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.time.*;
@@ -24,6 +26,8 @@ import static com.cse403.getitdone.googleCalendar.GoogleCal.APPLICATION_NAME;
 import static com.cse403.getitdone.googleCalendar.GoogleCal.JSON_FACTORY;
 
 public class ScheduleService {
+
+    final static private String CALENDAR_ID = "primary";
 
     private static boolean[][] timeSlots;
     private static String tid;
@@ -112,8 +116,10 @@ public class ScheduleService {
             // add to Google Calendar
             Event event = new Event()
                     .setSummary(task.getTitle())
-                    .setDescription(task.getDescription() + "\n---By Get It Done---")
+                    .setDescription(task.getDescription() + "\n---Event Scheduled by Get It Done---")
+//                    .setId(entry.getEid());
                     .setICalUID(entry.getEid());
+
 
             EventDateTime startDateTime = new EventDateTime()
                     .setDateTime(new DateTime(entry.getStartDate()))
@@ -129,13 +135,34 @@ public class ScheduleService {
             String calendarId = "primary";
             // event created
             service.events().insert(calendarId, event).execute();
-
         }
         // add to database
 
         CalendarService.addCalendarEntries(uid, tid, newEntries);
 
         return "Success: Events Scheduled";
+    }
+
+    public static String removeTaskCalendarEntries(String uid, final String tid) throws GeneralSecurityException, IOException, ExecutionException, InterruptedException {
+
+        // Get task details
+        List<CalendarEntry> entries = TaskService.getTaskCalendarEntries(uid, tid);
+
+        for(CalendarEntry entry: entries) {
+            // remove from google calendar here
+            System.out.println(entry.toString());
+
+            Events events = service.events().list(CALENDAR_ID)
+                    .setICalUID(entry.getEid())
+                    .execute();
+
+            if (events.isEmpty()) //TODO debug here
+                continue;
+
+            Event event = events.getItems().get(0);
+            service.events().delete(CALENDAR_ID, event.getId()).execute();
+        }
+        return "Success: Events Removed";
     }
 
     private static void getUserAvailability(String uid, final Task task) throws GeneralSecurityException, IOException {

@@ -41,15 +41,15 @@ public class TaskController {
     }
 
     @PostMapping("/updateTask")
-    public String updateTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException {
-        //scheduleTask() from ScheduleService
-        // remove previous calendar entries
-        return taskService.saveTaskDetails(uid,task);
+    public String updateTask(@RequestParam String uid, @RequestBody Task task ) throws InterruptedException, ExecutionException, GeneralSecurityException, IOException {
+        ScheduleService.removeTaskCalendarEntries(uid, task.getTid());
+        return ScheduleService.scheduleTask(uid, task);
     }
 
     @DeleteMapping("/deleteTask")
-    public String deleteTask(@RequestParam String uid, @RequestParam String tid){
-        return taskService.deleteTask(uid, tid);
+    public String deleteTask(@RequestParam String uid, @RequestParam String tid) throws GeneralSecurityException, IOException, ExecutionException, InterruptedException {
+        ScheduleService.removeTaskCalendarEntries(uid, tid);
+        return TaskService.deleteTask(uid, tid);
     }
 
     @GetMapping("/getTaskList")
