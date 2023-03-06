@@ -7,10 +7,10 @@ function EditTask(props) {
     const dueDate = new Date(props.currentTask.dueDate.substring(0,16));
     const curr = new Date(dueDate.getTime() - new Date().getTimezoneOffset() * 60000) //local Date
     let hours = curr.getUTCHours();
-    var minutes = curr.getUTCMinutes() < 10 ? '0'+ curr.getUTCMinutes()  : curr.getUTCMinutes() ;
+    let minutes = curr.getUTCMinutes() < 10 ? '0'+ curr.getUTCMinutes()  : curr.getUTCMinutes() ;
     hours = (hours < 10) ? '0' + hours.toString() : hours.toString();
     minutes = minutes < 10 ? '0'+ minutes : minutes;
-    var strTime = hours + ':' + minutes;
+    const  strTime = hours + ':' + minutes;
     const date = curr.toISOString().substring(0,11).concat(strTime);
 
     const getTimeZone = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000) //local Date
@@ -26,9 +26,9 @@ function EditTask(props) {
         fetch('http://localhost:8080/deleteTask?uid=' + userID + "&tid=" + taskID, {
             method: 'DELETE'
         })
+        .then(() => {props.setTrigger("default")})
         .catch((error) => console.error(error));
 
-        props.setTrigger("default")
         // window.location.reload(false);
 
     }
@@ -55,8 +55,8 @@ function EditTask(props) {
         .then((response) => {
             alert(response)
         })
+        .then(() => {props.setTrigger("default")})
         .catch((error) => console.error(error));
-        props.setTrigger("default")
         // window.location.reload(false);
     }
 
