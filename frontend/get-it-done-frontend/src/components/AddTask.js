@@ -12,17 +12,18 @@ function AddTask(props) {
 
 
     // Creates new task in database
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+        event.preventDefault()
         const task = {
             "hoursToComplete": event.target.hoursToComplete.value,
-            "isCompleted":false,
+            "isCompleted": false,
             "tid": uid,
             "title": event.target.taskName.value,
             "dueDate": (event.target.dueDate.value).concat(":00").concat(withColons),
             "description": event.target.description.value
         }
 
-        fetch("http://localhost:8080/createTask?uid=" + props.userID, {
+        await fetch("http://localhost:8080/createTask?uid=" + props.userID, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -33,11 +34,18 @@ function AddTask(props) {
             .then(response => response.text())
             .then((response) => {
                 alert(response)
+                // alert("hi")
             })
+            // .then(response => {
+            //     return response.json();
+            // })
+            // .then(props.setTrigger("default"))
+            .then(() => {props.setTrigger("default")})
+            // .then(window.location.reload(false))
             .catch((error) => console.error(error));
-        props.setTrigger("default");
+        // const test = await json.response();
+        // window.location.reload()
         // alert(bool.text() + "  OUTSIDE fejsdfkjl")
-        // window.location.reload(false);
     };
 
 
@@ -60,7 +68,7 @@ function AddTask(props) {
                             {/*        <label htmlFor={"Monthly"}>Monthly</label>*/}
                             {/*    </div>*/}
                             {/*</div>*/}
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required placeholder={"Enter Time Commitment in Hours"} min={"1"} max={"500"}/>
+                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required placeholder={"Enter Time Commitment in Hours"} min={"0"} max={"500"}/>
                     <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
                     <div className={"flex-1 flex"}>
                     <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
