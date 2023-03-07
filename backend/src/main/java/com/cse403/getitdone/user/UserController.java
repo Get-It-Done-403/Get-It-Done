@@ -74,7 +74,7 @@ public class UserController {
         return userService.saveUserName(uid, userName);
     }
 
-    @GetMapping("/auth-url")
+    @GetMapping("/authUrl")
     public String getAuthUrl() throws Exception {
         InputStream in = GoogleCal.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         if (in == null) {
