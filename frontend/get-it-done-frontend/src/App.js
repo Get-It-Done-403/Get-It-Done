@@ -1,16 +1,11 @@
-import CalendarPage from "./pages/CalendarPage";
-import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePageFlow from "./pages/homePage/HomePageFlow";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import React, {useEffect, useState} from "react";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "./firebase";
-import ProfilePage from "./pages/ProfilePage";
 import ForgotPassword from "./components/auth/ForgotPassword";
-import SettingsPage from "./pages/SettingsPage";
-// import HomePage from "./pages/homePage/HomePage";
+import HomePage from "./pages/HomePage";
 
 function App() {
     const [authUser, setAuthUser] = useState(null);
@@ -24,9 +19,6 @@ function App() {
         }
 
     }, [user]);
-
-
-
 
     const userSignOut = () => {
         auth.signOut().then(() => {
@@ -64,20 +56,17 @@ function App() {
     } else {
         return (
             authUser ?
-                <Router>
-                    <Header userEmail={authUser.email}/>
-                    <Routes>
-                        <Route path="/" element={<HomePageFlow userEmail={authUser.email}/>}/>
-                        <Route path="/calendar" element={<CalendarPage userID={authUser.email}/>}/>
-                        {/*<Route path="/settings" element={<AddTask/>}/>*/}
-                        <Route path="/profile"
-                               element={<ProfilePage userEmail={authUser.email} signOut={userSignOut}/>}/>
-                        {/*<Route path="/signin" element={<SignIn/>}/>*/}
-                        {/*<Route path="/signup" element={<SignUp/>}/>*/}
-                        <Route path="/settings" element={<SettingsPage/>}/>
-
-                    </Routes>
-                </Router> :
+                <HomePage signOut={userSignOut} userID={authUser.email}/>
+                // <Router>
+                //     <Routes>
+                //         <Route path="/" element={<HomePageFlow signOut={userSignOut} userEmail={authUser.email}/>}/>
+                //         {/*<Route path="/calendar" element={<CalendarPage userID={authUser.email}/>}/>*/}
+                //         <Route path="/profile"
+                //                element={<ProfilePage userEmail={authUser.email} signOut={userSignOut}/>}/>
+                //         {/*<Route path="/settings" element={<SettingsPage/>}/>*/}
+                //     </Routes>
+                // </Router>
+            :
                 <Router>
                     <Routes>
                         <Route path={"/"} element={<SignIn/>}/>
