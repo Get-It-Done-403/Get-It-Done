@@ -63,17 +63,9 @@ Fill out the following Google Form link.
 
 ## Known bugs
 
-### Bug: Schedule overlapping
-* Occurs when a user has consecutive events planned back to back.
-* The algorithm cannot detect the second event and will try to book the new event at the same time as the second event.
-* The scheduling algorithm is being improved to handle edge cases like this.
+### Limitation: Google Calendar API Authentication Issue
+* Currently when a new user tries to create a new task they would have to click on the link on the backend terminal in order to complete the authentication with the API. It does not have the feature to make the link pop up on the screen.
 
-### Limitation: Missing delete/edit features
-* Currently, the application cannot edit or delete tasks from the user's Google Calendar.
-* When a user edits the task, the soon to be implemented edit algorithm should first delete the calendar entries and run the scheduling algorithm again to adjust to the changes.
-
-### Adding/Deleting Task not showing 
-* Currently, the newly added task or deleted task does not appear right away until the next page refresh.
-
-### Page Loading 
-* Currently, sometimes during a page load the sign in page pops up first the first few seconds.
+### Bug: Buggy Edit Task Feature
+* The edit task feature sometimes causes overlaps for the edited version of the tasks. 
+* We are not sure why this is happening since we are simply deleting the tasks and running the scheduling algorithm again. (The scheduling algorithm itself works fine without overlapping)
