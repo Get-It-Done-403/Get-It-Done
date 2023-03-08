@@ -1,5 +1,4 @@
 import "../css/mainCSS.css";
-import NavBar from "./NavBar";
 import { v4 as uuid } from "uuid";
 
 function AddTask(props) {
@@ -7,9 +6,6 @@ function AddTask(props) {
     const date = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000) //local Date
     const timeZone = date.toTimeString().split("-")[1].substring(0,4)
     const withColons = "-" + timeZone.substring(0,2) + ":" + timeZone.substring(2,4)
-    // let test = date.toISOString().substring(0,16).concat(":00").concat(withColons)
-    // test.concat(withColons)
-
 
     // Creates new task in database
     const handleSubmit = async (event) => {
@@ -36,25 +32,17 @@ function AddTask(props) {
                 alert(response)
                 // alert("hi")
             })
-            // .then(response => {
-            //     return response.json();
-            // })
-            // .then(props.setTrigger("default"))
             .then(() => {props.setTrigger("default")})
-            // .then(window.location.reload(false))
             .catch((error) => console.error(error));
-        // const test = await json.response();
-        // window.location.reload()
-        // alert(bool.text() + "  OUTSIDE fejsdfkjl")
     };
 
 
     return (
-        <div className={"pageBackground"}>
-            <div className={"pageContainer"}>
-                <NavBar currentPage={"None"}/>
+        <div className={"popup-first"}>
+            <div className={"popup-inner"}>
+                {/*<NavBar currentPage={"None"}/>*/}
                 <form className={"calendarContainer"} onSubmit={handleSubmit}>
-                    <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"taskName"} placeholder={"Enter Name of Task "}/>
+                    <input type="text" className={"text-[36px] border-b mb-[10px] p-2"} required id={"taskName"} placeholder={"Enter Name of Task"}/>
                     <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"} min={date.toISOString().substring(0,16)} defaultValue={date.toISOString().substring(0,16)} required/>
                             {/*<div className={"radio-toolbar"}>*/}
                             {/*    <div className={"ml-[12px] mt-[5px]"}>*/}
@@ -68,13 +56,14 @@ function AddTask(props) {
                             {/*        <label htmlFor={"Monthly"}>Monthly</label>*/}
                             {/*    </div>*/}
                             {/*</div>*/}
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required placeholder={"Enter Time Commitment in Hours"} min={"0"} max={"500"}/>
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
-                    <div className={"flex-1 flex"}>
-                    <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
-                    <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={(() => {props.setTrigger("default")})}> Cancel  </button>
+                    <input className={"border border rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-4"} type={"number"} id={"hoursToComplete"} required placeholder={"Enter Time Commitment in Hours"} min={"1"} max={"500"}/>
+                    <textarea className={"border order-black rounded-[3px] h-[100px] mt-[12px] ml-[12px] p-4"} type={"text"} id={"description"} placeholder={"Enter Description"}/>
+                    <div className={"flex-1 flex mt-[10px]"}>
+                        <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
+                        <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={(() => {props.setTrigger("default")})}> Cancel  </button>
                     </div>
                 </form>
+
             </div>
             <style jsx> {`
                 .calendarContainer {
@@ -84,7 +73,7 @@ function AddTask(props) {
                     // background-color: black;
                     flex-direction: column;
                     display: flex;
-                    padding: 30px;
+                    padding: 2px;
                 }
                 .allDaysBox {
                     display: grid; 

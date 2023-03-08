@@ -1,5 +1,4 @@
 import "../css/mainCSS.css";
-import NavBar from "./NavBar";
 
 function EditTask(props) {
 
@@ -17,9 +16,7 @@ function EditTask(props) {
     const timeZone = getTimeZone.toTimeString().split("-")[1].substring(0,4)
     const withColons = "-" + timeZone.substring(0,2) + ":" + timeZone.substring(2,4)
 
-
-
-    const  deleteTask = (event) => {
+    const deleteTask = (event) => {
         event.preventDefault()
         const userID = props.userID;
         const taskID = props.currentTask.tid
@@ -28,9 +25,6 @@ function EditTask(props) {
         })
         .then(() => {props.setTrigger("default")})
         .catch((error) => console.error(error));
-
-        // window.location.reload(false);
-
     }
 
     const editTask = (event) => {
@@ -61,14 +55,21 @@ function EditTask(props) {
     }
 
     return (
-        <div className={"pageBackground"}>
-            <div className={"pageContainer"}>
-                <NavBar currentPage={"None"}/>
+        <div className={"popup-first"}>
+            <div className={"popup-inner"}>
                 <form className={"calendarContainer"} onSubmit={editTask}>
-                    <input type="text" className={"text-[36px] ml-[12px] border-b-2 border-[#353535] mb-[10px]"} required id={"title"} defaultValue={props.currentTask.title}/>
-                    <div className={"grid grid-row-2 grid-cols-2"}>
+                    <input type="text" className={"text-[36px] border-b mb-[10px] p-2"} required id={"title"} defaultValue={props.currentTask.title}/>
+                    <div className={""}>
                         <input type="datetime-local" className={"ml-[12px]"} id={"dueDate"} min={todayDate.toISOString().substring(0,16)} defaultValue={date}/>
-                        <button className={"ml-[12px] self-end justify-self-end w-20 bg-[#D9D9D9] self-right pt-2 pb-2 pl-3 pr-3"} onClick={deleteTask}> Delete  </button>
+                        <div className={"radio-toolbar"}>
+                            <div className={"ml-[12px] mt-[12px]"}>
+                                <input type="radio" id={"true"} name={"isCompleted"} defaultValue="true" required defaultChecked={props.currentTask.isCompleted}/>
+                                <label htmlFor={"true"}>Completed</label>
+                                <input type="radio" id={"false"} name={"isCompleted"} defaultValue="false" required defaultChecked={props.currentTask.isCompleted === false}/>
+                                <label htmlFor={"false"}>Not Completed</label>
+                                <button className={"ml-[400px] self-end justify-self-end w-20 bg-[#D9D9D9] self-right pt-2 pb-2 pl-3 pr-3 mr-2"} onClick={deleteTask}> Delete  </button>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -85,17 +86,9 @@ function EditTask(props) {
                     {/*    </div>*/}
                     {/*</div>*/}
 
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required defaultValue={props.currentTask.hoursToComplete} min={"1"} max={"500"}/>
-                    <input className={"border-2 border-black rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"} defaultValue={props.currentTask.description}/>
-                    <div className={"radio-toolbar"}>
-                        <div className={"ml-[12px] mt-[12px]"}>
-                            <input type="radio" id={"true"} name={"isCompleted"} defaultValue="true" required defaultChecked={props.currentTask.isCompleted}/>
-                            <label htmlFor={"true"}>Completed</label>
-                            <input type="radio" id={"false"} name={"isCompleted"} defaultValue="false" required defaultChecked={props.currentTask.isCompleted === false}/>
-                            <label htmlFor={"false"}>Not Completed</label>
-                        </div>
-                    </div>
-                    <div className={"flex-1 flex"}>
+                    <input className={"border rounded-[3px] w-[450px] mt-[12px] ml-[12px] p-2"} type={"number"} id={"hoursToComplete"} required defaultValue={props.currentTask.hoursToComplete} min={"1"} max={"500"}/>
+                    <textarea className={"border rounded-[3px]  mt-[12px] h-[100px] ml-[12px] p-2"} type={"text"} id={"description"} placeholder={"Enter Description"} defaultValue={props.currentTask.description}/>
+                    <div className={"flex-1 flex mt-[12px]"}>
                         <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} type={"submit"}> Save </button>
                         <button className={"ml-[12px] w-20 bg-[#D9D9D9] self-end pt-2 pb-2 pl-3 pr-3"} onClick={() => props.setTrigger("default")}> Cancel  </button>
                     </div>
@@ -111,7 +104,6 @@ function EditTask(props) {
                     // background-color: black;
                     flex-direction: column;
                     display: flex;
-                    padding: 30px;
                 }
                 .allDaysBox {
                     display: grid; 
