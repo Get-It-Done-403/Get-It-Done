@@ -28,6 +28,7 @@ Refer to the user manual [here](https://github.com/Get-It-Done-403/Get-It-Done/b
 
 To build and test this application, you will need [Git](https://git-scm.com/), [Node Js](https://nodejs.org/en/download/), and [Gradle](https://gradle.org/install/). This project uses the [Spring Boot framework](https://spring.io/), Java's JDK 17 for the backend architecture and [React JS](https://reactjs.org/) for the frontend. 
 
+**NOTE: To use our application make sure to log in using your google account.**
 
 From your command line:
 
