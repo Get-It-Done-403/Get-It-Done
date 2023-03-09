@@ -20,6 +20,8 @@ Get It Done is a productivity web application designed to help people schedule w
 ## How to use the software
 When the system is started the user will initially be greeted with a login page. In order to access the main features of the application the user must login. If the user does not have an account they must make an account and then login.
 
+**NOTE: To use our application make sure to log in using your google account.**
+
 #### Home Page
 Once the user is logged in their browser will navigate to that users home page where they can view todays tasks (remaining and completed). If a user wishes to create a new task for that day they can click the create new task button in the remaining tasks section where the browser will then navigate to the create task page. The user can also navigate between days by clicking the next and back butons in the upper right and upper left corner of the home page. Should the user need to find a specific task the home page allows you to search for a specific task. Simply type the name of your desired task in the search bar in the upper right hand corner of the web app. The upcoming tasks and overdue tasks are a work in progress.
 
